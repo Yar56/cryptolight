@@ -1,0 +1,10 @@
+/node_modules
+/build
+
+.npm
+.vscode
+.idea
+
+
+.env.*.local
+.env.production

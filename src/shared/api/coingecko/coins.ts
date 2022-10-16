@@ -4,12 +4,13 @@ import { Coin } from './models';
 
 // const BASE_URL = "/search";
 
-export type GetTrendingListParams = {
-    id?: string;
-};
+interface GetTrendingCoinsListResponse {
+    coins: Coin[];
+    exchanges: [];
+}
 
-export const getTrendingCoinsList = (params?: GetTrendingListParams): AxiosPromise<Coin[]> => {
-    return apiInstance.get('/search/trending', { params });
+export const getTrendingCoinsList = (): AxiosPromise<GetTrendingCoinsListResponse> => {
+    return apiInstance.get('/search/trending');
 };
 
 // export type GetTaskByIdParams = {

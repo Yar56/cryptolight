@@ -1,1 +1,1 @@
-export * as tasks from "./coins";
+export * as coins from './coins';

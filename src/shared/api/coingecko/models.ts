@@ -1,6 +1,15 @@
 export type Coin = {
-	id: number;
-	title: string;
-	userId: number;
-	completed: boolean;
+    item: {
+        coin_id: number;
+        id: string;
+        large: string;
+        market_cap_rank: number;
+        name: string;
+        price_btc: number;
+        score: number;
+        slug: string;
+        small: string;
+        symbol: string;
+        thumb: string;
+    };
 };

@@ -24,4 +24,4 @@ export const $coins = createStore<CoinsTrendingState>(coinsInitialState).on(
 export const $coinsList = $coins;
 // Можно промаппить и другие вещи вроде `isEmpty`, `isLoading`, ...
 export const $coinsListLoading = getTrendingCoinsListFx.pending;
-// export const $coinsListEmpty = $tasksFiltered.map((list) => list.length === 0);
+export const $coinsListEmpty = $coinsList.map((list) => list.length === 0);

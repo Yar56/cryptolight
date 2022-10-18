@@ -1,3 +1,19 @@
+.cardWrapper {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    background-color: #fff;
+}
+.badgeWrapper {
+    position: absolute;
+    background-color: #fff;
+    top: -8px;
+    z-index: 10;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+}
+
 .flexContainer {
     display: flex;
     flex-direction: row;

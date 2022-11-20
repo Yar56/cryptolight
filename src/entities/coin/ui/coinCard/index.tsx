@@ -1,17 +1,16 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { Card, Grid } from '@nextui-org/react';
-import { Coin } from '../../../../shared/api';
+import { TrendingCoin } from '../../../../shared/api';
 import styles from './styles.module.css';
 
 interface CoinCardProps {
-    coin: Coin;
+    coin: TrendingCoin;
     badge?: ReactNode;
 }
 
 export const CoinCard: FunctionComponent<CoinCardProps> = ({ coin, badge }) => {
     const {
-        // eslint-disable-next-line camelcase
-        item: { large, id, name, symbol, price_btc }
+        item: { large, id, name, symbol, priceBtc }
     } = coin;
     return (
         <Grid xs={12}>
@@ -28,8 +27,7 @@ export const CoinCard: FunctionComponent<CoinCardProps> = ({ coin, badge }) => {
                         </div>
                         <div className={styles.priceWrapper}>
                             <div className={styles.priceName}>Price to Bitcoin:</div>
-                            {/* eslint-disable-next-line camelcase */}
-                            <span className={styles.priceValue}>{price_btc}</span>
+                            <span className={styles.priceValue}>{priceBtc}</span>
                         </div>
                     </Card.Body>
                 </Card>

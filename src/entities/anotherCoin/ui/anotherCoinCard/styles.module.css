@@ -1,0 +1,56 @@
+.cardWrapper {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    background-color: #fff;
+}
+.badgeWrapper {
+    position: absolute;
+    background-color: #fff;
+    top: -8px;
+    z-index: 10;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+}
+
+.flexContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nameWrapper {
+    margin-left: 10px;
+}
+.name {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 5px;
+}
+.symbol {
+    font-size: 10px;
+    line-height: 13px;
+    color: #6C757D;
+
+}
+.priceWrapper {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+}
+.priceName {
+    color: #6C757D;
+    font-size: 12px;
+}
+
+.priceValue {
+    margin-left: auto;
+    font-weight: bold;
+}

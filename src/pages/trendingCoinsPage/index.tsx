@@ -6,7 +6,7 @@ import { useStore } from 'effector-react';
 import { CoinCard, coinModel } from 'entities/coin';
 import { LikeCoin } from '../../features/likeCoin';
 import { CoinSwitch } from 'features/coinSwitch/ui';
-import { eventType, useListType } from '../../features/coinSwitch/model';
+import { EventType, useListType } from '../../features/coinSwitch/model';
 import { AnotherCoinCard } from '../../entities/anotherCoin';
 
 const TrendingCoinsPage = () => {
@@ -21,12 +21,17 @@ const TrendingCoinsPage = () => {
      * @remark Является плохой практикой в мире effector и представлено здесь - лишь для наглядной демонстрации
      * Лучше фетчить через event.pageMounted или reflect
      */
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     useEffect(() => coinModel.getTrendingCoinsListFx(), []);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     useEffect(() => coinModel.getAnotherTrendingCoinsListFx(), []);
 
-    // const currentList = listType === eventType.COIN_GECKO ? coins : anotherCoins;
+    // const currentList = listType === EventType.COIN_GECKO ? coins : anotherCoins;
 
-    const isCoinGeckoType = listType === eventType.COIN_GECKO;
+    const isCoinGeckoType = listType === EventType.COIN_GECKO;
 
     return (
         <>
@@ -50,7 +55,7 @@ const TrendingCoinsPage = () => {
                                                 <CoinCard
                                                     key={coin.item.id}
                                                     coin={coin}
-                                                    badge={<LikeCoin coinId={coin.item.coin_id} />}
+                                                    badge={<LikeCoin coinId={coin.item.coinId} />}
                                                 />
                                             );
                                         })}

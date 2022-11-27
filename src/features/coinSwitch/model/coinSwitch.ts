@@ -2,18 +2,18 @@ import { createEvent, createStore } from 'effector';
 import { useStoreMap } from 'effector-react';
 
 // export type eventType = 'COIN-GECKO' | 'GLOBAL';
-export enum eventType {
+export enum EventType {
     COIN_GECKO = 'COIN_GECKO',
     GLOBAL = 'GLOBAL'
 }
 
-export const switchCoins = createEvent<eventType>();
+export const switchCoins = createEvent<EventType>();
 
 type CurrentCoinsListState = {
-    currentListType: eventType;
+    currentListType: EventType;
 };
 
-const $currentListType = createStore<CurrentCoinsListState>({ currentListType: eventType.COIN_GECKO }).on(
+const $currentListType = createStore<CurrentCoinsListState>({ currentListType: EventType.COIN_GECKO }).on(
     switchCoins,
     (state, listType) => {
         return { ...state, currentListType: listType };
@@ -22,6 +22,6 @@ const $currentListType = createStore<CurrentCoinsListState>({ currentListType: e
 
 export const events = { switchCoins };
 
-export const useListType = (): eventType => {
+export const useListType = (): EventType => {
     return useStoreMap($currentListType, (state) => state.currentListType);
 };

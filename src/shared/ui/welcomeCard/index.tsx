@@ -1,9 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { Button, Card, Row, Text } from '@nextui-org/react';
 import styles from 'styles.module.css';
+import { events, ModalType } from '../../../processes/modalBehavior';
 
 export const WelcomeCard: FunctionComponent = () => {
     const user = 'Alex';
+    //todo shared не может импортировать processes
+    const handleAuthClick = () => events.switchModal({ modalType: ModalType.AUTH });
+    const handleRegistrationClick = () => events.switchModal({ modalType: ModalType.REGISTRATION });
 
     return (
         <Card css={{ $$cardColor: '$colors$primary', color: '#fff' }}>
@@ -15,8 +19,11 @@ export const WelcomeCard: FunctionComponent = () => {
                     </Text>
                 </Row>
                 <Row justify="flex-start" align="center" css={{ mt: 10 }}>
-                    <Button auto className={styles.button}>
+                    <Button auto className={styles.button} onClick={handleAuthClick}>
                         Войти
+                    </Button>
+                    <Button auto color="success" onClick={handleRegistrationClick}>
+                        Регистрация
                     </Button>
                 </Row>
             </Card.Body>

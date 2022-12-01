@@ -15,6 +15,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+let app;
+
+try {
+    app = initializeApp(firebaseConfig);
+} catch (err) {
+    console.error(err);
+    // ignore app already initialized error in snack
+}
 
 export const auth = getAuth(app);

@@ -6,8 +6,8 @@ import { events, ModalType } from '../../../processes/modalBehavior';
 export const WelcomeCard: FunctionComponent = () => {
     const user = 'Alex';
     //todo shared не может импортировать processes
-    const handleAuthClick = () => events.switchModal({ modalType: ModalType.AUTH });
-    const handleRegistrationClick = () => events.switchModal({ modalType: ModalType.REGISTRATION });
+    const handleAuthClick = () => events.switchModal({ modalType: ModalType.AUTH, isOpen: true });
+    const handleRegistrationClick = () => events.switchModal({ modalType: ModalType.REGISTRATION, isOpen: true });
 
     return (
         <Card css={{ $$cardColor: '$colors$primary', color: '#fff' }}>

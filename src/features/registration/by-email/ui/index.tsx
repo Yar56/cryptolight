@@ -1,52 +1,60 @@
-import React, { FunctionComponent } from 'react';
-import { Modal, Button, Text, Input, Row, Spacer } from '@nextui-org/react';
+import React, { FunctionComponent, useState } from 'react';
+import { Modal, Button, Text, Input } from '@nextui-org/react';
 import { Mail } from '../../../../shared/ui/icons/Mail';
 import { Password } from '../../../../shared/ui/icons/Password';
 import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { signUpUserFx } from '../model';
 import styles from './styles.module.css';
+import { FirebaseError } from '@firebase/util';
+import { AuthErrorCodes } from 'firebase/auth';
 
 export interface AuthModalByEmailParams {
     isOpen: boolean;
     onClose(): void;
 }
 
+const schema = yup.object().shape({
+    email: yup.string().email('Email некорректен').required('Заполните поле с email'),
+    password: yup.string().required('Заполните поле с паролем').min(8, 'Пароль слишком короткий - минимум 8 символов'),
+    confirmPassword: yup
+        .string()
+        .required('Подтвердите пароль')
+        .oneOf([yup.ref('password'), null], 'Пароли должны совподать')
+});
+
 export const RegistrationModalByEmail: FunctionComponent<AuthModalByEmailParams> = ({ isOpen, onClose }) => {
+    const [apiError, setApiError] = useState<string>('');
+
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
             confirmPassword: ''
         },
-        validate: (values) => {
-            console.log(values);
-            const errors: { email: string; password: string; confirmPassword: string } = {
-                email: '',
-                password: '',
-                confirmPassword: ''
-            };
-            const { email, password, confirmPassword } = values;
-            if (!email) {
-                errors.email = 'Заполните поле с email';
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-                errors.email = 'Email некорректен';
-            } else if (!password) {
-                errors.password = 'Заполните поле с паролем';
-            } else if (!confirmPassword) {
-                errors.confirmPassword = 'Подтвердите пароль';
-            } else if (password !== confirmPassword) {
-                errors.confirmPassword = 'Пароли не совподают';
+        validationSchema: schema,
+        onSubmit: async (values, { resetForm }) => {
+            const { email, password } = values;
+
+            try {
+                await signUpUserFx({ email, password });
+                onClose();
+            } catch (error) {
+                const typedError = error as FirebaseError;
+                if (typedError.code === AuthErrorCodes.EMAIL_EXISTS) {
+                    setApiError('Такой email уже существует!');
+                } else {
+                    setApiError('Непредвиденная ошибка!');
+                    console.error('Unknown Error');
+                }
+            } finally {
+                resetForm();
             }
-            console.log(errors);
-            return errors;
-        },
-        onSubmit: (values) => {
-            // alert(JSON.stringify(values, null, 2));
         }
     });
-    console.log({ dirty: formik.dirty, isValid: formik.isValid });
+
     return (
-        <Modal closeButton aria-labelledby="modal-title" open={isOpen} onClose={onClose}>
+        <Modal closeButton blur aria-labelledby="modal-title" open={isOpen}>
             <Modal.Header>
                 <Text id="modal-title" size={18}>
                     <Text>Регистрация нового бро</Text>
@@ -62,59 +70,63 @@ export const RegistrationModalByEmail: FunctionComponent<AuthModalByEmailParams>
                         bordered
                         fullWidth
                         id="email"
+                        name="email"
+                        type="text"
+                        disabled={formik.isSubmitting}
                         value={formik.values.email}
                         color={formik.errors.email ? 'error' : 'primary'}
                         size="lg"
                         placeholder="Email"
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
                         contentLeft={<Mail fill="currentColor" />}
-                        // helperText={formik.errors.email}
-                        // label={formik.errors.email}
+                        aria-label="Email"
                     />
                     <div className={styles.errorText}>{formik.errors.email}</div>
-                    {/*<Spacer y={1} />*/}
                     <Input
                         clearable
                         bordered
                         fullWidth
                         id="password"
+                        name="password"
+                        type="password"
+                        disabled={formik.isSubmitting}
                         value={formik.values.password}
                         color={formik.errors.password ? 'error' : 'primary'}
                         size="lg"
                         placeholder="Password"
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
                         contentLeft={<Password fill="currentColor" />}
-                        // helperText={formik.errors.password}
+                        aria-label="Password"
                     />
                     <div className={styles.errorText}>{formik.errors.password}</div>
-                    {/*<Spacer y={1} />*/}
                     <Input
                         clearable
                         bordered
                         fullWidth
                         id="confirmPassword"
+                        name="confirmPassword"
+                        type="password"
+                        disabled={formik.isSubmitting}
                         value={formik.values.confirmPassword}
                         color={formik.errors.confirmPassword ? 'error' : 'primary'}
                         size="lg"
                         placeholder="Confirm Password"
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
                         contentLeft={<Password fill="currentColor" />}
-                        // helperText={formik.errors.confirmPassword}
+                        aria-label="confirmPassword"
                     />
                     <div className={styles.errorText}>{formik.errors.confirmPassword}</div>
+                    <div className={styles.errorText}>{apiError}</div>
+                    <Modal.Footer css={{ pr: '0px' }}>
+                        <Button auto flat color="error" onPress={onClose}>
+                            Закрыть
+                        </Button>
+                        <Button auto type="submit" color="success" disabled={formik.isSubmitting || !formik.isValid}>
+                            Зарегистрироваться
+                        </Button>
+                    </Modal.Footer>
                 </form>
             </Modal.Body>
-            <Modal.Footer>
-                <Button auto flat color="error" onClick={onClose}>
-                    Закрыть
-                </Button>
-                <Button auto color="success" onClick={onClose} disabled={formik.isSubmitting || !formik.isValid}>
-                    Зарегистрироваться
-                </Button>
-            </Modal.Footer>
         </Modal>
     );
 };

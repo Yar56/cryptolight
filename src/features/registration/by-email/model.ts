@@ -1,20 +1,19 @@
 import { createStore, createEffect } from 'effector';
 import { coinGeckoApi } from 'shared/api';
+import { UserCredential } from 'firebase/auth';
 
 interface SignUpUserFxParams {
     email: string;
     password: string;
 }
-export const signUpUserFx = createEffect(({ email, password }: SignUpUserFxParams) => {
-    // Здесь также может быть доп. обработка эффекта
-    return coinGeckoApi.user.signUpUser({ email, password });
+
+export const signUpUserFx = createEffect(async ({ email, password }: SignUpUserFxParams) => {
+    return await coinGeckoApi.user.signUpUser({ email, password });
 });
 
-type State = any;
+type State = UserCredential | Record<string, unknown>;
 
-export const registrationInitialState: State = [];
-
-export const $coins = createStore<State>(registrationInitialState).on(signUpUserFx.doneData, (state, payload) => {
+export const $user = createStore<State>({}).on(signUpUserFx.doneData, (state, payload) => {
     console.log(payload);
-    // return [...state, ...payload.data.coins];
+    return payload;
 });

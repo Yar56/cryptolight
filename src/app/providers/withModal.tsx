@@ -8,15 +8,15 @@ import { RegistrationModalByEmail } from '../../features/registration/by-email';
 export const withModal = (component: () => React.ReactNode) => () => {
     const { REGISTRATION, AUTH } = useStore($modalState);
 
-    const handleCloseRegistrationModal = () => events.switchModal({ modalType: ModalType.REGISTRATION });
-    const handleCloseAuthModal = () => events.switchModal({ modalType: ModalType.AUTH });
+    const handleCloseRegistrationModal = () => events.switchModal({ modalType: ModalType.REGISTRATION, isOpen: false });
+    const handleCloseAuthModal = () => events.switchModal({ modalType: ModalType.AUTH, isOpen: false });
 
     return (
         <div>
             {component()}
             <>
-                <AuthModalByEmail isOpen={AUTH} onClose={handleCloseAuthModal} />
-                <RegistrationModalByEmail isOpen={REGISTRATION} onClose={handleCloseRegistrationModal} />
+                <AuthModalByEmail isOpen={Boolean(AUTH)} onClose={handleCloseAuthModal} />
+                <RegistrationModalByEmail isOpen={Boolean(REGISTRATION)} onClose={handleCloseRegistrationModal} />
             </>
         </div>
     );

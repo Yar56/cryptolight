@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEventHandler } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Button, Input, Modal, Text } from '@nextui-org/react';
 import { Mail } from '../../../../shared/ui/icons/Mail';
 import { Password } from '../../../../shared/ui/icons/Password';
@@ -24,7 +24,7 @@ export const AuthModalByEmail: FunctionComponent<AuthModalByEmailParams> = ({ is
         console.debug('click');
     };
     return (
-        <Modal closeButton aria-labelledby="modal-title" open={isOpen} onClose={onClose}>
+        <Modal blur closeButton aria-labelledby="modal-title" open={isOpen}>
             <Modal.Header>
                 <Text id="modal-title" size={18}>
                     <Text size={18}>Вхождение старого бро</Text>

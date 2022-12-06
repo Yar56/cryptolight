@@ -1,15 +1,44 @@
 import React, { FunctionComponent } from 'react';
-import { Navbar, Button, Link, Text, Spacer } from '@nextui-org/react';
+import { Navbar, Button, Link, Text, Dropdown, Avatar } from '@nextui-org/react';
 import { events, ModalType } from '../../processes/modalBehavior';
+import { userModel } from '../../entities/user';
+import { coinGeckoApi } from '../../shared/api';
 
 interface HeaderProps {
     sticky?: boolean;
 }
 
+enum DropDownActions {
+    PROFILE = 'profile',
+    COINS = 'coins',
+    LOGOUT = 'logout'
+}
+
 export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => {
-    const collapseItems = ['Features', 'Customers', 'Pricing', 'Company', 'Legal', 'Team', 'Help & Feedback'];
+    const isUserAuth = userModel.selectors.useIsUserAuth();
+    const { user } = userModel.selectors.useUser();
 
     const handleAuthClick = () => events.switchModal({ modalType: ModalType.AUTH, isOpen: true });
+
+    const handleSignOutClick = async () => {
+        try {
+            await coinGeckoApi.user.signOutUser();
+        } catch (error) {
+            console.error(error, 'Error while user.signOutUser()');
+        }
+    };
+
+    const actionByType = {
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        [DropDownActions.PROFILE]: () => {},
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        [DropDownActions.COINS]: () => {},
+        [DropDownActions.LOGOUT]: handleSignOutClick
+    };
+
+    const handleDropDownMenuClick = (actionType: DropDownActions) => {
+        actionByType[actionType]();
+    };
 
     return (
         <Navbar
@@ -18,12 +47,9 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
             containerCss={{ paddingRight: 25, paddingLeft: 25 }}
         >
             <Navbar.Brand>
-                <Navbar.Toggle aria-label="toggle navigation" />
-                <Spacer y={2} />
                 <Text
                     b
                     color="inherit"
-                    hideIn="xs"
                     css={{
                         textGradient: 'to right, #121FCF 32%, #CF1512 100%'
                     }}
@@ -31,36 +57,53 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
                     CryptoLight
                 </Text>
             </Navbar.Brand>
-            <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
-                {/*<Navbar.Link href="#">Features</Navbar.Link>*/}
-                {/*<Navbar.Link isActive href="#">*/}
-                {/*    Customers*/}
-                {/*</Navbar.Link>*/}
-                {/*<Navbar.Link href="#">Pricing</Navbar.Link>*/}
-                {/*<Navbar.Link href="#">Company</Navbar.Link>*/}
-            </Navbar.Content>
             <Navbar.Content>
-                <Navbar.Item>
-                    <Button auto color="gradient" ghost onClick={handleAuthClick}>
-                        Вход
-                    </Button>
-                </Navbar.Item>
-            </Navbar.Content>
-            <Navbar.Collapse>
-                {collapseItems.map((item) => (
-                    <Navbar.CollapseItem key={item}>
-                        <Link
-                            color="inherit"
-                            css={{
-                                minWidth: '100%'
-                            }}
-                            href="#"
+                {!isUserAuth && (
+                    <Navbar.Item>
+                        <Button auto color="gradient" ghost onClick={handleAuthClick}>
+                            Вход
+                        </Button>
+                    </Navbar.Item>
+                )}
+                {isUserAuth && (
+                    <Dropdown placement="bottom-right">
+                        <Navbar.Item>
+                            <Dropdown.Trigger>
+                                <Avatar
+                                    bordered
+                                    as="button"
+                                    color="primary"
+                                    size="md"
+                                    src="https://i.pravatar.cc/150"
+                                />
+                            </Dropdown.Trigger>
+                        </Navbar.Item>
+                        <Dropdown.Menu
+                            aria-label="User menu actions"
+                            color="secondary"
+                            onAction={(actionKey) => handleDropDownMenuClick(actionKey as DropDownActions)}
                         >
-                            {item}
-                        </Link>
-                    </Navbar.CollapseItem>
-                ))}
-            </Navbar.Collapse>
+                            <Dropdown.Item key={DropDownActions.PROFILE} css={{ height: '$18' }}>
+                                <Text b color="inherit" css={{ d: 'flex' }}>
+                                    Signed in as
+                                </Text>
+                                <Text b color="inherit" css={{ d: 'flex' }}>
+                                    {user?.email}
+                                </Text>
+                            </Dropdown.Item>
+                            <Dropdown.Item key={DropDownActions.COINS} withDivider>
+                                Мои монеты
+                            </Dropdown.Item>
+                            <Dropdown.Item withDivider>
+                                <Link href="https://www.coingecko.com/en/api">CoinGecko API</Link>
+                            </Dropdown.Item>
+                            <Dropdown.Item key={DropDownActions.LOGOUT} withDivider color="error">
+                                Выход
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                )}
+            </Navbar.Content>
         </Navbar>
     );
 };

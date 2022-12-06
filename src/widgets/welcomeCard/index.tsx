@@ -20,12 +20,21 @@ export const WelcomeCard: FunctionComponent = () => {
                     </Text>
                 </Row>
                 <Row justify="flex-start" align="center" css={{ mt: 10 }}>
-                    <Button auto className={styles.button} onClick={handleAuthClick}>
-                        Вход
-                    </Button>
-                    <Button auto color="success" onClick={handleRegistrationClick}>
-                        Регистрация
-                    </Button>
+                    {isUserAuth ? (
+                        <Button color="success" auto onClick={handleAuthClick}>
+                            Мои монеты
+                        </Button>
+                    ) : (
+                        <>
+                            {' '}
+                            <Button auto className={styles.button} onClick={handleAuthClick}>
+                                Вход
+                            </Button>
+                            <Button auto color="success" onClick={handleRegistrationClick}>
+                                Регистрация
+                            </Button>
+                        </>
+                    )}
                 </Row>
             </Card.Body>
         </Card>

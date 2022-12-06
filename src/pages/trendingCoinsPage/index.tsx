@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container, Grid, Loading, Text } from '@nextui-org/react';
-import { WelcomeCard } from '../../shared/ui/welcomeCard';
+import { WelcomeCard } from '../../widgets/welcomeCard';
 import Header from '../../widgets/header/ui';
 import { useStore } from 'effector-react';
 import { CoinCard, coinModel } from 'entities/coin';

@@ -102,7 +102,7 @@ export const AuthModalByEmail: FunctionComponent<AuthModalByEmailParams> = ({ is
                             Закрыть
                         </Button>
                         <Button auto type="submit">
-                            Войти
+                            Вход
                         </Button>
                     </Modal.Footer>
                 </form>

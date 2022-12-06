@@ -1,10 +1,45 @@
-import React from 'react';
+import React, { createContext, useEffect } from 'react';
 import { useStore } from 'effector-react';
-import { registrationModel } from '../../features/registration/by-email';
+import { userModel } from '../../entities/user';
+import { coinGeckoApi } from 'shared/api';
+import { User } from '@firebase/auth';
 
 // eslint-disable-next-line react/display-name
-export const withAuth = (component: () => React.ReactNode) => () => {
-    const user = useStore(registrationModel.$user);
-    console.log(user);
-    return <div>{component()}</div>;
+interface AuthContextState {
+    user?: User;
+}
+
+export const AuthContext = createContext<AuthContextState>({});
+
+// eslint-disable-next-line react/display-name
+export const withAuthContextProvider = (component: () => React.ReactNode) => () => {
+    const user = useStore(userModel.$user);
+
+    const handleOnCheck = (user: User | null) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            userModel.events.updateUserData(user);
+            console.log('User is signed in');
+            // ...
+        } else {
+            userModel.events.updateUserData(undefined);
+            console.log('User is signed out');
+            // User is signed out
+            // ...
+        }
+    };
+    useEffect(() => {
+        coinGeckoApi.user.checkAuthUser({ onCheck: handleOnCheck });
+    }, []);
+
+    return <AuthContext.Provider value={user}>{component()}</AuthContext.Provider>;
 };
+
+// export const useAuthContext = () => useContext(AuthContext);
+//
+// export const useIsDynamicReport = () => {
+//     const { reportConfig } = useReportConfigContext();
+//
+//     return useMemo(() => reportConfig?.isDynamic, [reportConfig?.isDynamic]);
+// };

@@ -8,6 +8,7 @@ import { LikeCoin } from '../../features/likeCoin';
 import { CoinSwitch } from 'features/coinSwitch/ui';
 import { EventType, useListType } from '../../features/coinSwitch/model';
 import { AnotherCoinCard } from '../../entities/anotherCoin';
+import { likeCoinModel } from '../../features/likeCoin';
 
 const TrendingCoinsPage = () => {
     const coins = useStore(coinModel.$coinsList);
@@ -28,6 +29,9 @@ const TrendingCoinsPage = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     useEffect(() => coinModel.getAnotherTrendingCoinsListFx(), []);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    useEffect(() => likeCoinModel.getLikedUserCoinsFx(), []);
 
     // const currentList = listType === EventType.COIN_GECKO ? coins : anotherCoins;
 

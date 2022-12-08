@@ -1,23 +1,41 @@
 import produce from 'immer';
-import { createEvent, createStore } from 'effector';
-import { useStoreMap } from 'effector-react';
+import { createEffect, createEvent, createStore } from 'effector';
+import { useStore, useStoreMap } from 'effector-react';
+import { getDoc } from 'firebase/firestore';
+import { docRefUserLikedCoins } from '../../../shared/config/firebase';
 
 export const likeCoin = createEvent<number>();
 type LikedCoinsState = Record<number, boolean>;
 
-const $likedCoins = createStore<LikedCoinsState>({}).on(likeCoin, (state, coinId) =>
-    produce(state, (draft) => {
-        draft[coinId] = !draft[coinId];
-    })
-);
+export const getLikedUserCoinsFx = createEffect(() => {
+    return getDoc(docRefUserLikedCoins);
+});
+
+const $likedCoins = createStore<LikedCoinsState>({})
+    .on(likeCoin, (state, coinId) =>
+        produce(state, (draft) => {
+            draft[coinId] = !draft[coinId];
+        })
+    )
+    .on(getLikedUserCoinsFx.doneData, (state, snapShot) => {
+        if (snapShot.exists()) {
+            const docData: Record<number, LikedCoinsState> = snapShot.data();
+            const [likedCoins] = Object.values(docData);
+            return { ...state, ...likedCoins };
+        }
+    });
 
 export const events = { likeCoin };
 export const $likedCoinsMap = $likedCoins;
 
-export const useLikeCoin = (coinId: number): boolean | undefined => {
+const useLikedCoins = () => useStore($likedCoinsMap);
+
+export const useLikeCoin = ({ coinId }: { coinId: number }): boolean | undefined => {
     return useStoreMap({
         store: $likedCoins,
         keys: [coinId],
         fn: (coins, [id]) => coins[id] ?? null
     });
 };
+
+export const selectors = { useLikedCoins, useLikeCoin };

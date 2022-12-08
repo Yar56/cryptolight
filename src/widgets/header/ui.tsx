@@ -95,7 +95,9 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
                                 Мои монеты
                             </Dropdown.Item>
                             <Dropdown.Item withDivider>
-                                <Link href="https://www.coingecko.com/en/api">CoinGecko API</Link>
+                                <Link href="https://www.coingecko.com/en/api" isExternal target="_blank">
+                                    CoinGecko API
+                                </Link>
                             </Dropdown.Item>
                             <Dropdown.Item key={DropDownActions.LOGOUT} withDivider color="error">
                                 Выход

@@ -1,9 +1,9 @@
 import { createEvent, createStore } from 'effector';
-import { authModel } from '../../features/auth/by-email/';
-import { registrationModel } from '../../features/registration/by-email/';
+import { authModel } from '~/features/auth/by-email/';
+import { registrationModel } from '~/features/registration/by-email/';
 import { User } from '@firebase/auth';
 import { useStore, useStoreMap } from 'effector-react';
-import { signUpUserFx } from '../../features/registration/by-email/model';
+import { signUpUserFx } from '~/features/registration/by-email/model';
 
 type UserState = {
     user?: User;

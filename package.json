@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cross-env ENV_NAME=production ts-node config/build/esbuildProd.ts",
-    "serve": "ts-node config/build/esbuildDev.ts"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -30,13 +31,8 @@
     "autoprefixer": "^10.4.10",
     "cross-env": "^7.0.3",
     "css-tree": "^2.2.1",
-    "esbuild": "^0.15.11",
-    "esbuild-css-modules-plugin": "^2.6.1-beta.1",
-    "esbuild-plugin-svgr": "^1.0.1",
-    "esbuild-sass-plugin": "^2.3.2",
     "eslint": "8.22.0",
     "eslint-plugin-react": "^7.31.8",
-    "express": "^4.18.1",
     "postcss": "^8.4.16",
     "prettier": "2.7.1",
     "sass": "^1.54.9",
@@ -49,6 +45,7 @@
     "@mui/material": "^5.10.15",
     "@nextui-org/react": "^1.0.0-beta.10",
     "@types/lodash": "^4.14.189",
+    "@vitejs/plugin-react": "^3.0.0",
     "axios": "^0.27.2",
     "compose-function": "^3.0.3",
     "effector": "^22.3.0",
@@ -59,8 +56,11 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router": "^6.4.0",
-    "react-router-dom": "^6.4.0",
+    "react-router": "^6.4.5",
+    "react-router-dom": "^6.4.5",
+    "vite": "^4.0.0",
+    "vite-aliases": "^0.9.8",
+    "vite-plugin-svgr": "^2.3.0",
     "yup": "^0.32.11"
   }
 }

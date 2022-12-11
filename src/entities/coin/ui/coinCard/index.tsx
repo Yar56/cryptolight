@@ -1,7 +1,8 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { Card, Grid } from '@nextui-org/react';
-import { TrendingCoin } from '../../../../shared/api';
+import { TrendingCoin } from '~/shared/api';
 import styles from './styles.module.css';
+import { useNavigate } from 'react-router-dom';
 
 interface CoinCardProps {
     coin: TrendingCoin;
@@ -12,8 +13,11 @@ export const CoinCard: FunctionComponent<CoinCardProps> = ({ coin, badge }) => {
     const {
         item: { large, id, name, symbol, priceBtc }
     } = coin;
+    const navigate = useNavigate();
+    const handleCardClick = () => navigate(`/coin`);
+
     return (
-        <Grid xs={12}>
+        <Grid xs={12} onClick={handleCardClick}>
             <div className={styles.cardWrapper}>
                 {badge && <div className={styles.badgeWrapper}>{badge}</div>}
                 <Card isPressable isHoverable variant="bordered">

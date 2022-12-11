@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Button, Card, Row, Text } from '@nextui-org/react';
-import styles from 'styles.module.css';
-import { events, ModalType } from '../../processes/modalBehavior';
-import { userModel } from '../../entities/user';
+import styles from './styles.module.css';
+import { events, ModalType } from '~/processes/modalBehavior';
+import { userModel } from '~/entities/user';
 
 export const WelcomeCard: FunctionComponent = () => {
     const handleAuthClick = () => events.switchModal({ modalType: ModalType.AUTH, isOpen: true });

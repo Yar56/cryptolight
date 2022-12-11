@@ -2,7 +2,10 @@ import produce from 'immer';
 import { createEffect, createEvent, createStore } from 'effector';
 import { useStore, useStoreMap } from 'effector-react';
 import { getDoc } from 'firebase/firestore';
-import { docRefUserLikedCoins } from '../../../shared/config/firebase';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { docRefUserLikedCoins } from '~/shared/config/firebase';
 
 export const likeCoin = createEvent<number>();
 type LikedCoinsState = Record<number, boolean>;
@@ -19,7 +22,7 @@ const $likedCoins = createStore<LikedCoinsState>({})
     )
     .on(getLikedUserCoinsFx.doneData, (state, snapShot) => {
         if (snapShot.exists()) {
-            const docData: Record<number, LikedCoinsState> = snapShot.data();
+            const docData = snapShot.data() as Record<number, LikedCoinsState>;
             const [likedCoins] = Object.values(docData);
             return { ...state, ...likedCoins };
         }

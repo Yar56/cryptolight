@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { Container, Grid, Loading, Text } from '@nextui-org/react';
-import { WelcomeCard } from '../../widgets/welcomeCard';
-import Header from '../../widgets/header/ui';
+import { WelcomeCard } from '~/widgets/welcomeCard';
+import Header from '~/widgets/header/ui';
 import { useStore } from 'effector-react';
-import { CoinCard, coinModel } from 'entities/coin';
-import { LikeCoin } from '../../features/likeCoin';
-import { CoinSwitch } from 'features/coinSwitch/ui';
-import { EventType, useListType } from '../../features/coinSwitch/model';
-import { AnotherCoinCard } from '../../entities/anotherCoin';
-import { likeCoinModel } from '../../features/likeCoin';
+import { CoinCard, coinModel } from '~/entities/coin';
+import { LikeCoin } from '~/features/likeCoin';
+import { CoinSwitch } from '~/features/coinSwitch/ui';
+import { EventType, useListType } from '~/features/coinSwitch/model';
+import { AnotherCoinCard } from '~/entities/anotherCoin';
+import { likeCoinModel } from '~/features/likeCoin';
 
 const TrendingCoinsPage = () => {
     const coins = useStore(coinModel.$coinsList);

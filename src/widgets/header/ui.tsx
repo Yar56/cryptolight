@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { Navbar, Button, Link, Text, Dropdown, Avatar } from '@nextui-org/react';
-import { events, ModalType } from '../../processes/modalBehavior';
+import { events, ModalType } from '~/processes/modalBehavior';
 import { userModel } from '../../entities/user';
 import { coinGeckoApi } from '../../shared/api';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
     sticky?: boolean;
@@ -17,8 +18,10 @@ enum DropDownActions {
 export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => {
     const isUserAuth = userModel.selectors.useIsUserAuth();
     const { user } = userModel.selectors.useUser();
+    const navigate = useNavigate();
 
     const handleAuthClick = () => events.switchModal({ modalType: ModalType.AUTH, isOpen: true });
+    const handleProfileClick = () => navigate('/profile');
 
     const handleSignOutClick = async () => {
         try {
@@ -30,7 +33,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
 
     const actionByType = {
         // eslint-disable-next-line @typescript-eslint/no-empty-function
-        [DropDownActions.PROFILE]: () => {},
+        [DropDownActions.PROFILE]: handleProfileClick,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         [DropDownActions.COINS]: () => {},
         [DropDownActions.LOGOUT]: handleSignOutClick

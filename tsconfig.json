@@ -1,24 +1,26 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "outDir": "./build/",
-    "module": "ESNext",
-    "noImplicitAny": true,
-    "target": "ES6",
-    "jsx": "react-jsx",
-    "allowJs": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "moduleResolution": "Node",
+    "target": "ESNext",
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "~/*": ["./*"]
+    },
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    // обязательно с esbuild
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
     "isolatedModules": true,
-    "preserveConstEnums": true,
-    "sourceMap": true
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  "include": ["src","react-app.d.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

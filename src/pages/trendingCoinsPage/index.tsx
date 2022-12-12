@@ -23,17 +23,17 @@ const TrendingCoinsPage = () => {
      * Лучше фетчить через event.pageMounted или reflect
      */
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    useEffect(() => coinModel.getTrendingCoinsListFx(), []);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    useEffect(() => coinModel.getAnotherTrendingCoinsListFx(), []);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    useEffect(() => likeCoinModel.getLikedUserCoinsFx(), []);
+    useEffect(() => {
+        coinModel.getTrendingCoinsListFx();
+    }, []);
 
-    // const currentList = listType === EventType.COIN_GECKO ? coins : anotherCoins;
+    useEffect(() => {
+        coinModel.getAnotherTrendingCoinsListFx();
+    }, []);
+
+    useEffect(() => {
+        likeCoinModel.getLikedUserCoinsFx();
+    }, []);
 
     const isCoinGeckoType = listType === EventType.COIN_GECKO;
 

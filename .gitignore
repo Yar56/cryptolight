@@ -5,6 +5,6 @@
 .vscode
 .idea
 
-
+.env
 .env.*.local
 .env.production

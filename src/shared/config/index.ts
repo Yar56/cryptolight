@@ -10,6 +10,9 @@
  * @throwable
  */
 const getEnvVar = (key: string) => {
+    console.log(import.meta.env);
+    console.log(process?.env);
+
     if (import.meta.env[key] === undefined) {
         throw new Error(`Env variable ${key} is required`);
     }

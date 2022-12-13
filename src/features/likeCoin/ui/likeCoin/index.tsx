@@ -37,7 +37,8 @@ export const LikeCoin: FunctionComponent<LikeCoinProps> = ({ coinId }) => {
         })();
     }, [likedCoinsMap]);
 
-    const handleChange = async () => {
+    const handleChange = async (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
         const userId = user?.uid;
         if (!userId) {
             events.switchModal({ modalType: ModalType.AUTH, isOpen: true });

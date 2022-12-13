@@ -52,9 +52,13 @@ export const RegistrationModalByEmail: FunctionComponent<AuthModalByEmailParams>
             }
         }
     });
+    const handleClose = () => {
+        onClose();
+        formik.resetForm();
+    };
 
     return (
-        <Modal closeButton blur aria-labelledby="modal-title" open={isOpen}>
+        <Modal closeButton blur aria-labelledby="modal-title" open={isOpen} onClose={handleClose}>
             <Modal.Header>
                 <Text id="modal-title" size={18}>
                     <Text>Регистрация нового бро</Text>

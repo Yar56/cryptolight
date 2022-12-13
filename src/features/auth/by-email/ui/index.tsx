@@ -50,8 +50,13 @@ export const AuthModalByEmail: FunctionComponent<AuthModalByEmailParams> = ({ is
         }
     });
 
+    const handleClose = () => {
+        onClose();
+        formik.resetForm();
+    };
+
     return (
-        <Modal blur closeButton aria-labelledby="modal-title" open={isOpen} onClose={() => formik.resetForm()}>
+        <Modal blur closeButton aria-labelledby="modal-title" open={isOpen} onClose={handleClose}>
             <Modal.Header>
                 <Text id="modal-title" size={18}>
                     <Text size={18}>Вхождение старого бро</Text>

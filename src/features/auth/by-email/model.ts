@@ -1,5 +1,6 @@
-import { coinGeckoApi } from '~/shared/api';
 import { createEffect } from 'effector';
+
+import { coinGeckoApi } from '~/shared/api';
 
 interface SignInUserFxParams {
     email: string;

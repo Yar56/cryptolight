@@ -1,14 +1,20 @@
-import React, { FunctionComponent, useEffect } from 'react';
-import * as likeCoinModel from '../../model';
-import { ReactComponent as Like } from './icons/like.svg';
-import { ReactComponent as ActiveLike } from './icons/activeLike.svg';
-import styles from './styles.module.css';
-import { userModel } from '~/entities/user';
 import { setDoc } from 'firebase/firestore';
+import React, { FunctionComponent, useEffect } from 'react';
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { docRefUserLikedCoins } from '~/shared/config/firebase';
+
+import { userModel } from '~/entities/user';
+
+//todo зарезолвить импорт
 import { events, ModalType } from '~/processes/modalBehavior';
+
+import * as likeCoinModel from '../../model';
+
+import { ReactComponent as ActiveLike } from './icons/activeLike.svg';
+import { ReactComponent as Like } from './icons/like.svg';
+import styles from './styles.module.css';
 
 interface LikeCoinProps {
     coinId: number;

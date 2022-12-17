@@ -1,5 +1,5 @@
 import { createStore, createEffect } from 'effector';
-// import { useStore } from 'effector-react';
+
 import { coinGeckoApi } from '~/shared/api';
 import type { TrendingCoin, Coin } from '~/shared/api';
 

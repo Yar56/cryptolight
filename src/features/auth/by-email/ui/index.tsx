@@ -1,12 +1,15 @@
-import React, { FunctionComponent, useState } from 'react';
-import { Button, Input, Modal, Text } from '@nextui-org/react';
-import { Mail } from '../../../../shared/ui/icons/Mail';
-import { Password } from '../../../../shared/ui/icons/Password';
-import { useFormik } from 'formik';
-import { signInUserFx } from '../model';
-import * as yup from 'yup';
 import { FirebaseError } from '@firebase/util';
+import { Button, Input, Modal, Text } from '@nextui-org/react';
 import { AuthErrorCodes } from 'firebase/auth';
+import { useFormik } from 'formik';
+import React, { FunctionComponent, useState } from 'react';
+import * as yup from 'yup';
+
+import { Mail } from '~/shared/ui/icons/Mail';
+import { Password } from '~/shared/ui/icons/Password';
+
+import { signInUserFx } from '../model';
+
 import styles from './styles.module.css';
 
 export interface AuthModalByEmailParams {

@@ -1,8 +1,9 @@
+import { User } from '@firebase/auth';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { auth } from '~/shared/config/firebase';
-import { User } from '@firebase/auth';
 
 export interface SignUpUserParams {
     email: string;

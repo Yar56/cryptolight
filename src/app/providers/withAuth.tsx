@@ -1,8 +1,10 @@
-import React, { createContext, useEffect } from 'react';
-import { useStore } from 'effector-react';
-import { userModel } from '~/entities/user';
-import { coinGeckoApi } from '~/shared/api';
 import { User } from '@firebase/auth';
+import { useStore } from 'effector-react';
+import React, { createContext, useEffect } from 'react';
+
+import { coinGeckoApi } from '~/shared/api';
+
+import { userModel } from '~/entities/user';
 
 // eslint-disable-next-line react/display-name
 interface AuthContextState {

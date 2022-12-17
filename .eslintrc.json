@@ -6,11 +6,20 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "@feature-sliced",
+        "@feature-sliced/eslint-config/rules/import-order/experimental"
     ],
     "overrides": [
     ],
     "parser": "@typescript-eslint/parser",
+    "settings": {
+        "import/resolver": {
+            "typescript": {
+                "alwaysTryTypes": true
+            }
+        }
+    },
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
@@ -20,7 +29,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "no-console": "warn",
+        "no-console": "off",
         "no-debugger": "warn",
         "@typescript-eslint/no-explicit-any": "warn",
         "@typescript-eslint/ban-ts-ignore": "off",
@@ -33,6 +42,9 @@
                 "props": "never",
                 "children": "never"
             }
-        ]
+        ],
+        "import/no-internal-modules": [ "off", {
+            "allow": [ "firebase/auth", "~/shared/ui/icons/*"]
+        } ]
     }
 }

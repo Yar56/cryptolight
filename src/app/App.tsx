@@ -1,11 +1,12 @@
 import React from 'react';
-import './styles/index.scss';
-import {withProviders} from "./providers";
-import {Routing} from "../pages";
 
+import { Routing } from '~/pages';
+
+import './styles/index.scss';
+import { withProviders } from './providers';
 
 const App = () => {
-    return <Routing/>
+    return <Routing />;
 };
 
 export default withProviders(App);

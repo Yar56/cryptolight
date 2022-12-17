@@ -1,8 +1,10 @@
-import React from 'react';
 import { useStore } from 'effector-react';
-import { $modalState, events, ModalType } from '../../processes/modalBehavior';
-import { AuthModalByEmail } from '../../features/auth/by-email';
-import { RegistrationModalByEmail } from '../../features/registration/by-email';
+import React from 'react';
+
+import { AuthModalByEmail } from '~/features/auth/by-email';
+import { RegistrationModalByEmail } from '~/features/registration/by-email';
+
+import { $modalState, events, ModalType } from '~/processes/modalBehavior';
 
 // eslint-disable-next-line react/display-name
 export const withModal = (component: () => React.ReactNode) => () => {

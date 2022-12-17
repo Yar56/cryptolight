@@ -1,8 +1,10 @@
-import React, { FunctionComponent, ReactNode } from 'react';
 import { Card, Grid } from '@nextui-org/react';
-import { TrendingCoin } from '~/shared/api';
-import styles from './styles.module.css';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { TrendingCoin } from '~/shared/api';
+
+import styles from './styles.module.css';
 
 interface CoinCardProps {
     coin: TrendingCoin;

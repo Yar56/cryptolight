@@ -1,7 +1,7 @@
-import produce from 'immer';
 import { createEffect, createEvent, createStore } from 'effector';
 import { useStore, useStoreMap } from 'effector-react';
 import { getDoc } from 'firebase/firestore';
+import produce from 'immer';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

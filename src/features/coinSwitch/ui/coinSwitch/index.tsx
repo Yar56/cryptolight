@@ -1,7 +1,9 @@
-import React, { FunctionComponent } from 'react';
-import styles from './styles.module.css';
 import { Switch, Text } from '@nextui-org/react';
+import React, { FunctionComponent } from 'react';
+
 import { events, EventType, useListType } from '../../model';
+
+import styles from './styles.module.css';
 
 export const CoinSwitch: FunctionComponent = () => {
     const listType = useListType();

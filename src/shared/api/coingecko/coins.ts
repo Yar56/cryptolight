@@ -1,8 +1,7 @@
-import { apiInstance } from './base';
 import { AxiosPromise } from 'axios';
-import { Coin, TrendingCoin } from './models';
 
-// const BASE_URL = "/search";
+import { apiInstance } from './base';
+import { Coin, TrendingCoin } from './models';
 
 interface GetTrendingCoinsListResponse {
     coins: TrendingCoin[];
@@ -16,12 +15,3 @@ export const getTrendingCoinsList = (): AxiosPromise<GetTrendingCoinsListRespons
 export const getAnotherTrendingCoinsList = (): AxiosPromise<Array<Coin>> => {
     return apiInstance.get('/coins/?id=bitcoin');
 };
-
-// export type GetTaskByIdParams = {
-// 	taskId: number;
-// 	[x: string]: any;
-// };
-//
-// export const getTaskById = ({ taskId, ...params }: GetTaskByIdParams): AxiosPromise<Task> => {
-// 	return apiInstance.get(`${BASE_URL}/${taskId}`, { params });
-// };

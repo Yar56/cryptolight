@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+
 import { IconParams } from './Password';
 
 export const Mail: FunctionComponent<IconParams> = ({ fill, size, height, width, ...props }) => {

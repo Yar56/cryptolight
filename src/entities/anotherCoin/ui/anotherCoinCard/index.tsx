@@ -1,8 +1,10 @@
-import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { Card, Grid } from '@nextui-org/react';
-import { Coin } from '~/shared/api';
-import styles from './styles.module.css';
 import { get } from 'lodash';
+import React, { FunctionComponent, ReactNode, useState } from 'react';
+
+import { Coin } from '~/shared/api';
+
+import styles from './styles.module.css';
 
 interface CoinCardProps {
     coin: Coin;

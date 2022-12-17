@@ -1,9 +1,12 @@
-import React, { FunctionComponent } from 'react';
 import { Navbar, Button, Link, Text, Dropdown, Avatar } from '@nextui-org/react';
-import { events, ModalType } from '~/processes/modalBehavior';
-import { userModel } from '../../entities/user';
-import { coinGeckoApi } from '../../shared/api';
+import React, { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { coinGeckoApi } from '~/shared/api';
+
+import { userModel } from '~/entities/user';
+
+import { events, ModalType } from '~/processes/modalBehavior';
 
 interface HeaderProps {
     sticky?: boolean;

@@ -6,6 +6,7 @@ import { coinGeckoApi } from '~/shared/api';
 
 import { userModel } from '~/entities/user';
 
+//todo resolve imports
 import { events, ModalType } from '~/processes/modalBehavior';
 
 interface HeaderProps {
@@ -115,5 +116,3 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
         </Navbar>
     );
 };
-
-export default Header;

@@ -10,7 +10,7 @@ import { CoinSwitch } from '~/features/coinSwitch/ui';
 import { LikeCoin } from '~/features/likeCoin';
 import { likeCoinModel } from '~/features/likeCoin';
 
-import Header from '~/widgets/header/ui';
+import { Header } from '~/widgets/header';
 import { WelcomeCard } from '~/widgets/welcomeCard';
 
 const TrendingCoinsPage = () => {

@@ -3,14 +3,12 @@ import React, { FunctionComponent } from 'react';
 
 import { userModel } from '~/entities/user';
 
-//todo зарезолвить импорты
-import { events, ModalType } from '~/processes/modalBehavior';
+import { AuthModalByEmail } from '~/features/auth/by-email';
+import { RegistrationModalByEmail } from '~/features/registration/by-email';
 
 import styles from './styles.module.css';
 
 export const WelcomeCard: FunctionComponent = () => {
-    const handleAuthClick = () => events.switchModal({ modalType: ModalType.AUTH, isOpen: true });
-    const handleRegistrationClick = () => events.switchModal({ modalType: ModalType.REGISTRATION, isOpen: true });
     const isUserAuth = userModel.selectors.useIsUserAuth();
     const { user } = userModel.selectors.useUser();
 
@@ -25,18 +23,31 @@ export const WelcomeCard: FunctionComponent = () => {
                 </Row>
                 <Row justify="flex-start" align="center" css={{ mt: 10 }}>
                     {isUserAuth ? (
-                        <Button color="success" auto onClick={handleAuthClick}>
+                        <Button
+                            color="success"
+                            auto
+                            onClick={() => {
+                                console.log('Мои монеты');
+                            }}
+                        >
                             Мои монеты
                         </Button>
                     ) : (
                         <>
-                            {' '}
-                            <Button auto className={styles.button} onClick={handleAuthClick}>
-                                Вход
-                            </Button>
-                            <Button auto color="success" onClick={handleRegistrationClick}>
-                                Регистрация
-                            </Button>
+                            <AuthModalByEmail>
+                                {({ openModal }) => (
+                                    <Button auto className={styles.button} onClick={() => openModal()}>
+                                        Вход
+                                    </Button>
+                                )}
+                            </AuthModalByEmail>
+                            <RegistrationModalByEmail>
+                                {({ openModal }) => (
+                                    <Button auto color="success" onClick={() => openModal()}>
+                                        Регистрация
+                                    </Button>
+                                )}
+                            </RegistrationModalByEmail>
                         </>
                     )}
                 </Row>

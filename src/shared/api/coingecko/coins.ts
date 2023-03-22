@@ -15,3 +15,7 @@ export const getTrendingCoinsList = (): AxiosPromise<GetTrendingCoinsListRespons
 export const getAnotherTrendingCoinsList = (): AxiosPromise<Array<Coin>> => {
     return apiInstance.get('/coins/?id=bitcoin');
 };
+
+export const getCoinById = () => {
+    return apiInstance.get('/coins/bitcoin/market_chart?vs_currency=usd&days=30');
+};

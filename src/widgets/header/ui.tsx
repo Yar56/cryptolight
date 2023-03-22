@@ -6,8 +6,7 @@ import { coinGeckoApi } from '~/shared/api';
 
 import { userModel } from '~/entities/user';
 
-//todo resolve imports
-import { events, ModalType } from '~/processes/modalBehavior';
+import { AuthModalByEmail } from '~/features/auth/by-email';
 
 interface HeaderProps {
     sticky?: boolean;
@@ -24,7 +23,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
     const { user } = userModel.selectors.useUser();
     const navigate = useNavigate();
 
-    const handleAuthClick = () => events.switchModal({ modalType: ModalType.AUTH, isOpen: true });
     const handleProfileClick = () => navigate('/profile');
 
     const handleSignOutClick = async () => {
@@ -67,9 +65,13 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
             <Navbar.Content>
                 {!isUserAuth && (
                     <Navbar.Item>
-                        <Button auto color="gradient" ghost onClick={handleAuthClick}>
-                            Вход
-                        </Button>
+                        <AuthModalByEmail>
+                            {({ openModal }) => (
+                                <Button auto color="gradient" ghost onClick={() => openModal()}>
+                                    Вход
+                                </Button>
+                            )}
+                        </AuthModalByEmail>
                     </Navbar.Item>
                 )}
                 {isUserAuth && (

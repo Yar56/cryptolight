@@ -16,7 +16,7 @@ export const CoinCard: FunctionComponent<CoinCardProps> = ({ coin, badge }) => {
         item: { large, id, name, symbol, priceBtc }
     } = coin;
     const navigate = useNavigate();
-    const handleCardClick = () => navigate(`/coin`);
+    const handleCardClick = () => navigate({ pathname: `/coin/${id}` });
 
     return (
         <Grid xs={12} onClick={handleCardClick}>

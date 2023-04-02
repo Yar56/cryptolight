@@ -52,15 +52,16 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
             containerCss={{ paddingRight: 25, paddingLeft: 25 }}
         >
             <Navbar.Brand>
-                <Text
-                    b
+                <Link
                     color="inherit"
+                    href="/"
                     css={{
-                        textGradient: 'to right, #121FCF 32%, #CF1512 100%'
+                        textGradient: 'to right, #121FCF 32%, #CF1512 100%',
+                        fontWeight: 600
                     }}
                 >
                     CryptoLight
-                </Text>
+                </Link>
             </Navbar.Brand>
             <Navbar.Content>
                 {!isUserAuth && (

@@ -1,6 +1,7 @@
 import { setDoc } from 'firebase/firestore';
 import React, { FunctionComponent, useEffect } from 'react';
 
+import classNames from '~/shared/aliases/classNames';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { docRefUserLikedCoins } from '~/shared/config/firebase';
@@ -18,9 +19,11 @@ import styles from './styles.module.css';
 
 interface LikeCoinProps {
     coinId: number;
+
+    className?: string;
 }
 
-export const LikeCoin: FunctionComponent<LikeCoinProps> = ({ coinId }) => {
+export const LikeCoin: FunctionComponent<LikeCoinProps> = ({ coinId, className }) => {
     const { user } = userModel.useUser();
     const isLike = likeCoinModel.useLikeCoin({ coinId });
     const likedCoinsMap = likeCoinModel.selectors.useLikedCoins();
@@ -54,7 +57,7 @@ export const LikeCoin: FunctionComponent<LikeCoinProps> = ({ coinId }) => {
     };
 
     return (
-        <div className={styles.like} onClick={handleChange}>
+        <div className={classNames(styles.like, className)} onClick={handleChange}>
             {isLike ? <ActiveLike /> : <Like />}
         </div>
     );

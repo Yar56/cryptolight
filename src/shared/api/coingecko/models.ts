@@ -16,8 +16,29 @@ export type TrendingCoin = {
 };
 
 // coins/{id}
-export type Coin = {
-    blockTimeInMinutes: string;
+export interface Coin {
+    additionalNotices: [];
+    assetPlatformId: string;
+    blockTimeInMinutes: number;
+    categories: string[];
+    coingeckoRank: number;
+    coingeckoScore: 19.873;
+    communityData: {
+        facebookLikes: null;
+        twitterFollowers: number;
+        redditAveragePosts48H: number;
+        redditAverageComments48H: number;
+        redditSubscribers: number;
+    };
+    communityScore: number;
+    contractAddress: string;
+    countryOrigin: string;
+    description: Record<string, string>;
+    detailPlatforms: { ethereum: object; binanceSmartChain: object; polygonPos: object; avalanche: object };
+    developerData: { forks: number; stars: number; subscribers: number; totalIssues: number; closedIssues: number };
+    developerScore: number;
+    genesisDate: null;
+    hashingAlgorithm: string;
     id: string;
     image: {
         thumb: string;
@@ -25,72 +46,36 @@ export type Coin = {
         large: string;
     };
     lastUpdated: string;
-    localization: Record<string, string>;
+    links: { homepage: []; blockchainSite: []; officialForumUrl: []; chatUrl: []; announcementUrl: [] };
+    liquidityScore: number;
+    localization: { en: string; de: string; es: string; fr: string; it: string };
+    marketCapRank: 200;
     marketData: {
-        currentPrice: {
-            aed: number;
-            ars: number;
-            aud: number;
-            bch: number;
-            bdt: number;
-            bhd: number;
-            bits: number;
-            bmd: number;
-            bnb: number;
-            brl: number;
-            btc: number;
-            cad: number;
-            chf: number;
-            clp: number;
-            cny: number;
-            czk: number;
-            dkk: number;
-            dot: number;
-            eos: number;
-            eth: number;
-            eur: number;
-            gbp: number;
-            hkd: number;
-            huf: number;
-            idr: number;
-            ils: number;
-            inr: number;
-            jpy: number;
-            krw: number;
-            kwd: number;
-            link: number;
-            lkr: number;
-            ltc: number;
-            mmk: number;
-            mxn: number;
-            myr: number;
-            ngn: number;
-            nok: number;
-            nzd: number;
-            php: number;
-            pkr: number;
-            pln: number;
-            rub: number;
-            sar: number;
-            sats: number;
-            sek: number;
-            sgd: number;
-            thb: number;
-            try: number;
-            twd: number;
-            uah: number;
-            usd: number;
-            vef: number;
-            vnd: number;
-            xag: number;
-            xau: number;
-            xdr: number;
-            xlm: number;
-            xrp: number;
-            yfi: number;
-            zar: number;
-        };
+        currentPrice: Record<string, number>;
+        totalValueLocked: null;
+        mcapToTvlRatio: null;
+        fdvToTvlRatio: null;
+        roi: null;
+        high24H: Record<string, number>;
+        low24H: Record<string, number>;
     };
     name: string;
+    platforms: { ethereum: string; binanceSmartChain: string; polygonPos: string; avalanche: string };
+    publicInterestScore: number;
+    publicInterestStats: { alexaRank: number; bingMatches: null };
+    publicNotice: null;
+    sentimentVotesDownPercentage: number;
+    sentimentVotesUpPercentage: number;
+    statusUpdates: [];
     symbol: string;
-};
+    tickers: [];
+}
+
+// coins/${coinId}/market_chart?
+
+export type MarketChart = [number, number][];
+export interface MarketChartCoin {
+    marketCaps: MarketChart;
+    prices: MarketChart;
+    totalVolumes: MarketChart;
+}

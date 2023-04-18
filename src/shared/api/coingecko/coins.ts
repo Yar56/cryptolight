@@ -19,9 +19,26 @@ export const getAnotherTrendingCoinsList = (): AxiosPromise<Array<Coin>> => {
 interface GetCoinByIdParams {
     coinId?: string;
 }
+interface GetCoinChartByIdParams extends GetCoinByIdParams {
+    vsCurrency?: string;
+    days?: string;
+}
 export const getCoinById = ({ coinId }: GetCoinByIdParams) => {
     if (!coinId) {
-        return Promise.resolve();
+        return Promise.reject(new Error('empty coinId'));
     }
     return apiInstance.get(`/coins/${coinId}/`);
+};
+
+export const getCoinMarketChartById = ({ coinId, vsCurrency = 'usd', days = '1' }: GetCoinChartByIdParams) => {
+    if (!coinId) {
+        return Promise.reject(new Error('empty coinId'));
+    }
+
+    return apiInstance.get(`/coins/${coinId}/market_chart`, {
+        params: {
+            ['vs_currency']: vsCurrency,
+            days
+        }
+    });
 };

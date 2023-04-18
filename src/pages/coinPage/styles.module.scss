@@ -1,5 +1,93 @@
-.likeWrapper {
-    width: 36px;
-    border-radius: 8px;
-    border: 1px solid rgb(207, 214, 228);
+$text-color-sub: #58667e;
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-top: 20px;
+    .avatar {
+        margin-right: 10px;
+    }
+    .name {
+        font-weight: 700;
+        font-size: 16px;
+
+        margin-right: 15px;
+    }
+    .symbol {
+        margin-right: 10px;
+    }
+
+    .priceWrapper {
+        margin-left: auto;
+        @media screen and (min-width: 1200px) {
+            margin-left: 200px;
+        }
+        .priceSymbol {
+            color: $text-color-sub;
+        }
+        .priceValue {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 42px;
+            margin-bottom: 20px;
+        }
+        .price24h {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &Item {
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 18px;
+                span {
+                    font-size: 12px;
+                    font-weight: 600;
+                    line-height: 22px;
+                }
+            }
+            &Divider {
+                height: 6px;
+                width: 20px;
+                background: $text-color-sub;
+                border-radius: 2px;
+                margin: 0 5px;
+            }
+        }
+    }
+
+    .likeWrapper {
+        width: 35px;
+        height: 33px;
+        border-radius: 8px;
+        border: 1px solid rgb(207, 214, 228);
+        cursor: pointer;
+        padding: 4px;
+        .likeCoin {
+
+        }
+    }
+}
+.addInfo {
+    margin-top: 20px;
+}
+
+.categories {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+    &Title {
+        color: $text-color-sub;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+    &Tags {
+
+    }
+    .buttonViewAll {
+        display: inline-block;
+        margin-left: 15px;
+    }
 }

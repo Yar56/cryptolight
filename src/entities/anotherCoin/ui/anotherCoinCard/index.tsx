@@ -1,6 +1,7 @@
 import { Card, Grid } from '@nextui-org/react';
 import { get } from 'lodash';
 import React, { FunctionComponent, ReactNode, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Coin } from '~/shared/api';
 
@@ -23,6 +24,8 @@ export const AnotherCoinCard: FunctionComponent<CoinCardProps> = ({ coin, badge 
         marketData: { currentPrice }
     } = coin;
 
+    const navigate = useNavigate();
+
     const [price, setPrice] = useState<string>(`${shortPrice({ price: currentPrice.usd })} usd`);
 
     const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -30,9 +33,9 @@ export const AnotherCoinCard: FunctionComponent<CoinCardProps> = ({ coin, badge 
         const price = get(currentPrice, value);
         setPrice(`${shortPrice({ price })} ${value}`);
     };
-
+    const handleCardClick = () => navigate({ pathname: `/coin/${id}` });
     return (
-        <Grid xs={12}>
+        <Grid xs={12} onClick={handleCardClick}>
             <div className={styles.cardWrapper}>
                 {badge && <div className={styles.badgeWrapper}>{badge}</div>}
                 <Card variant="bordered">

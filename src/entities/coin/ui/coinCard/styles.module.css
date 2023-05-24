@@ -4,14 +4,8 @@
     cursor: pointer;
     background-color: #fff;
 }
-.badgeWrapper {
-    position: absolute;
-    background-color: #fff;
-    top: -8px;
-    z-index: 10;
-    right: 5px;
-    width: 25px;
-    height: 25px;
+.likeWrapper {
+    margin-left: 15px;
 }
 
 .flexContainer {

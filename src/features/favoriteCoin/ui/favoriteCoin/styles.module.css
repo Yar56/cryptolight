@@ -1,6 +1,7 @@
 .like {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
 }
 .like:active {
     box-shadow: 7px 6px 28px 1px rgba(115, 133, 255, 0.24);

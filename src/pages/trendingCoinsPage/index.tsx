@@ -7,8 +7,7 @@ import { CoinCard, coinModel } from '~/entities/coin';
 
 import { EventType, useListType } from '~/features/coinSwitch/model';
 import { CoinSwitch } from '~/features/coinSwitch/ui';
-import { LikeCoin } from '~/features/likeCoin';
-import { likeCoinModel } from '~/features/likeCoin';
+import { FavoriteCoin, favoriteCoinModel } from '~/features/favoriteCoin';
 
 import { Header } from '~/widgets/header';
 import { WelcomeCard } from '~/widgets/welcomeCard';
@@ -35,7 +34,7 @@ const TrendingCoinsPage = () => {
     }, []);
 
     useEffect(() => {
-        likeCoinModel.getLikedUserCoinsFx();
+        favoriteCoinModel.getFavoriteUserCoinsFx();
     }, []);
 
     const isCoinGeckoType = listType === EventType.COIN_GECKO;
@@ -62,7 +61,7 @@ const TrendingCoinsPage = () => {
                                                 <CoinCard
                                                     key={coin.item.id}
                                                     coin={coin}
-                                                    badge={<LikeCoin coinId={coin.item.coinId} />}
+                                                    likeComponent={<FavoriteCoin coinId={coin.item.id} />}
                                                 />
                                             );
                                         })}

@@ -8,26 +8,25 @@ import { docRefUserLikedCoins } from '~/shared/config/firebase';
 
 import { userModel } from '~/entities/user';
 
-//todo зарезолвить импорт
-import { events, ModalType } from '~/processes/modalBehavior';
+//todo обработать нажатие когда user не авторизован
+// import { events, ModalType } from '~/processes/modalBehavior';
 
 import * as likeCoinModel from '../../model';
 
-import { ReactComponent as ActiveLike } from './icons/activeLike.svg';
-import { ReactComponent as Like } from './icons/like.svg';
+import { ReactComponent as ActiveLike } from './icons/activelikeIcon.svg';
+import { ReactComponent as Like } from './icons/likeIcon.svg';
 import styles from './styles.module.css';
 
-interface LikeCoinProps {
-    coinId: number;
-
+interface FavoriteCoinProps {
+    coinId: string;
     className?: string;
 }
 
-export const LikeCoin: FunctionComponent<LikeCoinProps> = ({ coinId, className }) => {
+export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, className }) => {
     const { user } = userModel.useUser();
-    const isLike = likeCoinModel.useLikeCoin({ coinId });
-    const likedCoinsMap = likeCoinModel.selectors.useLikedCoins();
-
+    const isLike = likeCoinModel.useFavoriteCoin({ coinId });
+    const likedCoinsMap = likeCoinModel.selectors.useFavoritedCoins();
+    console.log({ likedCoinsMap });
     useEffect(() => {
         if (Object.keys(likedCoinsMap).length === 0) {
             return;
@@ -50,10 +49,10 @@ export const LikeCoin: FunctionComponent<LikeCoinProps> = ({ coinId, className }
         event.stopPropagation();
         const userId = user?.uid;
         if (!userId) {
-            events.switchModal({ modalType: ModalType.AUTH, isOpen: true });
-            return;
+            // events.switchModal({ modalType: ModalType.AUTH, isOpen: true });
+            // return;
         }
-        likeCoinModel.events.likeCoin(coinId);
+        likeCoinModel.events.setFavoriteCoin(coinId);
     };
 
     return (

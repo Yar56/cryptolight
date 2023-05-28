@@ -1,4 +1,4 @@
-import { Card, Grid, Row, Tooltip } from '@nextui-org/react';
+import { Card, Grid, Row } from '@nextui-org/react';
 import React, { FunctionComponent, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,13 +35,7 @@ export const CoinCard: FunctionComponent<CoinCardProps> = ({ coin, likeComponent
                                 <div className={styles.priceName}>Price to Bitcoin:</div>
                                 <span className={styles.priceValue}>{priceBtc}</span>
                             </div>
-                            {likeComponent && (
-                                <div className={styles.likeWrapper}>
-                                    <Tooltip content="Добавить в любимые монеты" color="primary">
-                                        {likeComponent}
-                                    </Tooltip>
-                                </div>
-                            )}
+                            {likeComponent && <div className={styles.likeWrapper}>{likeComponent}</div>}
                         </Row>
                     </Card.Body>
                 </Card>

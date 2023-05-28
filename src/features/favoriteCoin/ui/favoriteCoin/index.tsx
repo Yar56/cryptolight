@@ -1,3 +1,4 @@
+import { Tooltip } from '@nextui-org/react';
 import { setDoc } from 'firebase/firestore';
 import React, { FunctionComponent, useEffect } from 'react';
 
@@ -24,7 +25,7 @@ interface FavoriteCoinProps {
 
 export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, className }) => {
     const { user } = userModel.useUser();
-    const isLike = likeCoinModel.useFavoriteCoin({ coinId });
+    const isFavorite = likeCoinModel.useFavoriteCoin({ coinId });
     const likedCoinsMap = likeCoinModel.selectors.useFavoritedCoins();
     console.log({ likedCoinsMap });
     useEffect(() => {
@@ -56,8 +57,13 @@ export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, cla
     };
 
     return (
-        <div className={classNames(styles.like, className)} onClick={handleChange}>
-            {isLike ? <ActiveLike /> : <Like />}
-        </div>
+        <Tooltip
+            content={isFavorite ? 'Убрать из любимых монет' : 'Добавить в любимые монеты'}
+            color={isFavorite ? 'warning' : 'primary'}
+        >
+            <div className={classNames(styles.like, className)} onClick={handleChange}>
+                {isFavorite ? <ActiveLike /> : <Like />}
+            </div>
+        </Tooltip>
     );
 };

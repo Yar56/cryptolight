@@ -82,9 +82,7 @@ const CoinPage: FunctionComponent = () => {
                             </select>
                         </Row>
                         <Row>
-                            <Tooltip content="Убрать из любимых монет" color="warning">
-                                <FavoriteCoin coinId={coinState.id} />
-                            </Tooltip>
+                            <FavoriteCoin coinId={coinState.id} />
                         </Row>
                     </Card.Header>
                     <Card.Body css={{ p: 0 }}>

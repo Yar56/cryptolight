@@ -58,6 +58,9 @@ export interface Coin {
         roi: null;
         high24H: Record<string, number>;
         low24H: Record<string, number>;
+        marketCap: Record<string, number>;
+        totalVolume: Record<string, number>;
+        marketCapChangePercentage24H: number;
     };
     name: string;
     platforms: { ethereum: string; binanceSmartChain: string; polygonPos: string; avalanche: string };

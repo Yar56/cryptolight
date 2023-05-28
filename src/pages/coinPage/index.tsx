@@ -1,4 +1,4 @@
-import { Avatar, Card, Container, Row, Text, Tooltip } from '@nextui-org/react';
+import { Avatar, Button, Card, Col, Container, Row, Text, Tooltip } from '@nextui-org/react';
 import { get } from 'lodash';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -6,11 +6,13 @@ import { Link, useParams } from 'react-router-dom';
 import { Coin, MarketChart, MarketChartCoin } from '~/shared/api';
 import { getCoinById, getCoinMarketChartById } from '~/shared/api/coingecko/coins';
 import { useModalState } from '~/shared/hooks/useModalState';
+import { numberWithSpaces } from '~/shared/lib/numberWithSpaces';
 
 import { FavoriteCoin } from '~/features/favoriteCoin';
 
 import { Header } from '~/widgets/header';
 
+import styles from './styles.module.scss';
 const shortPrice = ({ price }: { price: number }): string => {
     return price.toFixed(2);
 };
@@ -64,14 +66,20 @@ const CoinPage: FunctionComponent = () => {
                     <br />
                     назад
                 </Link>
-                <Card>
+                <Card css={{ mw: '400px' }}>
                     <Card.Header>
                         <Row justify="flex-start" align="center">
                             <Avatar text="JR" size="md" src={coinState?.image?.small ?? ''} css={{ mr: 10 }} />
                             <Text b css={{ fontSize: 18, marginRight: 10 }}>
                                 {coinState?.name}
                             </Text>
-                            <select name="coinNames" id="coinNames" onChange={handleSelect} defaultValue="usd">
+                            <select
+                                className={styles.select}
+                                name="coinNames"
+                                id="coinNames"
+                                onChange={handleSelect}
+                                defaultValue="usd"
+                            >
                                 {Object.keys(coinState?.marketData.currentPrice).map((currency) => {
                                     return (
                                         <option value={currency} key={currency} selected={currency === 'usd'}>
@@ -81,96 +89,37 @@ const CoinPage: FunctionComponent = () => {
                                 })}
                             </select>
                         </Row>
-                        <Row>
+                        <Row justify="flex-end">
                             <FavoriteCoin coinId={coinState.id} />
                         </Row>
                     </Card.Header>
-                    <Card.Body css={{ p: 0 }}>
-                        {/*<Card.Image*/}
-                        {/*    src={coinState?.image?.small ?? ''}*/}
-                        {/*    // objectFit="cover"*/}
-                        {/*    width="100%"*/}
-                        {/*    height={140}*/}
-                        {/*    alt={coinState?.name}*/}
-                        {/*/>*/}
+                    <Card.Body>
+                        <Text b color="#8f89b4">
+                            {coinState.name} price
+                        </Text>
+                        <Text b h3>
+                            $ {numberWithSpaces(coinState.marketData.currentPrice['usd'])}
+                        </Text>
                     </Card.Body>
-                    <Card.Footer css={{ justifyItems: 'flex-start' }}>
-                        {/*<Row wrap="wrap" justify="space-between" align="center">*/}
-                        {/*    <Text b>{item.title}</Text>*/}
-                        {/*    <Text css={{ color: '$accents7', fontWeight: '$semibold', fontSize: '$sm' }}>*/}
-                        {/*        {item.price}*/}
-                        {/*    </Text>*/}
-                        {/*</Row>*/}
-                    </Card.Footer>
+                    <Card css={{ width: 'calc(100% - 40px)', margin: '0 auto 20px', p: 15 }}>
+                        <Row justify="space-between" align="center">
+                            <Col span={7}>
+                                <Text color="#7a7ebd">
+                                    Market Cap{' '}
+                                    <strong>
+                                        {coinState.marketData.marketCapChangePercentage24H.toFixed(2)}% (1d)
+                                    </strong>
+                                </Text>
+                                <Text b>$ {numberWithSpaces(coinState.marketData.marketCap['usd'])}</Text>
+                            </Col>
+
+                            <Col span={5}>
+                                <Text color="#7a7ebd">Volume</Text>
+                                <Text b>$ {numberWithSpaces(coinState.marketData.totalVolume['usd'])}</Text>
+                            </Col>
+                        </Row>
+                    </Card>
                 </Card>
-                {/*<div className={styles.header}>*/}
-                {/*    <Avatar squared src={coinState?.image?.small} className={styles.avatar} />*/}
-                {/*    <div className={styles.name}>{coinState?.name}</div>*/}
-                {/*    <Badge className={styles.symbol}>{coinState?.symbol}</Badge>*/}
-                {/*    <div className={styles.likeWrapper}>*/}
-                {/*        <LikeCoin coinId={2} className={styles.likeCoin} />*/}
-                {/*    </div>*/}
-
-                {/*    <div className={styles.priceWrapper}>*/}
-                {/*        <div className={styles.priceSymbol}>*/}
-                {/*            {`${coinState?.name} price (${coinState?.symbol.toUpperCase()})`}*/}
-                {/*        </div>*/}
-
-                {/*        <div className={styles.priceValue}>${coinState?.marketData?.currentPrice['usd']}</div>*/}
-
-                {/*        <div className={styles.price24h}>*/}
-                {/*            <div className={styles.price24hItem}>*/}
-                {/*                Low24h: <span>${coinState?.marketData?.low24H['usd']}</span>*/}
-                {/*            </div>*/}
-                {/*            /!*<Spacer x={2} y={2} className={styles.spacer} />*!/*/}
-                {/*            <div className={styles.price24hDivider}></div>*/}
-                {/*            <div className={styles.price24hItem}>*/}
-                {/*                High24h: <span>${coinState?.marketData?.high24H['usd']}</span>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-                {/*<div className={styles.addInfo}>*/}
-                {/*    <Badge>marketCapRank #{coinState?.marketCapRank}</Badge>*/}
-                {/*</div>*/}
-                {/*{coinState?.categories && (*/}
-                {/*    <div className={styles.categories}>*/}
-                {/*        <span className={styles.categoriesTitle}>Категории:</span>*/}
-                {/*        <div className={styles.categoriesTags}>*/}
-                {/*            {coinState?.categories?.map((category: string, index) => {*/}
-                {/*                if (index >= 3) {*/}
-                {/*                    return;*/}
-                {/*                }*/}
-                {/*                return <Badge key={index}>{category}</Badge>;*/}
-                {/*            })}*/}
-                {/*            {coinState?.categories.length >= 3 && (*/}
-                {/*                <Button size="xs" className={styles.buttonViewAll} onClick={handleOpen}>*/}
-                {/*                    Посмотреть все*/}
-                {/*                </Button>*/}
-                {/*            )}*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*)}*/}
-                {/*<div className={styles.marketChartWrapper}>*/}
-                {/*    <Text b>{coinState?.name} to USD Chart</Text>*/}
-                {/*    {marketChartState?.map((itemPrice, index) => {*/}
-                {/*        const [, price] = itemPrice;*/}
-                {/*        // return <div key={index}>{price}</div>;*/}
-                {/*    })}*/}
-                {/*</div>*/}
-
-                {/*<ModalComponent>*/}
-                {/*    <Modal.Header>*/}
-                {/*        <Text b size={18}>*/}
-                {/*            {coinState?.name} Категории:*/}
-                {/*        </Text>*/}
-                {/*    </Modal.Header>*/}
-                {/*    <Modal.Body>*/}
-                {/*        {coinState?.categories?.map((category: string, index) => {*/}
-                {/*            return <Badge key={index}>{category}</Badge>;*/}
-                {/*        })}*/}
-                {/*    </Modal.Body>*/}
-                {/*</ModalComponent>*/}
             </Container>
         </>
     );

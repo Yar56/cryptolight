@@ -1,26 +1,18 @@
-import { cloneDeep, isArray, mapKeys, map, camelCase, mapValues, isPlainObject, isString } from 'lodash';
+import { camelCase, forEach, isArray, isObject, map, isNull } from 'lodash';
 
-// из альтернатив ещё есть https://github.com/DenysIvko/camelize2
-export default function keysToCamelCase(object: object | object[]): unknown {
-    let camelCaseObject = cloneDeep(object);
+export function keysToCamelCase(object: object | object[]): unknown {
+    if (isArray(object)) {
+        return map(object, (item) => keysToCamelCase(item));
+    } else if (isObject(object) && !isNull(object)) {
+        const camelCaseObj: { [key: string]: unknown } = {};
 
-    if (isArray(camelCaseObject)) {
-        return map(camelCaseObject, keysToCamelCase);
-    } else if (isString(camelCaseObject)) {
-        return camelCaseObject;
-    } else {
-        camelCaseObject = mapKeys(camelCaseObject, (value, key) => {
-            return camelCase(key);
+        forEach(object, (value, key) => {
+            const camelCaseKey = camelCase(key);
+            camelCaseObj[camelCaseKey] = keysToCamelCase(value);
         });
 
-        return mapValues(camelCaseObject, (value) => {
-            if (isPlainObject(value)) {
-                return keysToCamelCase(value);
-            } else if (isArray(value)) {
-                return map(value, keysToCamelCase);
-            } else {
-                return value;
-            }
-        });
+        return camelCaseObj;
     }
+
+    return object;
 }

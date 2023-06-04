@@ -82,3 +82,8 @@ export interface MarketChartCoin {
     prices: MarketChart;
     totalVolumes: MarketChart;
 }
+
+export interface DataProps {
+    date: string | Date;
+    price: number;
+}

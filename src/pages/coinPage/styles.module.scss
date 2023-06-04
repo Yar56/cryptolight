@@ -3,3 +3,21 @@ $text-color-sub: #58667e;
 .select {
     margin-left: 15px;
 }
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: center;
+
+    .card {
+        margin-bottom: 50px;
+
+        @media screen and (min-width: 1280px) {
+            margin-right: 50px;
+            margin-bottom: 0
+        }
+
+    }
+}

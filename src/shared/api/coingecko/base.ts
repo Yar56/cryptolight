@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 import { API_HOST } from '~/shared/config';
-
-import keysToCamelCase from '../../lib/keysToCamelCase';
+import { keysToCamelCase } from '~/shared/lib/keysToCamelCase';
 
 export const apiInstance = axios.create({
     baseURL: API_HOST

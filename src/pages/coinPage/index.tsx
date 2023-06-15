@@ -85,10 +85,6 @@ const CoinPage: FunctionComponent = () => {
         <>
             <Header sticky />
             <Container>
-                <Link to="/">
-                    <br />
-                    <GoBackIcon />
-                </Link>
                 <Spacer y={1} />
                 <div className={styles.wrapper}>
                     <Card css={{ mw: '400px', maxH: '276px' }} className={styles.card}>
@@ -126,7 +122,7 @@ const CoinPage: FunctionComponent = () => {
                                 $ {numberWithSpaces(coinState.marketData.currentPrice['usd'])}
                             </Text>
                         </Card.Body>
-                        <Card css={{ width: 'calc(100% - 20px)', margin: '0 auto 20px', p: 15 }}>
+                        <Card css={{ width: 'calc(100% - 20px)', margin: '0 auto 20px', p: 15 }} variant="bordered">
                             <Row justify="space-between" align="center">
                                 <Col span={7}>
                                     <Text color="#7a7ebd">

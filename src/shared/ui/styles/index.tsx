@@ -4,7 +4,7 @@ import { createGlobalStyle, DefaultTheme } from 'styled-components';
 export enum ColorsEnum {
     primary = '#808a9d',
     secondary = '#cfd6e4',
-    lapislazuli = '#26619C',
+    lapislazuli = '#0063F5',
     lime = '#32CD32',
     red = '#FF4136'
 }

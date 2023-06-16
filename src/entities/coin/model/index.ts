@@ -1,3 +1,1 @@
-// Разбиваем на submodels
-
-export * from './coins';
+export * from './coin';

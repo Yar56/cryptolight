@@ -1,7 +1,7 @@
 import { createStore, createEffect } from 'effector';
 
 import { coinGeckoApi } from '~/shared/api';
-import type { TrendingCoin, Coin } from '~/shared/api';
+import type { TrendingCoin } from '~/shared/api';
 
 // В каждом эффекте так же может быть своя доп. обработка
 export const getTrendingCoinsListFx = createEffect(() => {
@@ -26,17 +26,4 @@ export const $coinsList = $coins;
 export const $coinsListLoading = getTrendingCoinsListFx.pending;
 export const $coinsListEmpty = $coinsList.map((list) => list.length === 0);
 
-export const getAnotherTrendingCoinsListFx = createEffect(() => {
-    // Здесь также может быть доп. обработка эффекта
-    return coinGeckoApi.coins.getAnotherTrendingCoinsList();
-});
-
-export const $anotherCoins = createStore<Array<Coin>>([]).on(
-    getAnotherTrendingCoinsListFx.doneData,
-    (state, payload) => {
-        return [...state, ...payload.data];
-    }
-);
-
-export const $anotherCoinsList = $anotherCoins;
-export const $anotherCoinsListEmpty = $anotherCoins.map((list) => list.length === 0);
+$coinsList.watch((state) => console.debug(state));

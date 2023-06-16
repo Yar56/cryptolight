@@ -2,8 +2,8 @@ import { Container, Grid, Loading, Text } from '@nextui-org/react';
 import { useStore } from 'effector-react';
 import React, { useEffect } from 'react';
 
-import { AnotherCoinCard } from '~/entities/anotherCoin';
 import { CoinCard, coinModel } from '~/entities/coin';
+import { CoinByGlobalTrendsCard, coinByGlobalTrendsModel } from '~/entities/coinByGlobalTrends';
 
 import { EventType, useListType } from '~/features/coinSwitch/model';
 import { CoinSwitch } from '~/features/coinSwitch/ui';
@@ -16,7 +16,7 @@ const TrendingCoinsPage = () => {
     const coins = useStore(coinModel.$coinsList);
     const isLoading = useStore(coinModel.$coinsListLoading);
     const isEmpty = useStore(coinModel.$coinsListEmpty);
-    const anotherCoins = useStore(coinModel.$anotherCoinsList);
+    const coinsByGlobal = useStore(coinByGlobalTrendsModel.$coinListByGlobal);
     const listType = useListType();
 
     /**
@@ -30,7 +30,7 @@ const TrendingCoinsPage = () => {
     }, []);
 
     useEffect(() => {
-        coinModel.getAnotherTrendingCoinsListFx();
+        coinByGlobalTrendsModel.getAnotherTrendingCoinsListFx();
     }, []);
 
     useEffect(() => {
@@ -69,8 +69,8 @@ const TrendingCoinsPage = () => {
                             </Grid.Container>
                         ) : (
                             <Grid.Container gap={2} justify="center" css={{ mt: 0, pl: 0, pr: 0 }}>
-                                {anotherCoins.map((anotherCoin) => {
-                                    return <AnotherCoinCard coin={anotherCoin} key={anotherCoin.id} />;
+                                {coinsByGlobal.map((anotherCoin) => {
+                                    return <CoinByGlobalTrendsCard coin={anotherCoin} key={anotherCoin.id} />;
                                 })}
                             </Grid.Container>
                         )}

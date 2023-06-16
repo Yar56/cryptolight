@@ -27,7 +27,7 @@ export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, cla
     const { user } = userModel.useUser();
     const isFavorite = likeCoinModel.useFavoriteCoin({ coinId });
     const likedCoinsMap = likeCoinModel.selectors.useFavoritedCoins();
-    console.log({ likedCoinsMap });
+
     useEffect(() => {
         if (Object.keys(likedCoinsMap).length === 0) {
             return;

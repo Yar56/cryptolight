@@ -1,21 +1,20 @@
-import { Box, Typography } from '@mui/material';
-import { Avatar, Button, Card, Col, Container, Row, Spacer, Text } from '@nextui-org/react';
-import { useMediaQuery, useWindowSize } from '@uidotdev/usehooks';
+import { Avatar, Card, Col, Container, Row, Spacer, Text } from '@nextui-org/react';
+import { useMediaQuery } from '@uidotdev/usehooks';
 import { get } from 'lodash';
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { Coin, DataProps, MarketChartCoin } from '~/shared/api';
 import { getCoinById, getCoinMarketChartById } from '~/shared/api/coingecko/coins';
 import { useModalState } from '~/shared/hooks/useModalState';
 import { numberWithSpaces } from '~/shared/lib/numberWithSpaces';
+import BackButton from '~/shared/ui/components/backButton/BackButton';
 
 import { FavoriteCoin } from '~/features/favoriteCoin';
 import PriceChart from '~/features/priceChart/ui/priceChart';
 
 import { Header } from '~/widgets/header';
 
-import { ReactComponent as GoBackIcon } from './images/goBackIcon.svg';
 import styles from './styles.module.scss';
 
 const shortPrice = ({ price }: { price: number }): string => {
@@ -85,6 +84,7 @@ const CoinPage: FunctionComponent = () => {
         <>
             <Header sticky />
             <Container>
+                <BackButton />
                 <Spacer y={1} />
                 <div className={styles.wrapper}>
                     <Card css={{ mw: '400px', maxH: '276px' }} className={styles.card}>

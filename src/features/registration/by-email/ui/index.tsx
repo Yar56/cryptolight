@@ -8,9 +8,9 @@ import * as yup from 'yup';
 import { Mail } from '~/shared/ui/icons/Mail';
 import { Password } from '~/shared/ui/icons/Password';
 
-import { ModalByEmailParams } from '~/features/commonModalTypes';
+import { signUpUserFx } from '~/entities/user/model';
 
-import { signUpUserFx } from '../model';
+import { ModalByEmailParams } from '~/features/commonModalTypes';
 
 import styles from './styles.module.css';
 

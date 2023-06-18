@@ -8,9 +8,9 @@ import * as yup from 'yup';
 import { Mail } from '~/shared/ui/icons/Mail';
 import { Password } from '~/shared/ui/icons/Password';
 
-import { ModalByEmailParams } from '~/features/commonModalTypes';
+import { signInUserFx } from '~/entities/user/model';
 
-import { signInUserFx } from '../model';
+import { ModalByEmailParams } from '~/features/commonModalTypes';
 
 import styles from './styles.module.css';
 
@@ -39,8 +39,6 @@ const reducer = (state: State, action: Action): State => {
             throw new Error('action.type = undefined');
     }
 };
-
-type Reducer<S, A> = (prevState: S, action: A) => S;
 
 const schema = yup.object().shape({
     email: yup.string().email('Email некорректен').required('Заполните поле с email'),

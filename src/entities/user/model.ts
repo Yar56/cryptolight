@@ -1,11 +1,21 @@
 import { User } from '@firebase/auth';
-import { createEvent, createStore } from 'effector';
+import { createEffect, createEvent, createStore } from 'effector';
 import { useStore, useStoreMap } from 'effector-react';
 
-//todo зарезолвить импорты
-import { authModel } from '~/features/auth/by-email/';
-import { registrationModel } from '~/features/registration/by-email/';
-import { signUpUserFx } from '~/features/registration/by-email/model';
+import { coinGeckoApi } from '~/shared/api';
+
+interface AuthUserFxParams {
+    email: string;
+    password: string;
+}
+
+export const signInUserFx = createEffect(
+    async ({ email, password }: AuthUserFxParams) => await coinGeckoApi.user.signInUser({ email, password })
+);
+
+export const signUpUserFx = createEffect(
+    async ({ email, password }: AuthUserFxParams) => await coinGeckoApi.user.signUpUser({ email, password })
+);
 
 type UserState = {
     user?: User;
@@ -16,14 +26,14 @@ const initialUserState: UserState = {};
 const updateUserData = createEvent<User | undefined>();
 
 export const $user = createStore<UserState>(initialUserState)
-    .on([authModel.signInUserFx.doneData, registrationModel.signUpUserFx.doneData], (state, { user }) => {
+    .on([signInUserFx.doneData, signUpUserFx.doneData], (state, { user }) => {
         return { ...state, user };
     })
     .on(updateUserData, (state, payload) => {
         return { ...state, user: payload };
     });
 
-export const $userLoading = authModel.signInUserFx.pending || signUpUserFx.pending;
+export const $userLoading = signInUserFx.pending || signUpUserFx.pending;
 
 export const events = { updateUserData };
 
@@ -32,3 +42,5 @@ export const useIsUserAuth = (): boolean =>
 export const useUser = (): UserState => useStore($user);
 
 export const selectors = { useIsUserAuth, useUser };
+
+$user.watch((state) => console.debug(state));

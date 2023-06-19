@@ -60,7 +60,6 @@ export const theme: DefaultTheme = {
         one: '0 2px 4px 0 rgba(0, 0, 0, 0.16)',
         two: '0 -6px 16px -8px rgba(0, 0, 0, 0.08), 0 -9px 28px 0 rgba(0, 0, 0, 0.05)'
     },
-    // TODO: Replace arbitrary numbers with actual values from Haiying
     mediaQuery: {
         mobile: {
             screenSize: '575px',

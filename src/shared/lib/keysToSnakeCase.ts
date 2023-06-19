@@ -1,6 +1,5 @@
 import { cloneDeep, isArray, isPlainObject, isString, map, mapKeys, mapValues, snakeCase } from 'lodash';
 
-// todo сделать универсальную функцию, которая принимала бы в качестве аргумента caseConverter (snakeCase/camelCase из lodash)
 export default function keysToSnakeCase(object: object | object[]): object {
     let snakeCaseObject = cloneDeep(object);
 

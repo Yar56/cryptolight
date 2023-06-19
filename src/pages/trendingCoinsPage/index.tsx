@@ -2,8 +2,9 @@ import { Container, Grid, Loading, Text } from '@nextui-org/react';
 import { useStore } from 'effector-react';
 import React, { useEffect } from 'react';
 
-import { CoinCard, coinModel } from '~/entities/coin';
-import { CoinByGlobalTrendsCard, coinByGlobalTrendsModel } from '~/entities/coinByGlobalTrends';
+import { coinUi, coinModel } from '~/entities/coin';
+const { CoinListCard, CoinListByGlobalTrendsCard } = coinUi;
+const { coinListSubModel, coinListByGlobalTrendsSubModel } = coinModel;
 
 import { EventType, useListType } from '~/features/coinSwitch/model';
 import { CoinSwitch } from '~/features/coinSwitch/ui';
@@ -13,10 +14,10 @@ import { Header } from '~/widgets/header';
 import { WelcomeCard } from '~/widgets/welcomeCard';
 
 const TrendingCoinsPage = () => {
-    const coins = useStore(coinModel.$coinsList);
-    const isLoading = useStore(coinModel.$coinsListLoading);
-    const isEmpty = useStore(coinModel.$coinsListEmpty);
-    const coinsByGlobal = useStore(coinByGlobalTrendsModel.$coinListByGlobal);
+    const coinList = useStore(coinListSubModel.$coinList);
+    const isLoading = useStore(coinListSubModel.$coinListIsLoading);
+    const isEmpty = useStore(coinListSubModel.$coinListIsEmpty);
+    const coinsByGlobal = useStore(coinListByGlobalTrendsSubModel.$coinListByGlobal);
     const listType = useListType();
 
     /**
@@ -26,11 +27,11 @@ const TrendingCoinsPage = () => {
      */
 
     useEffect(() => {
-        coinModel.getTrendingCoinsListFx();
+        coinModel.coinListSubModel.getTrendingCoinsListFx();
     }, []);
 
     useEffect(() => {
-        coinByGlobalTrendsModel.getAnotherTrendingCoinsListFx();
+        coinModel.coinListByGlobalTrendsSubModel.getAnotherTrendingCoinsListFx();
     }, []);
 
     useEffect(() => {
@@ -56,9 +57,9 @@ const TrendingCoinsPage = () => {
                                 <>
                                     {isLoading && <Loading type="spinner" size="lg" />}
                                     {!isLoading &&
-                                        coins.map((coin) => {
+                                        coinList.map((coin) => {
                                             return (
-                                                <CoinCard
+                                                <CoinListCard
                                                     key={coin.item.id}
                                                     coin={coin}
                                                     likeComponent={<FavoriteCoin coinId={coin.item.id} />}
@@ -70,7 +71,7 @@ const TrendingCoinsPage = () => {
                         ) : (
                             <Grid.Container gap={2} justify="center" css={{ mt: 0, pl: 0, pr: 0 }}>
                                 {coinsByGlobal.map((anotherCoin) => {
-                                    return <CoinByGlobalTrendsCard coin={anotherCoin} key={anotherCoin.id} />;
+                                    return <CoinListByGlobalTrendsCard coin={anotherCoin} key={anotherCoin.id} />;
                                 })}
                             </Grid.Container>
                         )}

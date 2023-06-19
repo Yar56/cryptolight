@@ -7,7 +7,7 @@ import { Coin } from '~/shared/api';
 
 import styles from './styles.module.css';
 
-interface CoinByGlobalTrendsCardProps {
+interface CoinsByGlobalTrendsCardProps {
     coin: Coin;
     badge?: ReactNode;
 }
@@ -15,7 +15,7 @@ interface CoinByGlobalTrendsCardProps {
 const shortPrice = ({ price }: { price: number }): string => {
     return price.toFixed(2);
 };
-export const CoinByGlobalTrendsCard: FunctionComponent<CoinByGlobalTrendsCardProps> = ({ coin, badge }) => {
+export const CoinListByGlobalTrendsCard: FunctionComponent<CoinsByGlobalTrendsCardProps> = ({ coin, badge }) => {
     const {
         image: { large },
         name,

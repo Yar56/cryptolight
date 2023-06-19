@@ -9,7 +9,7 @@ export const getAnotherTrendingCoinsListFx = createEffect(() => {
     return coinGeckoApi.coins.getAnotherTrendingCoinsList();
 });
 
-export const $coinsByGlobal = createStore<CoinsTrendingByGlobalState>([]).on(
+const $coinsByGlobal = createStore<CoinsTrendingByGlobalState>([]).on(
     getAnotherTrendingCoinsListFx.doneData,
     (state, payload) => {
         return [...state, ...payload.data];

@@ -11,7 +11,7 @@ interface CoinCardProps {
     likeComponent?: ReactElement;
 }
 
-export const CoinCard: FunctionComponent<CoinCardProps> = ({ coin, likeComponent }) => {
+export const CoinListCard: FunctionComponent<CoinCardProps> = ({ coin, likeComponent }) => {
     const {
         item: { large, id, name, symbol, priceBtc }
     } = coin;

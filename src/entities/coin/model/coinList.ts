@@ -5,8 +5,7 @@ import type { TrendingCoin } from '~/shared/api';
 
 // В каждом эффекте так же может быть своя доп. обработка
 export const getTrendingCoinsListFx = createEffect(() => {
-    // Здесь также может быть доп. обработка эффекта
-    return coinGeckoApi.coins.getTrendingCoinsList();
+    return coinGeckoApi.coins.getTrendingCoinList();
 });
 
 // Можно хранить и в нормализованном виде

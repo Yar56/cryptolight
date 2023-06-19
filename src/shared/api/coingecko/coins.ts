@@ -1,38 +1,42 @@
-import { AxiosPromise } from 'axios';
+import { AxiosPromise, AxiosResponse } from 'axios';
 
 import { apiInstance } from './base';
-import { Coin, TrendingCoin } from './models';
+import { Coin, CoinMarketChart, TrendingCoin } from './models';
 
-interface GetTrendingCoinsListResponse {
+interface GetTrendingCoinListResponse {
     coins: TrendingCoin[];
     exchanges: [];
 }
 
-export const getTrendingCoinsList = (): AxiosPromise<GetTrendingCoinsListResponse> => {
+export const getTrendingCoinList = (): AxiosPromise<GetTrendingCoinListResponse> => {
     return apiInstance.get('/search/trending');
 };
 
-export const getAnotherTrendingCoinsList = (): AxiosPromise<Array<Coin>> => {
+export const getCoinListByGlobalTrends = (): AxiosPromise<Array<Coin>> => {
     return apiInstance.get('/coins/?id=bitcoin');
 };
 
-interface GetCoinByIdParams {
+export interface GetCoinByIdParams {
     coinId?: string;
 }
-interface GetCoinChartByIdParams extends GetCoinByIdParams {
+export interface GetCoinChartByIdParams extends GetCoinByIdParams {
     vsCurrency?: string;
     days?: string;
 }
-export const getCoinById = ({ coinId }: GetCoinByIdParams) => {
+export const getCoinById = ({ coinId }: GetCoinByIdParams): Promise<AxiosResponse<Coin>> => {
     if (!coinId) {
         return Promise.reject(new Error('empty coinId'));
     }
     return apiInstance.get(`/coins/${coinId}/`);
 };
 
-export const getCoinMarketChartById = ({ coinId, vsCurrency = 'usd', days = '1' }: GetCoinChartByIdParams) => {
+export const getCoinMarketChartById = ({
+    coinId,
+    vsCurrency = 'usd',
+    days = '1'
+}: GetCoinChartByIdParams): Promise<AxiosResponse<CoinMarketChart>> => {
     if (!coinId) {
-        return Promise.reject(new Error('empty coinId'));
+        return Promise.reject(new Error('coinId is empty'));
     }
 
     return apiInstance.get(`/coins/${coinId}/market_chart`, {

@@ -31,7 +31,7 @@ const TrendingCoinsPage = () => {
     }, []);
 
     useEffect(() => {
-        coinModel.coinListByGlobalTrendsSubModel.getAnotherTrendingCoinsListFx();
+        coinModel.coinListByGlobalTrendsSubModel.getCoinListByGlobalTrendsFx();
     }, []);
 
     useEffect(() => {

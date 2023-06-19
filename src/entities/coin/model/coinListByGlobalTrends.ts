@@ -4,13 +4,13 @@ import type { Coin } from '~/shared/api';
 import { coinGeckoApi } from '~/shared/api';
 
 type CoinsTrendingByGlobalState = Coin[];
-export const getAnotherTrendingCoinsListFx = createEffect(() => {
+export const getCoinListByGlobalTrendsFx = createEffect(() => {
     // Здесь также может быть доп. обработка эффекта
-    return coinGeckoApi.coins.getAnotherTrendingCoinsList();
+    return coinGeckoApi.coins.getCoinListByGlobalTrends();
 });
 
 const $coinsByGlobal = createStore<CoinsTrendingByGlobalState>([]).on(
-    getAnotherTrendingCoinsListFx.doneData,
+    getCoinListByGlobalTrendsFx.doneData,
     (state, payload) => {
         return [...state, ...payload.data];
     }

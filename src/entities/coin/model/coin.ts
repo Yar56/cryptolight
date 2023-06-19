@@ -1,25 +1,41 @@
 import { createStore, createEffect } from 'effector';
 
-import { coinGeckoApi } from '~/shared/api';
-// import type { TrendingCoin } from '~/shared/api';
+import { Coin, coinGeckoApi, CoinMarketChart, DataProps } from '~/shared/api';
+import { GetCoinByIdParams, GetCoinChartByIdParams } from '~/shared/api/coingecko/coins';
 
-// В каждом эффекте так же может быть своя доп. обработка
-export const getCoinByIdFx = createEffect(() => {
-    // Здесь также может быть доп. обработка эффекта
-    return coinGeckoApi.coins.getTrendingCoinsList();
+export const getCoinByIdFx = createEffect(({ coinId }: GetCoinByIdParams) => {
+    return coinGeckoApi.coins.getCoinById({ coinId });
 });
 
-// Можно хранить и в нормализованном виде
-// type CoinsTrendingState = TrendingCoin[];
-
-// export const coinsInitialState: CoinsTrendingState = [];
-
-export const $coin = createStore({}).on(getCoinByIdFx.doneData, (state, payload) => {
-    return [...state, ...payload.data.coins];
+export const getCoinMarketChartByIdFx = createEffect(({ coinId }: GetCoinChartByIdParams) => {
+    return coinGeckoApi.coins.getCoinMarketChartById({ coinId });
 });
 
-// export const $coin = $coin;
-// export const $coinListLoading = getTrendingCoinsListFx.pending;
-// export const $coinListEmpty = $coinList.map((list) => list.length === 0);
-//
-// $coinList.watch((state) => console.debug(state));
+interface CoinState {
+    coin?: Coin;
+    coinMarketChart?: CoinMarketChart;
+    preparedPrices?: DataProps[];
+}
+
+export const coinInitialState: CoinState = {};
+
+export const $coinState = createStore<CoinState>(coinInitialState)
+    .on(getCoinByIdFx.doneData, (state, { data }) => {
+        return { ...state, coin: data };
+    })
+    .on(getCoinMarketChartByIdFx.doneData, (state, { data }) => {
+        return {
+            ...state,
+            coinMarketChart: data,
+            preparedPrices: data.prices.map((item) => {
+                return { date: new Date(item[0]), price: item[1] };
+            })
+        };
+    });
+
+export const $coin = $coinState.map((state) => state.coin as Coin);
+export const $preparedPrices = $coinState.map((state) => state.preparedPrices);
+export const $coinIsLoading = getCoinByIdFx.pending && getCoinMarketChartByIdFx.pending;
+export const $coinIsEmpty = $coinState.map((state) => !state.coin);
+
+$coinState.watch((state) => console.debug(state));

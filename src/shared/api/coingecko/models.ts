@@ -77,7 +77,7 @@ export interface Coin {
 // coins/${coinId}/market_chart?
 
 export type MarketChart = [number, number][];
-export interface MarketChartCoin {
+export interface CoinMarketChart {
     marketCaps: MarketChart;
     prices: MarketChart;
     totalVolumes: MarketChart;

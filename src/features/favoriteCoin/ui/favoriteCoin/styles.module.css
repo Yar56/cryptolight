@@ -3,6 +3,10 @@
     height: 40px;
     cursor: pointer;
 }
+.like.likeDisabled {
+    transform: none;
+    opacity: 0.3;
+}
 .like:active {
     box-shadow: 7px 6px 28px 1px rgba(115, 133, 255, 0.24);
     transform: translateY(2px);

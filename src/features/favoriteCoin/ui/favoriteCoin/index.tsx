@@ -1,4 +1,5 @@
 import { Tooltip } from '@nextui-org/react';
+import { SimpleColors } from '@nextui-org/react/types/utils/prop-types';
 import { setDoc } from 'firebase/firestore';
 import React, { FunctionComponent, useEffect } from 'react';
 
@@ -8,9 +9,6 @@ import classNames from '~/shared/aliases/classNames';
 import { docRefUserLikedCoins } from '~/shared/config/firebase';
 
 import { userModel } from '~/entities/user';
-
-//todo обработать нажатие когда user не авторизован
-// import { events, ModalType } from '~/processes/modalBehavior';
 
 import * as likeCoinModel from '../../model';
 
@@ -22,6 +20,17 @@ interface FavoriteCoinProps {
     coinId: string;
     className?: string;
 }
+
+const getTooltipText = (isFavorite: boolean, isUserExist: boolean): { content: string; color: SimpleColors } => {
+    if (!isUserExist) {
+        return { content: 'Зарегистрируйтесь или войдите', color: 'error' };
+    }
+
+    return {
+        content: isFavorite ? 'Убрать из любимых монет' : 'Добавить в любимые монеты',
+        color: isFavorite ? 'warning' : 'primary'
+    };
+};
 
 export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, className }) => {
     const { user } = userModel.useUser();
@@ -50,18 +59,18 @@ export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, cla
         event.stopPropagation();
         const userId = user?.uid;
         if (!userId) {
-            // events.switchModal({ modalType: ModalType.AUTH, isOpen: true });
-            // return;
+            return;
         }
         likeCoinModel.events.setFavoriteCoin(coinId);
     };
+    const { content, color } = getTooltipText(Boolean(isFavorite), Boolean(user));
 
     return (
-        <Tooltip
-            content={isFavorite ? 'Убрать из любимых монет' : 'Добавить в любимые монеты'}
-            color={isFavorite ? 'warning' : 'primary'}
-        >
-            <div className={classNames(styles.like, className)} onClick={handleChange}>
+        <Tooltip content={content} color={color}>
+            <div
+                className={classNames(styles.like, className, { [styles.likeDisabled]: !user })}
+                onClick={handleChange}
+            >
                 {isFavorite ? <ActiveLike /> : <Like />}
             </div>
         </Tooltip>

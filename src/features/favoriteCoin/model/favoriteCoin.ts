@@ -42,3 +42,4 @@ export const useFavoriteCoin = ({ coinId }: { coinId: string }): boolean | undef
 };
 
 export const selectors = { useFavoritedCoins, useFavoriteCoin };
+$favoritedCoins.watch((state) => console.debug(state));

@@ -39,4 +39,4 @@ try {
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-export const docRefUserLikedCoins = doc(db, 'userLikedCoins', '2022-12-08');
+export const docRefUserLikedCoins = doc(db, 'userLikedCoins', '1');

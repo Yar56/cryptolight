@@ -1,10 +1,10 @@
-import { Card, Container, Grid, Loading, Spacer, Text } from '@nextui-org/react';
+import { Card, Container, Grid, Loading, Text } from '@nextui-org/react';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import { useStore } from 'effector-react';
 import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import BackButton from '~/shared/ui/components/backButton/BackButton';
+import CommonPageHeader from '~/shared/ui/components/commonPageHeader/CommonPageHeader';
 
 import { coinModel, coinUi } from '~/entities/coin';
 
@@ -73,8 +73,7 @@ const CoinPage: FunctionComponent = () => {
                         )}
                         {!coinDataIsLoading && (
                             <>
-                                <BackButton />
-                                <Spacer y={1} />
+                                <CommonPageHeader headerText={`Монета ${coin.name}`} />
                                 <div className={styles.wrapper}>
                                     <CoinPageCard
                                         coin={coin}

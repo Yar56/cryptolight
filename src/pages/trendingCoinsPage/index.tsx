@@ -1,5 +1,6 @@
 import { Container, Grid, Loading, Text } from '@nextui-org/react';
 import { useStore } from 'effector-react';
+import { uniqueId } from 'lodash';
 import React, { useEffect } from 'react';
 
 import { coinUi, coinModel } from '~/entities/coin';
@@ -60,7 +61,7 @@ const TrendingCoinsPage = () => {
                                         coinList.map((coin) => {
                                             return (
                                                 <CoinListCard
-                                                    key={coin.item.id}
+                                                    key={uniqueId()}
                                                     coin={coin}
                                                     likeComponent={<FavoriteCoin coinId={coin.item.id} />}
                                                 />
@@ -71,7 +72,7 @@ const TrendingCoinsPage = () => {
                         ) : (
                             <Grid.Container gap={2} justify="center" css={{ mt: 0, pl: 0, pr: 0 }}>
                                 {coinsByGlobal.map((anotherCoin) => {
-                                    return <CoinListByGlobalTrendsCard coin={anotherCoin} key={anotherCoin.id} />;
+                                    return <CoinListByGlobalTrendsCard coin={anotherCoin} key={uniqueId()} />;
                                 })}
                             </Grid.Container>
                         )}

@@ -54,25 +54,30 @@ const TrendingCoinsPage = () => {
                 ) : (
                     <>
                         {isCoinGeckoType ? (
-                            <Grid.Container gap={2} justify="center" css={{ mt: 0, pl: 0, pr: 0 }}>
+                            <Grid.Container gap={1} justify="flex-start">
                                 <>
                                     {isLoading && <Loading type="spinner" size="lg" />}
                                     {!isLoading &&
                                         coinList.map((coin) => {
                                             return (
-                                                <CoinListCard
-                                                    key={uniqueId()}
-                                                    coin={coin}
-                                                    likeComponent={<FavoriteCoin coinId={coin.item.id} />}
-                                                />
+                                                <Grid xs={12} sm={4} key={uniqueId()}>
+                                                    <CoinListCard
+                                                        coin={coin}
+                                                        likeComponent={<FavoriteCoin coinId={coin.item.id} />}
+                                                    />
+                                                </Grid>
                                             );
                                         })}
                                 </>
                             </Grid.Container>
                         ) : (
-                            <Grid.Container gap={2} justify="center" css={{ mt: 0, pl: 0, pr: 0 }}>
+                            <Grid.Container gap={1} justify="center">
                                 {coinsByGlobal.map((anotherCoin) => {
-                                    return <CoinListByGlobalTrendsCard coin={anotherCoin} key={uniqueId()} />;
+                                    return (
+                                        <Grid xs={12} sm={4} key={uniqueId()}>
+                                            <CoinListByGlobalTrendsCard coin={anotherCoin} />
+                                        </Grid>
+                                    );
                                 })}
                             </Grid.Container>
                         )}

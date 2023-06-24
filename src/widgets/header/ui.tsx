@@ -24,6 +24,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
     const navigate = useNavigate();
 
     const handleProfileClick = () => navigate('/profile');
+    const handleCoinsClick = () => navigate('/profile');
 
     const handleSignOutClick = async () => {
         try {
@@ -37,7 +38,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         [DropDownActions.PROFILE]: handleProfileClick,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
-        [DropDownActions.COINS]: () => {},
+        [DropDownActions.COINS]: handleCoinsClick,
         [DropDownActions.LOGOUT]: handleSignOutClick
     };
 

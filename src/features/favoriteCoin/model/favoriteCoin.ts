@@ -30,8 +30,10 @@ const $favoritedCoins = createStore<FavoriteCoinsState>({})
 
 export const events = { setFavoriteCoin };
 export const $favoritedCoinsMap = $favoritedCoins;
+export const $favoritedCoinsIds = $favoritedCoins.map((item) => Object.keys(item).map((id) => id));
 
 const useFavoritedCoins = () => useStore($favoritedCoinsMap);
+const useFavoritedCoinsIds = () => useStore($favoritedCoinsIds);
 
 export const useFavoriteCoin = ({ coinId }: { coinId: string }): boolean | undefined => {
     return useStoreMap({
@@ -41,5 +43,5 @@ export const useFavoriteCoin = ({ coinId }: { coinId: string }): boolean | undef
     });
 };
 
-export const selectors = { useFavoritedCoins, useFavoriteCoin };
+export const selectors = { useFavoritedCoins, useFavoriteCoin, useFavoritedCoinsIds };
 $favoritedCoins.watch((state) => console.debug(state));

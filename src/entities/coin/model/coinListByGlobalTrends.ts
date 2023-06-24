@@ -11,9 +11,7 @@ export const getCoinListByGlobalTrendsFx = createEffect(() => {
 
 const $coinsByGlobal = createStore<CoinsTrendingByGlobalState>([]).on(
     getCoinListByGlobalTrendsFx.doneData,
-    (state, payload) => {
-        return [...state, ...payload.data];
-    }
+    (_, payload) => payload.data
 );
 
 export const $coinListByGlobal = $coinsByGlobal;

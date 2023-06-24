@@ -1,5 +1,6 @@
 import { Button, Card, Row, Text } from '@nextui-org/react';
 import React, { FunctionComponent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { userModel } from '~/entities/user';
 
@@ -9,11 +10,13 @@ import { RegistrationModalByEmail } from '~/features/registration/by-email';
 import styles from './styles.module.css';
 
 export const WelcomeCard: FunctionComponent = () => {
+    const navigate = useNavigate();
     const isUserAuth = userModel.selectors.useIsUserAuth();
     const { user } = userModel.selectors.useUser();
+    const handleCoinsClick = () => navigate('/profile');
 
     return (
-        <Card css={{ $$cardColor: '$colors$primary', color: '#fff' }}>
+        <Card css={{ $$cardColor: '$colors$primary', color: '#fff', maxW: '500px' }}>
             <Card.Header className={styles.header}>Привет {isUserAuth ? user?.email : 'незнакомец'}</Card.Header>
             <Card.Body css={{ pt: '$0' }}>
                 <Row justify="flex-start" align="center">
@@ -23,13 +26,7 @@ export const WelcomeCard: FunctionComponent = () => {
                 </Row>
                 <Row justify="flex-start" align="center" css={{ mt: 10 }}>
                     {isUserAuth ? (
-                        <Button
-                            color="success"
-                            auto
-                            onClick={() => {
-                                console.log('Мои монеты');
-                            }}
-                        >
+                        <Button color="success" auto onClick={handleCoinsClick}>
                             Мои монеты
                         </Button>
                     ) : (

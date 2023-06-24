@@ -26,12 +26,8 @@ const initialUserState: UserState = {};
 const updateUserData = createEvent<User | undefined>();
 
 export const $user = createStore<UserState>(initialUserState)
-    .on([signInUserFx.doneData, signUpUserFx.doneData], (state, { user }) => {
-        return { ...state, user };
-    })
-    .on(updateUserData, (state, payload) => {
-        return { ...state, user: payload };
-    });
+    .on([signInUserFx.doneData, signUpUserFx.doneData], (_, { user }) => ({ user }))
+    .on(updateUserData, (state, payload) => ({ user: payload }));
 
 export const $userLoading = signInUserFx.pending || signUpUserFx.pending;
 

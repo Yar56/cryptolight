@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-import { API_HOST } from '~/shared/config';
+import { COIN_API_HOST } from '~/shared/config';
 import { keysToCamelCase } from '~/shared/lib/keysToCamelCase';
 
-export const apiInstance = axios.create({
-    baseURL: API_HOST
+export const coinGeckoRequester = axios.create({
+    baseURL: COIN_API_HOST
 });
 
 const EXCLUDED_URLS = ['/coins/bitcoin/market_chart?vs_currency'];
 
-apiInstance.interceptors.response.use((response) => {
+coinGeckoRequester.interceptors.response.use((response) => {
     if (response?.config?.url && EXCLUDED_URLS.includes(response.config.url)) {
         return response;
     }

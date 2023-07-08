@@ -2,7 +2,8 @@ import { Navbar, Button, Link, Text, Dropdown, Avatar } from '@nextui-org/react'
 import React, { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { coinGeckoApi } from '~/shared/api';
+import { cryptoLightApi } from '~/shared/api';
+import { clearState } from '~/shared/lib/localStorage';
 
 import { userModel } from '~/entities/user';
 
@@ -28,7 +29,10 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
 
     const handleSignOutClick = async () => {
         try {
-            await coinGeckoApi.user.signOutUser();
+            await cryptoLightApi.user.signOutUser({ uid: user?.localId }).then(() => {
+                userModel.events.updateUserData(undefined);
+                clearState();
+            });
         } catch (error) {
             console.error(error, 'Error while user.signOutUser()');
         }

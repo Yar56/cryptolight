@@ -17,7 +17,8 @@ const getEnvVar = (key: string) => {
 };
 
 // region хосты
-export const API_HOST = getEnvVar('VITE_REACT_APP_API_HOST');
+export const COIN_API_HOST = getEnvVar('VITE_REACT_APP_COIN_API_HOST');
+export const CRYPTO_LIGHT_HOST = getEnvVar('VITE_REACT_APP_CRYPTO_LIGHT_API_HOST');
 // endregion
 
 // region firebase

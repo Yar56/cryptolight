@@ -1,6 +1,6 @@
 import { AxiosPromise, AxiosResponse } from 'axios';
 
-import { apiInstance } from './base';
+import { coinGeckoRequester } from './base';
 import { Coin, CoinMarketChart, TrendingCoin } from './models';
 
 interface GetTrendingCoinListResponse {
@@ -9,11 +9,11 @@ interface GetTrendingCoinListResponse {
 }
 
 export const getTrendingCoinList = (): AxiosPromise<GetTrendingCoinListResponse> => {
-    return apiInstance.get('/search/trending');
+    return coinGeckoRequester.get('/search/trending');
 };
 
 export const getCoinListByGlobalTrends = (): AxiosPromise<Array<Coin>> => {
-    return apiInstance.get('/coins/?id=bitcoin');
+    return coinGeckoRequester.get('/coins/?id=bitcoin');
 };
 
 export interface GetCoinByIdParams {
@@ -27,7 +27,7 @@ export const getCoinById = ({ coinId }: GetCoinByIdParams): Promise<AxiosRespons
     if (!coinId) {
         return Promise.reject(new Error('empty coinId'));
     }
-    return apiInstance.get(`/coins/${coinId}/`);
+    return coinGeckoRequester.get(`/coins/${coinId}/`);
 };
 
 export const getCoinMarketChartById = ({
@@ -39,7 +39,7 @@ export const getCoinMarketChartById = ({
         return Promise.reject(new Error('coinId is empty'));
     }
 
-    return apiInstance.get(`/coins/${coinId}/market_chart`, {
+    return coinGeckoRequester.get(`/coins/${coinId}/market_chart`, {
         params: {
             ['vs_currency']: vsCurrency,
             days

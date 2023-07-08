@@ -1,2 +1,2 @@
 export * as coinGeckoApi from './coingecko';
-export * from './models';
+export * as cryptoLightApi from './cryptoLight';

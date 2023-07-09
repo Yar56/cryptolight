@@ -2,7 +2,7 @@ import { createStore, createEffect } from 'effector';
 import { useStore } from 'effector-react';
 
 import { coinGeckoApi } from '~/shared/api';
-import type { TrendingCoin } from '~/shared/api';
+import { TrendingCoin } from '~/shared/api/coingecko/models';
 
 // В каждом эффекте так же может быть своя доп. обработка
 export const getTrendingCoinsListFx = createEffect(() => {

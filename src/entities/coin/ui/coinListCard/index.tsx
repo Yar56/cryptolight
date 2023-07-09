@@ -2,7 +2,7 @@ import { Card, Grid, Row } from '@nextui-org/react';
 import React, { FunctionComponent, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { TrendingCoin } from '~/shared/api';
+import { TrendingCoin } from '~/shared/api/coingecko/models';
 
 import styles from './styles.module.css';
 

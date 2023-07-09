@@ -1,7 +1,8 @@
 import { createStore, createEffect } from 'effector';
 
-import { Coin, coinGeckoApi, CoinMarketChart, DataProps } from '~/shared/api';
+import { coinGeckoApi } from '~/shared/api';
 import { GetCoinByIdParams, GetCoinChartByIdParams } from '~/shared/api/coingecko/coins';
+import { Coin, CoinMarketChart, DataProps } from '~/shared/api/coingecko/models';
 
 export const getCoinByIdFx = createEffect(({ coinId }: GetCoinByIdParams) => {
     return coinGeckoApi.coins.getCoinById({ coinId });

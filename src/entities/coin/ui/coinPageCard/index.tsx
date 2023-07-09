@@ -1,7 +1,7 @@
 import { Avatar, Card, Col, Row, Text } from '@nextui-org/react';
 import React, { FunctionComponent, ReactElement } from 'react';
 
-import { Coin } from '~/shared/api';
+import { Coin } from '~/shared/api/coingecko/models';
 import { numberWithSpaces } from '~/shared/lib/numberWithSpaces';
 
 import styles from './styles.module.scss';

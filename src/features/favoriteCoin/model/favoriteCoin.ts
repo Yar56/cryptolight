@@ -1,18 +1,17 @@
 import { createEffect, createEvent, createStore } from 'effector';
 import { useStore, useStoreMap } from 'effector-react';
-import { getDoc } from 'firebase/firestore';
 import produce from 'immer';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { docRefUserLikedCoins } from '~/shared/config/firebase';
+import { cryptoLightApi } from '~/shared/api';
+import { FavoritedCoinsMap } from '~/shared/api/cryptoLight/models';
 
 export const setFavoriteCoin = createEvent<string>();
 type FavoriteCoinsState = Record<string, boolean>;
 
-export const getFavoriteUserCoinsFx = createEffect(() => {
-    return getDoc(docRefUserLikedCoins);
-});
+export const getFavoriteUserCoinsFx = createEffect(async () => await cryptoLightApi.favoriteCoins.getFavoritedCoins());
+export const setFavoriteUserCoinsFx = createEffect(
+    async (data: FavoritedCoinsMap) => await cryptoLightApi.favoriteCoins.setFavoritedCoins(data)
+);
 
 const $favoritedCoins = createStore<FavoriteCoinsState>({})
     .on(setFavoriteCoin, (state, coinId) =>
@@ -20,12 +19,9 @@ const $favoritedCoins = createStore<FavoriteCoinsState>({})
             draft[coinId] = !draft[coinId];
         })
     )
-    .on(getFavoriteUserCoinsFx.doneData, (state, snapShot) => {
-        if (snapShot.exists()) {
-            const docData = snapShot.data() as Record<number, FavoriteCoinsState>;
-            const [likedCoins] = Object.values(docData);
-            return { ...state, ...likedCoins };
-        }
+    .on(getFavoriteUserCoinsFx.doneData, (state, { data }) => {
+        const [likedCoins] = Object.values(data);
+        return { ...state, ...likedCoins };
     });
 
 export const events = { setFavoriteCoin };

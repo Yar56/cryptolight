@@ -4,6 +4,7 @@ import { uniqueId } from 'lodash';
 import React, { useEffect } from 'react';
 
 import { coinUi, coinModel } from '~/entities/coin';
+import { userModel } from '~/entities/user';
 const { CoinListCard, CoinListByGlobalTrendsCard } = coinUi;
 const { coinListSubModel, coinListByGlobalTrendsSubModel } = coinModel;
 
@@ -15,6 +16,7 @@ import { Header } from '~/widgets/header';
 import { WelcomeCard } from '~/widgets/welcomeCard';
 
 const TrendingCoinsPage = () => {
+    const { user } = userModel.selectors.useUser();
     const coinList = useStore(coinListSubModel.$coinList);
     const isLoading = useStore(coinListSubModel.$coinListIsLoading);
     const isEmpty = useStore(coinListSubModel.$coinListIsEmpty);
@@ -36,6 +38,11 @@ const TrendingCoinsPage = () => {
     }, []);
 
     useEffect(() => {
+        //todo обработать
+        // if (!user) {
+        //     console.log('user is undefined, skip getFavoriteUserCoinsFx');
+        //     return;
+        // }
         favoriteCoinModel.getFavoriteUserCoinsFx();
     }, []);
 

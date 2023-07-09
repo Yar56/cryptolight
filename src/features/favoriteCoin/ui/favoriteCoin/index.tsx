@@ -1,16 +1,14 @@
 import { Tooltip } from '@nextui-org/react';
 import { SimpleColors } from '@nextui-org/react/types/utils/prop-types';
-import { setDoc } from 'firebase/firestore';
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import classNames from '~/shared/aliases/classNames';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { docRefUserLikedCoins } from '~/shared/config/firebase';
+import { FavoritedCoinsMap } from '~/shared/api/cryptoLight/models';
 
 import { userModel } from '~/entities/user';
 
 import * as likeCoinModel from '../../model';
+import { setFavoriteUserCoinsFx } from '../../model';
 
 import { ReactComponent as ActiveLike } from './icons/activelikeIcon.svg';
 import { ReactComponent as Like } from './icons/likeIcon.svg';
@@ -37,31 +35,25 @@ export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, cla
     const isFavorite = likeCoinModel.useFavoriteCoin({ coinId });
     const likedCoinsMap = likeCoinModel.selectors.useFavoritedCoins();
 
-    useEffect(() => {
-        if (Object.keys(likedCoinsMap).length === 0) {
-            return;
-        }
-        const data = {
-            [`${user?.uid}`]: { ...likedCoinsMap }
-        };
-
-        (async () => {
-            try {
-                await setDoc(docRefUserLikedCoins, data);
-                console.log('This value has been written to the database: ', docRefUserLikedCoins.id);
-            } catch (error) {
-                console.error('Error: ', error);
-            }
-        })();
-    }, [likedCoinsMap]);
-
     const handleChange = async (event: React.MouseEvent<HTMLElement>) => {
         event.stopPropagation();
-        const userId = user?.uid;
+        const userId = user?.localId;
         if (!userId) {
             return;
         }
         likeCoinModel.events.setFavoriteCoin(coinId);
+
+        if (Object.keys(likedCoinsMap).length === 0) {
+            return;
+        }
+        const data: FavoritedCoinsMap = {
+            [`${user?.localId}`]: { ...likedCoinsMap }
+        };
+        try {
+            await setFavoriteUserCoinsFx(data);
+        } catch (error) {
+            console.error('Error: ', error);
+        }
     };
     const { content, color } = getTooltipText(Boolean(isFavorite), Boolean(user));
 

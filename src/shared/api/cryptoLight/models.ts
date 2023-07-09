@@ -35,3 +35,5 @@ export interface AuthStateChangesResponse {
 //     "createdAt": string,
 //     "lastRefreshAt": string
 // }
+
+export type FavoritedCoinsMap = Record<string, Record<string, boolean>>;

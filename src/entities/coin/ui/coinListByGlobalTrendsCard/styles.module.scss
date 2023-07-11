@@ -48,9 +48,52 @@
 .priceName {
     color: #6C757D;
     font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &Price {
+        padding-top: 0.15em;
+        margin-right: 10px;
+    }
 }
 
 .priceValue {
     margin-left: auto;
     font-weight: bold;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+select {
+    outline: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+}
+
+select::-ms-expand {
+    display: none;
+}
+.select {
+    width: 100%;
+    min-width: 15ch;
+    max-width: 30ch;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    /*font-size: 1.25rem;*/
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: #fff;
+    background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 }

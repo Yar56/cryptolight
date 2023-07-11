@@ -8,5 +8,5 @@ export const getFavoritedCoins = (): AxiosPromise<FavoritedCoinsMap> => {
 };
 
 export const setFavoritedCoins = (data: FavoritedCoinsMap): AxiosPromise<User> => {
-    return cryptoLightRequester.post('/favoritedCoinsMap', data);
+    return cryptoLightRequester.post('/setFavoritedCoinsMap', data);
 };

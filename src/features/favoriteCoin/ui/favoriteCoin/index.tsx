@@ -35,22 +35,20 @@ export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, cla
     const isFavorite = likeCoinModel.useFavoriteCoin({ coinId });
     const likedCoinsMap = likeCoinModel.selectors.useFavoritedCoins();
 
-    const handleChange = async (event: React.MouseEvent<HTMLElement>) => {
+    const handleChange = (coinId: string) => async (event: React.MouseEvent<HTMLElement>) => {
         event.stopPropagation();
         const userId = user?.localId;
         if (!userId) {
             return;
         }
-        likeCoinModel.events.setFavoriteCoin(coinId);
 
-        if (Object.keys(likedCoinsMap).length === 0) {
-            return;
-        }
         const data: FavoritedCoinsMap = {
-            [`${user?.localId}`]: { ...likedCoinsMap }
+            [`${user?.localId}`]: { ...likedCoinsMap, [coinId]: !isFavorite }
         };
+
         try {
             await setFavoriteUserCoinsFx(data);
+            likeCoinModel.events.setFavoriteCoin(coinId);
         } catch (error) {
             console.error('Error: ', error);
         }
@@ -61,7 +59,7 @@ export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, cla
         <Tooltip content={content} color={color}>
             <div
                 className={classNames(styles.like, className, { [styles.likeDisabled]: !user })}
-                onClick={handleChange}
+                onClick={handleChange(coinId)}
             >
                 {isFavorite ? <ActiveLike /> : <Like />}
             </div>

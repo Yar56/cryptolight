@@ -38,13 +38,12 @@ const TrendingCoinsPage = () => {
     }, []);
 
     useEffect(() => {
-        //todo обработать
-        // if (!user) {
-        //     console.log('user is undefined, skip getFavoriteUserCoinsFx');
-        //     return;
-        // }
+        if (!user) {
+            console.log('user is undefined, skip getFavoriteUserCoinsFx');
+            return;
+        }
         favoriteCoinModel.getFavoriteUserCoinsFx();
-    }, []);
+    }, [user]);
 
     const isCoinGeckoType = listType === EventType.COIN_GECKO;
 

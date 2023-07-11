@@ -11,7 +11,7 @@ import { userModel } from '~/entities/user';
 export const withAuth = (component: () => React.ReactNode) => () => {
     const { user } = userModel.selectors.useUser();
 
-    const [idToken, setIdToken] = useState<string | undefined>();
+    const [userFormLs, setUserFormLs] = useState<User | undefined>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
@@ -22,34 +22,32 @@ export const withAuth = (component: () => React.ReactNode) => () => {
             timeoutId = setTimeout(() => {
                 const user = loadState();
                 if (user) {
-                    console.log('idToken is exists');
-                    setIdToken(user.idToken);
+                    console.log('user from storage is exists');
+                    setUserFormLs(user);
                 } else {
-                    console.log('idToken is empty');
+                    console.log('user from storage is empty');
                 }
 
                 setIsLoading(false);
             }, 1000);
         } else {
-            setIdToken(user.idToken);
+            setUserFormLs(user);
         }
 
         return () => clearTimeout(timeoutId);
     }, []);
 
-    const handleOnCheck = (user: User | null) => {
-        if (user) {
-            userModel.events.updateUserData(user);
-            console.log('User is signed in');
-        } else {
-            userModel.events.updateUserData(undefined);
-            console.log('User is signed out');
-        }
-    };
-
     useEffect(() => {
-        cryptoLightApi.user.checkAuthUser({ idToken, onCheck: handleOnCheck });
-    }, [idToken]);
+        cryptoLightApi.user.checkAuthUser({ idToken: userFormLs?.idToken }).then((response) => {
+            if (response && userFormLs) {
+                userModel.events.updateUserData(userFormLs);
+                console.log('User is signed in, load user from local storage');
+            } else {
+                userModel.events.updateUserData(undefined);
+                console.log('User is signed out');
+            }
+        });
+    }, [userFormLs?.idToken]);
 
     if (isLoading) {
         return <PageLoader />;

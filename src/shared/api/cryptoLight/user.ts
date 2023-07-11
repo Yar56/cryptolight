@@ -1,7 +1,7 @@
-import { AxiosPromise, AxiosResponse } from 'axios';
+import { AxiosPromise } from 'axios';
 
 import { cryptoLightRequester } from '~/shared/api/cryptoLight/base';
-import { AuthStateChangesResponse, User } from '~/shared/api/cryptoLight/models';
+import { User } from '~/shared/api/cryptoLight/models';
 
 export interface SignUpUserParams {
     email: string;
@@ -29,18 +29,12 @@ export const signOutUser = ({ uid }: SignOutUserParams) => {
 
 export interface CheckAuthUserParams {
     idToken?: string;
-    onCheck(user: User | null): void;
 }
 
-export const checkAuthUser = ({ idToken, onCheck }: CheckAuthUserParams) => {
+export const checkAuthUser = ({ idToken }: CheckAuthUserParams) => {
     if (!idToken) {
         console.log(`idToken=${idToken}, skip checkAuthUser`);
         return Promise.resolve();
     }
-    return cryptoLightRequester
-        .post('/authStateChanged', { idToken })
-        .then((response: AxiosResponse<AuthStateChangesResponse>) => {
-            console.log(response.data);
-            onCheck(response.data.users[0]);
-        });
+    return cryptoLightRequester.post('/authStateChanged', { idToken });
 };

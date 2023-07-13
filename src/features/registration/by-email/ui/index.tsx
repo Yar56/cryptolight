@@ -1,6 +1,4 @@
-import { FirebaseError } from '@firebase/util';
 import { Modal, Button, Text, Input } from '@nextui-org/react';
-import { AuthErrorCodes } from 'firebase/auth';
 import { useFormik } from 'formik';
 import React, { FunctionComponent, useReducer, useState } from 'react';
 import * as yup from 'yup';
@@ -77,13 +75,14 @@ export const RegistrationModalByEmail: FunctionComponent<RegistrationModalByEmai
                 await signUpUserFx({ email, password });
                 handleClose();
             } catch (error) {
-                const typedError = error as FirebaseError;
-                if (typedError.code === AuthErrorCodes.EMAIL_EXISTS) {
-                    setApiError('Такой email уже существует!');
-                } else {
-                    setApiError('Непредвиденная ошибка!');
-                    console.error('Unknown Error');
-                }
+                // todo обработать
+                // const typedError = error as FirebaseError;
+                // if (typedError.code === AuthErrorCodes.EMAIL_EXISTS) {
+                //     setApiError('Такой email уже существует!');
+                // } else {
+                //     setApiError('Непредвиденная ошибка!');
+                //     console.error('Unknown Error');
+                // }
             } finally {
                 resetForm();
             }

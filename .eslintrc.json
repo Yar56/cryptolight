@@ -44,7 +44,7 @@
             }
         ],
         "import/no-internal-modules": [ "off", {
-            "allow": [ "firebase/auth", "~/shared/ui/icons/*"]
+            "allow": [ "~/shared/ui/icons/*"]
         } ]
     }
 }

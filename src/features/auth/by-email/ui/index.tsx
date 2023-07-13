@@ -1,6 +1,4 @@
-import { FirebaseError } from '@firebase/util';
 import { Button, Input, Modal, Text } from '@nextui-org/react';
-import { AuthErrorCodes } from 'firebase/auth';
 import { useFormik } from 'formik';
 import React, { FunctionComponent, useReducer, useState } from 'react';
 import * as yup from 'yup';
@@ -70,17 +68,18 @@ export const AuthModalByEmail: FunctionComponent<AuthModalByEmailParams> = ({ ch
                 await signInUserFx({ email, password });
                 handleClose();
             } catch (error) {
-                const typedError = error as FirebaseError;
-                if (typedError.code === AuthErrorCodes.EMAIL_EXISTS) {
-                    setApiError('Такой email уже существует!');
-                } else if (typedError.code === AuthErrorCodes.INVALID_PASSWORD) {
-                    setApiError('Неверный пароль');
-                } else if (typedError.code === AuthErrorCodes.USER_DELETED) {
-                    setApiError('Такого email не существует');
-                } else {
-                    setApiError('Непредвиденная ошибка!');
-                    console.error('Unknown Error', error);
-                }
+                // todo обработать
+                // const typedError = error as FirebaseError;
+                // if (typedError.code === AuthErrorCodes.EMAIL_EXISTS) {
+                //     setApiError('Такой email уже существует!');
+                // } else if (typedError.code === AuthErrorCodes.INVALID_PASSWORD) {
+                //     setApiError('Неверный пароль');
+                // } else if (typedError.code === AuthErrorCodes.USER_DELETED) {
+                //     setApiError('Такого email не существует');
+                // } else {
+                //     setApiError('Непредвиденная ошибка!');
+                //     console.error('Unknown Error', error);
+                // }
             } finally {
                 resetForm();
             }

@@ -26,6 +26,7 @@ Project based on [Feature-Sliced Design](https://feature-sliced.design/)
 - [ ] think about the functionality of modal windows (React Portal?)
 - [ ] Multi-language Support (by FSD)
     - [ ] English
+- [ ] Add a night theme (by FSD)
 
 See the [open issues](https://github.com/Yar56/cryptolight/issues) for a full list of proposed features (and known issues).
 

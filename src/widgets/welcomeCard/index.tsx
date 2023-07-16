@@ -16,7 +16,7 @@ export const WelcomeCard: FunctionComponent = () => {
     const handleCoinsClick = () => navigate('/profile');
 
     return (
-        <Card css={{ $$cardColor: '$colors$primary', color: '#fff', maxW: '500px' }}>
+        <Card css={{ $$cardColor: '$colors$primary', color: '#fff', maxW: '590px' }}>
             <Card.Header className={styles.header}>Привет {isUserAuth ? user?.email : 'незнакомец'}</Card.Header>
             <Card.Body css={{ pt: '$0' }}>
                 <Row justify="flex-start" align="center">

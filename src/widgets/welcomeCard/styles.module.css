@@ -3,7 +3,7 @@
 }
 
 .button {
-    background-color: white;
-    color: #0063F5;
+    background-color: white !important;
+    color: #0063F5 !important;
     margin-right: 10px;
 }

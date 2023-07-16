@@ -66,7 +66,7 @@ const TrendingCoinsPage = () => {
                                     {!isLoading &&
                                         coinList.map((coin) => {
                                             return (
-                                                <Grid xs={12} sm={4} key={uniqueId()}>
+                                                <Grid xs={12} sm={6} md={4} key={uniqueId()}>
                                                     <CoinListCard
                                                         coin={coin}
                                                         likeComponent={<FavoriteCoin coinId={coin.item.id} />}
@@ -80,7 +80,7 @@ const TrendingCoinsPage = () => {
                             <Grid.Container gap={1} justify="center">
                                 {coinsByGlobal.map((anotherCoin) => {
                                     return (
-                                        <Grid xs={12} sm={4} key={uniqueId()}>
+                                        <Grid xs={12} sm={6} md={4} key={uniqueId()}>
                                             <CoinListByGlobalTrendsCard coin={anotherCoin} />
                                         </Grid>
                                     );

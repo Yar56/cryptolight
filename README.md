@@ -11,12 +11,13 @@ This pet project was written to try FSD in action. The project has conventions a
     - npm install
     - or use docker
       - `docker build -t cryptolight .`
-      - `docker run -it -v ${PWD}:/app -v /app/node_modules -e CHOKIDAR_USEPOLLING=true --env-file .env -p 3000:3000 cryptolight`
 - Run
   - add .env file with the following contents
     `VITE_REACT_APP_COIN_API_HOST=https://api.coingecko.com/api/v3/`
     `VITE_REACT_APP_CRYPTO_LIGHT_API_HOST=http://crypto-light.space`
   - npm run dev
+  - or use docker
+    - `docker run -it -v ${PWD}:/app -v /app/node_modules -e CHOKIDAR_USEPOLLING=true --env-file .env -p 3000:3000 cryptolight`
 
 ## Architecture
 
@@ -28,7 +29,7 @@ Project based on [Feature-Sliced Design](https://feature-sliced.design/)
 - [ ] Multi-language Support (by FSD)
     - [ ] English
 - [ ] Add a night theme (by FSD)
-
+- [ ] Update PriceChart (Coin Page)
 See the [open issues](https://github.com/Yar56/cryptolight/issues) for a full list of proposed features (and known issues).
 
 ## Contributing

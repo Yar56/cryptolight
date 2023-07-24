@@ -1,4 +1,4 @@
-# Cryptolight &middot; [![Build Status](https://github.com/Yar56/cryptolight/actions/workflows/vite.yml/badge.svg)](https://github.com/Yar56/cryptolight/actions)
+# [Cryptolight](http://crypto-light.space) &middot; [![Build Status](https://github.com/Yar56/cryptolight/actions/workflows/vite.yml/badge.svg)](https://github.com/Yar56/cryptolight/actions)
 
 Сryptolight is a project built on the new FSD architectural methodology. A fundamentally new approach to frontend project development.
 This pet project was written to try FSD in action. The project has conventions and incompleteness.

@@ -15,9 +15,9 @@
 }
 
 .flexContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
 }
 .description {
     display: flex;

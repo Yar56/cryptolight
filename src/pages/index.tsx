@@ -1,11 +1,14 @@
 import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { SuspenseLayout } from '~/widgets/layouts/SuspenseLayout';
+
 import { RouteDescription, RouteName } from '~/pages/models';
 
-import CoinPage from './coinPage';
-import ProfilePage from './profilePage';
 import MainPage from './trendingCoinsPage';
+
+const CoinPage = lazy(() => import('./coinPage'));
+const ProfilePage = lazy(() => import('./profilePage'));
 const NotFoundPage = lazy(() => import('./notFoundPage'));
 
 const routes: RouteDescription[] = [
@@ -29,9 +32,11 @@ const routesContent = routes.map(({ path, component: Component }) => (
 
 export const Routing = () => {
     return (
-        <Routes>
-            {routesContent}
-            <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <SuspenseLayout>
+            <Routes>
+                {routesContent}
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+        </SuspenseLayout>
     );
 };

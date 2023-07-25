@@ -8,6 +8,7 @@ import { clearState } from '~/shared/lib/localStorage';
 import { userModel } from '~/entities/user';
 
 import { AuthModalByEmail } from '~/features/auth/by-email';
+import { favoriteCoinModel } from '~/features/favoriteCoin';
 
 interface HeaderProps {
     sticky?: boolean;
@@ -31,6 +32,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
         try {
             await cryptoLightApi.user.signOutUser({ uid: user?.localId }).then(() => {
                 userModel.events.updateUserData(undefined);
+                favoriteCoinModel.events.clearFavoriteCoins();
                 clearState();
             });
         } catch (error) {

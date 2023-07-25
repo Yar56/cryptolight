@@ -3,12 +3,16 @@ import { useStore, useStoreMap } from 'effector-react';
 import produce from 'immer';
 
 import { cryptoLightApi } from '~/shared/api';
+import { GetFavoritedCoinsParams } from '~/shared/api/cryptoLight/favoriteCoins';
 import { FavoritedCoinsMap } from '~/shared/api/cryptoLight/models';
 
 export const setFavoriteCoin = createEvent<string>();
+export const clearFavoriteCoins = createEvent();
 type FavoriteCoinsState = Record<string, boolean>;
 
-export const getFavoriteUserCoinsFx = createEffect(async () => await cryptoLightApi.favoriteCoins.getFavoritedCoins());
+export const getFavoriteUserCoinsFx = createEffect(
+    async (data: GetFavoritedCoinsParams) => await cryptoLightApi.favoriteCoins.getFavoritedCoins(data)
+);
 export const setFavoriteUserCoinsFx = createEffect(
     async (data: FavoritedCoinsMap) => await cryptoLightApi.favoriteCoins.setFavoritedCoins(data)
 );
@@ -19,12 +23,14 @@ const $favoritedCoins = createStore<FavoriteCoinsState>({})
             draft[coinId] = !draft[coinId];
         })
     )
+    .on(clearFavoriteCoins, () => {
+        return {};
+    })
     .on(getFavoriteUserCoinsFx.doneData, (state, { data }) => {
-        const [likedCoins] = Object.values(data);
-        return { ...state, ...likedCoins };
+        return { ...state, ...data };
     });
 
-export const events = { setFavoriteCoin };
+export const events = { setFavoriteCoin, clearFavoriteCoins };
 export const $favoritedCoinsMap = $favoritedCoins;
 export const $favoritedCoinsIds = $favoritedCoins.map((item) => Object.keys(item).map((id) => id));
 

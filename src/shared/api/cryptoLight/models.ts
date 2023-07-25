@@ -37,3 +37,4 @@ export interface AuthStateChangesResponse {
 // }
 
 export type FavoritedCoinsMap = Record<string, Record<string, boolean>>;
+export type FavoritedCoinsMapResponse = Record<string, boolean>;

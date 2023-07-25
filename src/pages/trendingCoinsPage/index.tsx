@@ -42,7 +42,7 @@ const TrendingCoinsPage = () => {
             console.log('user is undefined, skip getFavoriteUserCoinsFx');
             return;
         }
-        favoriteCoinModel.getFavoriteUserCoinsFx();
+        favoriteCoinModel.getFavoriteUserCoinsFx({ userId: user.localId });
     }, [user]);
 
     const isCoinGeckoType = listType === EventType.COIN_GECKO;

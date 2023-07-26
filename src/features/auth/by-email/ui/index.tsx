@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import React, { FunctionComponent, useReducer, useState } from 'react';
 import * as yup from 'yup';
 
+import { AuthErrorMessages, FirebaseError } from '~/shared/api/cryptoLight/models';
 import { Mail } from '~/shared/ui/icons/Mail';
 import { Password } from '~/shared/ui/icons/Password';
 
@@ -68,18 +69,17 @@ export const AuthModalByEmail: FunctionComponent<AuthModalByEmailParams> = ({ ch
                 await signInUserFx({ email, password });
                 handleClose();
             } catch (error) {
-                // todo обработать
-                // const typedError = error as FirebaseError;
-                // if (typedError.code === AuthErrorCodes.EMAIL_EXISTS) {
-                //     setApiError('Такой email уже существует!');
-                // } else if (typedError.code === AuthErrorCodes.INVALID_PASSWORD) {
-                //     setApiError('Неверный пароль');
-                // } else if (typedError.code === AuthErrorCodes.USER_DELETED) {
-                //     setApiError('Такого email не существует');
-                // } else {
-                //     setApiError('Непредвиденная ошибка!');
-                //     console.error('Unknown Error', error);
-                // }
+                const typedError = error as FirebaseError;
+                if (typedError.message === AuthErrorMessages.EMAIL_NOT_FOUND) {
+                    setApiError('Такого email не существует');
+                } else if (typedError.message === AuthErrorMessages.INVALID_PASSWORD) {
+                    setApiError('Неверный пароль');
+                } else if (typedError.message === AuthErrorMessages.USER_DISABLED) {
+                    setApiError('Юзер был отключен');
+                } else {
+                    setApiError('Непредвиденная ошибка!');
+                    console.error('Unknown Error', error);
+                }
             } finally {
                 resetForm();
             }

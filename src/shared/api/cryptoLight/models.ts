@@ -14,27 +14,22 @@ export interface AuthStateChangesResponse {
     users: User[];
 }
 
-// User from AuthStateChangesResponse['users']
-// {
-//     "localId": string,
-//     "email": string,
-//     "passwordHash": string,
-//     "emailVerified": boolean,
-//     "passwordUpdatedAt": number,
-//     "providerUserInfo": [
-//         {
-//             "providerId": string,
-//             "federatedId": string,
-//             "email": string,
-//             "rawId": string
-//         }
-//     ],
-//     "validSince": string,
-//     "disabled": boolean,
-//     "lastLoginAt": string,
-//     "createdAt": string,
-//     "lastRefreshAt": string
-// }
-
 export type FavoritedCoinsMap = Record<string, Record<string, boolean>>;
 export type FavoritedCoinsMapResponse = Record<string, boolean>;
+
+export interface FirebaseError {
+    code: number;
+    message: AuthErrorMessages;
+}
+
+export enum AuthErrorMessages {
+    // singIn
+    EMAIL_NOT_FOUND = 'EMAIL_NOT_FOUND',
+    INVALID_PASSWORD = 'INVALID_PASSWORD',
+    USER_DISABLED = 'USER_DISABLED',
+
+    // signUp
+    EMAIL_EXISTS = 'EMAIL_EXISTS',
+    OPERATION_NOT_ALLOWED = 'OPERATION_NOT_ALLOWED',
+    TOO_MANY_ATTEMPTS_TRY_LATER = 'TOO_MANY_ATTEMPTS_TRY_LATER'
+}

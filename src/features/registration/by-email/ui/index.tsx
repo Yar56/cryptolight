@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import React, { FunctionComponent, useReducer, useState } from 'react';
 import * as yup from 'yup';
 
+import { AuthErrorMessages, FirebaseError } from '~/shared/api/cryptoLight/models';
 import { Mail } from '~/shared/ui/icons/Mail';
 import { Password } from '~/shared/ui/icons/Password';
 
@@ -75,14 +76,18 @@ export const RegistrationModalByEmail: FunctionComponent<RegistrationModalByEmai
                 await signUpUserFx({ email, password });
                 handleClose();
             } catch (error) {
-                // todo обработать
-                // const typedError = error as FirebaseError;
-                // if (typedError.code === AuthErrorCodes.EMAIL_EXISTS) {
-                //     setApiError('Такой email уже существует!');
-                // } else {
-                //     setApiError('Непредвиденная ошибка!');
-                //     console.error('Unknown Error');
-                // }
+                const typedError = error as FirebaseError;
+
+                if (typedError.message === AuthErrorMessages.EMAIL_EXISTS) {
+                    setApiError('Такой email уже существует!');
+                } else if (typedError.message === AuthErrorMessages.OPERATION_NOT_ALLOWED) {
+                    setApiError('Вход с паролем отключен для этого проекта. Обратитесь в поддержку');
+                } else if (typedError.message === AuthErrorMessages.TOO_MANY_ATTEMPTS_TRY_LATER) {
+                    setApiError('Слишком много попыток, попробуйте позже');
+                } else {
+                    setApiError('Непредвиденная ошибка!');
+                    console.error('Unknown Error', error);
+                }
             } finally {
                 resetForm();
             }

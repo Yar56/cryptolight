@@ -30,6 +30,7 @@ Project based on [Feature-Sliced Design](https://feature-sliced.design/)
     - [ ] English
 - [ ] Add a night theme (by FSD)
 - [ ] Update PriceChart (Coin Page)
+
 See the [open issues](https://github.com/Yar56/cryptolight/issues) for a full list of proposed features (and known issues).
 
 ## Contributing

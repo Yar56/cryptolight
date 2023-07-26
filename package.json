@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "typescript:validate": "tsc --noEmit",
+    "typescript:validate": "tsc --noEmit -p tsconfig.validation.json",
     "host": "vite --host"
   },
   "repository": {

@@ -16,14 +16,3 @@ coinGeckoRequester.interceptors.response.use((response) => {
 
     return keysToCamelCase(response);
 });
-
-// apiInstance.interceptors.request.use((request) => {
-//     const params = get(request, 'params', {});
-//     const data = get(request, 'data', {});
-//
-//     return {
-//         ...request,
-//         params: keysToSnakeCase(params),
-//         data: data instanceof FormData ? data : keysToSnakeCase(data)
-//     };
-// });

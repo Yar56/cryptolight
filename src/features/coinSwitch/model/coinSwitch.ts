@@ -1,7 +1,6 @@
 import { createEvent, createStore } from 'effector';
 import { useStoreMap } from 'effector-react';
 
-// export type eventType = 'COIN-GECKO' | 'GLOBAL';
 export enum EventType {
     COIN_GECKO = 'COIN_GECKO',
     GLOBAL = 'GLOBAL'

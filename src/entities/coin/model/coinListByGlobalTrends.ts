@@ -5,7 +5,6 @@ import { Coin } from '~/shared/api/coingecko/models';
 
 type CoinsTrendingByGlobalState = Coin[];
 export const getCoinListByGlobalTrendsFx = createEffect(() => {
-    // Здесь также может быть доп. обработка эффекта
     return coinGeckoApi.coins.getCoinListByGlobalTrends();
 });
 

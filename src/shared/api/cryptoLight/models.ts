@@ -4,7 +4,7 @@ export interface User {
     expiresIn: string;
     idToken: string;
     kind: string;
-    localId: string; //this is uid in firebase
+    localId: string; // firebase uid
     refreshToken: string;
     registered: boolean;
 }

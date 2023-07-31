@@ -9,5 +9,4 @@ const App = () => {
     return <Routing />;
 };
 
-// todo добавить проверку на состояние api (/ping)
 export default withProviders(App);

@@ -41,9 +41,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
     };
 
     const actionByType = {
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
         [DropDownActions.PROFILE]: handleProfileClick,
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
         [DropDownActions.COINS]: handleCoinsClick,
         [DropDownActions.LOGOUT]: handleSignOutClick
     };

@@ -4,12 +4,10 @@ import { useStore } from 'effector-react';
 import { coinGeckoApi } from '~/shared/api';
 import { TrendingCoin } from '~/shared/api/coingecko/models';
 
-// В каждом эффекте так же может быть своя доп. обработка
 export const getTrendingCoinsListFx = createEffect(() => {
     return coinGeckoApi.coins.getTrendingCoinList();
 });
 
-// Можно хранить и в нормализованном виде
 type CoinsTrendingState = TrendingCoin[];
 
 export const coinsInitialState: CoinsTrendingState = [];

@@ -28,12 +28,6 @@ const CoinPage: FunctionComponent = () => {
     const isDesktop = useMediaQuery('only screen and (min-width: 1280px)');
     const isXs = useMediaQuery('only screen and (max-width: 600px)');
 
-    // const [value, setValue] = React.useState(0);
-
-    // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    //     setValue(newValue);
-    // };
-
     const fetchData = useCallback(async () => {
         return await Promise.all([
             coinModel.coinSubModel.getCoinByIdFx({ coinId }),
@@ -44,15 +38,6 @@ const CoinPage: FunctionComponent = () => {
     useEffect(() => {
         fetchData();
     }, []);
-
-    // const options = useMemo(() => {
-    //     if (!coinState) {
-    //         return [];
-    //     }
-    //     return Object.keys(coinState.marketData.currentPrice).map((currency) => {
-    //         return { value: currency, label: currency };
-    //     });
-    // }, []);
 
     return (
         <>

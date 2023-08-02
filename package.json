@@ -1,7 +1,7 @@
 {
   "name": "cryptolight",
   "version": "1.0.0",
-  "description": "",
+  "description": "React app based on Feature-Sliced Design (Architectural methodology for frontend projects)",
   "main": "index.js",
   "scripts": {
     "dev": "vite",

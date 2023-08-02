@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { COIN_API_HOST } from '~/shared/config';
-import { keysToCamelCase } from '~/shared/lib/keysToCamelCase';
+import { keysToCamelCase } from '~/shared/lib/cases/keysToCamelCase';
 
 export const coinGeckoRequester = axios.create({
     baseURL: COIN_API_HOST

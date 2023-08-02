@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { cryptoLightApi } from '~/shared/api';
 import { User } from '~/shared/api/cryptoLight/models';
-import { loadState } from '~/shared/lib/localStorage';
+import { loadState } from '~/shared/lib/storage/localStorage';
 import PageLoader from '~/shared/ui/components/pageLoader/PageLoader';
 
 import { userModel } from '~/entities/user';

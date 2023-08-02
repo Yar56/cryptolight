@@ -4,6 +4,7 @@ import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Coin } from '~/shared/api/coingecko/models';
+import { getCoinPageUrl } from '~/shared/lib/navigate/getCoinPageUrl';
 
 import { RouteName } from '~/pages/models';
 
@@ -22,7 +23,7 @@ export const CoinListByGlobalTrendsCard: FunctionComponent<CoinsByGlobalTrendsCa
         image: { large },
         name,
         symbol,
-        id,
+        id: coinId,
         marketData: { currentPrice }
     } = coin;
 
@@ -40,7 +41,7 @@ export const CoinListByGlobalTrendsCard: FunctionComponent<CoinsByGlobalTrendsCa
             return;
         }
 
-        navigate({ pathname: `${RouteName.COIN_PAGE}${id}` });
+        navigate({ pathname: getCoinPageUrl({ coinId }) });
     };
     return (
         <Grid xs={12} onClick={handleCardClick}>
@@ -49,7 +50,7 @@ export const CoinListByGlobalTrendsCard: FunctionComponent<CoinsByGlobalTrendsCa
                 <Card variant="bordered">
                     <Card.Body className={styles.flexContainer} css={{ pr: '20px' }}>
                         <div className={styles.description}>
-                            <img alt={id} src={large} width="34px" height="34px" />
+                            <img alt={coinId} src={large} width="34px" height="34px" />
                             <div className={styles.nameWrapper}>
                                 <div className={styles.name}>{name}</div>
                                 <div className={styles.symbol}>{symbol}</div>

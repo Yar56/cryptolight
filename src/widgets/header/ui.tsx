@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { cryptoLightApi } from '~/shared/api';
-import { clearState } from '~/shared/lib/localStorage';
+import { clearState } from '~/shared/lib/storage/localStorage';
 
 import { userModel } from '~/entities/user';
 

@@ -3,6 +3,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { TrendingCoin } from '~/shared/api/coingecko/models';
+import { getCoinPageUrl } from '~/shared/lib/navigate/getCoinPageUrl';
 
 import { RouteName } from '~/pages/models';
 
@@ -15,10 +16,10 @@ interface CoinCardProps {
 
 export const CoinListCard: FunctionComponent<CoinCardProps> = ({ coin, likeComponent }) => {
     const {
-        item: { large, id, name, symbol, priceBtc }
+        item: { large, id: coinId, name, symbol, priceBtc }
     } = coin;
     const navigate = useNavigate();
-    const handleCardClick = () => navigate({ pathname: `${RouteName.COIN_PAGE}${id}` });
+    const handleCardClick = () => navigate({ pathname: getCoinPageUrl({ coinId }) });
 
     return (
         <Grid xs={12} onClick={handleCardClick}>
@@ -27,7 +28,7 @@ export const CoinListCard: FunctionComponent<CoinCardProps> = ({ coin, likeCompo
                     <Card.Body>
                         <Row justify="flex-start" align="center">
                             <Row>
-                                <img alt={id} src={large} width="34px" height="34px" />
+                                <img alt={coinId} src={large} width="34px" height="34px" />
                                 <div className={styles.nameWrapper}>
                                     <div className={styles.name}>{name}</div>
                                     <div className={styles.symbol}>{symbol}</div>

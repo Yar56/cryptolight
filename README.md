@@ -31,6 +31,7 @@ Project based on [Feature-Sliced Design](https://feature-sliced.design/)
 - [ ] Add a night theme (by FSD)
 - [ ] Update PriceChart, add a time filter (Coin Page)
 - [ ] add SystemLayout (/ping implementation), [api](https://www.coingecko.com/ru/api/documentation)
+- [ ] add husky pre-commit, lint-staged
 
 See the [open issues](https://github.com/Yar56/cryptolight/issues) for a full list of proposed features (and known issues).
 

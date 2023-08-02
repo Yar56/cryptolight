@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { TrendingCoin } from '~/shared/api/coingecko/models';
 import { getCoinPageUrl } from '~/shared/lib/navigate/getCoinPageUrl';
 
-import { RouteName } from '~/pages/models';
-
 import styles from './styles.module.css';
 
 interface CoinCardProps {

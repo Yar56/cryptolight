@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Coin } from '~/shared/api/coingecko/models';
 
+import { RouteName } from '~/pages/models';
+
 import styles from './styles.module.scss';
 
 interface CoinsByGlobalTrendsCardProps {
@@ -38,7 +40,7 @@ export const CoinListByGlobalTrendsCard: FunctionComponent<CoinsByGlobalTrendsCa
             return;
         }
 
-        navigate({ pathname: `/coin/${id}` });
+        navigate({ pathname: `${RouteName.COIN_PAGE}${id}` });
     };
     return (
         <Grid xs={12} onClick={handleCardClick}>

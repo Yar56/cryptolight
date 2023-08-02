@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { TrendingCoin } from '~/shared/api/coingecko/models';
 
+import { RouteName } from '~/pages/models';
+
 import styles from './styles.module.css';
 
 interface CoinCardProps {
@@ -16,7 +18,7 @@ export const CoinListCard: FunctionComponent<CoinCardProps> = ({ coin, likeCompo
         item: { large, id, name, symbol, priceBtc }
     } = coin;
     const navigate = useNavigate();
-    const handleCardClick = () => navigate({ pathname: `/coin/${id}` });
+    const handleCardClick = () => navigate({ pathname: `${RouteName.COIN_PAGE}${id}` });
 
     return (
         <Grid xs={12} onClick={handleCardClick}>

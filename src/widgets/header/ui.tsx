@@ -10,6 +10,8 @@ import { userModel } from '~/entities/user';
 import { AuthModalByEmail } from '~/features/auth/by-email';
 import { favoriteCoinModel } from '~/features/favoriteCoin';
 
+import { RouteName } from '~/pages/models';
+
 interface HeaderProps {
     sticky?: boolean;
 }
@@ -25,8 +27,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
     const { user } = userModel.selectors.useUser();
     const navigate = useNavigate();
 
-    const handleProfileClick = () => navigate('/profile');
-    const handleCoinsClick = () => navigate('/profile');
+    const handleProfileClick = () => navigate(RouteName.PROFILE_PAGE);
+    const handleCoinsClick = () => navigate(RouteName.PROFILE_PAGE);
 
     const handleSignOutClick = async () => {
         try {

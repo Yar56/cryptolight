@@ -7,13 +7,15 @@ import { userModel } from '~/entities/user';
 import { AuthModalByEmail } from '~/features/auth/by-email';
 import { RegistrationModalByEmail } from '~/features/registration/by-email';
 
+import { RouteName } from '~/pages/models';
+
 import styles from './styles.module.css';
 
 export const WelcomeCard: FunctionComponent = () => {
     const navigate = useNavigate();
     const isUserAuth = userModel.selectors.useIsUserAuth();
     const { user } = userModel.selectors.useUser();
-    const handleCoinsClick = () => navigate('/profile');
+    const handleCoinsClick = () => navigate(RouteName.PROFILE_PAGE);
 
     return (
         <Card css={{ $$cardColor: '$colors$primary', color: '#fff', maxW: '590px' }}>

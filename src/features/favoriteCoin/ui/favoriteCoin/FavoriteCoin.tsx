@@ -10,9 +10,9 @@ import { userModel } from '~/entities/user';
 import * as likeCoinModel from '../../model';
 import { setFavoriteUserCoinsFx } from '../../model';
 
+import styles from './FavoriteCoin.module.css';
 import { ReactComponent as ActiveLike } from './icons/activelikeIcon.svg';
 import { ReactComponent as Like } from './icons/likeIcon.svg';
-import styles from './styles.module.css';
 
 interface FavoriteCoinProps {
     coinId: string;

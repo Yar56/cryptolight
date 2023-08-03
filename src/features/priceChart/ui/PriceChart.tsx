@@ -10,7 +10,7 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { theme } from '~/shared/ui/styles';
 
 import { DataProps, PriceChartProps } from '~/features/priceChart/model/types';
-import LineChart from '~/features/priceChart/ui/lineChart/LineChart';
+import LineChart from '~/features/priceChart/ui/LineChart';
 
 const getDate = (d: DataProps) => new Date(d.date);
 const getStockValue = (d: DataProps) => d?.price;

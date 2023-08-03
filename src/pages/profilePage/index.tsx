@@ -7,14 +7,14 @@ import CommonPageHeader from '~/shared/ui/components/commonPageHeader/CommonPage
 import { coinModel, coinUi } from '~/entities/coin';
 
 import { FavoriteCoin } from '~/features/favoriteCoin';
-import * as likeCoinModel from '~/features/favoriteCoin/model';
+import { favoriteCoinModel } from '~/features/favoriteCoin';
 
 import { Header } from '~/widgets/header';
 
 const { CoinListCard } = coinUi;
 
 const ProfilePage = () => {
-    const likedCoinsIds = likeCoinModel.selectors.useFavoritedCoinsIds();
+    const likedCoinsIds = favoriteCoinModel.selectors.useFavoritedCoinsIds();
     const coinList = coinModel.coinListSubModel.selectors.useCoinList();
 
     const favoriteCoins = useMemo(() => {

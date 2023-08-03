@@ -7,8 +7,7 @@ import { FavoritedCoinsMap } from '~/shared/api/cryptoLight/models';
 
 import { userModel } from '~/entities/user';
 
-import * as likeCoinModel from '../../model';
-import { setFavoriteUserCoinsFx } from '../../model';
+import { favoriteCoinModel } from '../index';
 
 import styles from './FavoriteCoin.module.css';
 import { ReactComponent as ActiveLike } from './icons/activelikeIcon.svg';
@@ -32,8 +31,8 @@ const getTooltipText = (isFavorite: boolean, isUserExist: boolean): { content: s
 
 export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, className }) => {
     const { user } = userModel.useUser();
-    const isFavorite = likeCoinModel.useFavoriteCoin({ coinId });
-    const likedCoinsMap = likeCoinModel.selectors.useFavoritedCoins();
+    const isFavorite = favoriteCoinModel.useFavoriteCoin({ coinId });
+    const likedCoinsMap = favoriteCoinModel.selectors.useFavoritedCoins();
 
     const handleChange = (coinId: string) => async (event: React.MouseEvent<HTMLElement>) => {
         event.stopPropagation();
@@ -47,8 +46,8 @@ export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, cla
         };
 
         try {
-            await setFavoriteUserCoinsFx(data);
-            likeCoinModel.events.setFavoriteCoin(coinId);
+            await favoriteCoinModel.setFavoriteUserCoinsFx(data);
+            favoriteCoinModel.events.setFavoriteCoin(coinId);
         } catch (error) {
             console.error('Error: ', error);
         }

@@ -1,7 +1,7 @@
 import { Switch, Text } from '@nextui-org/react';
 import React, { FunctionComponent } from 'react';
 
-import { events, EventType, useListType } from '../../model';
+import { events, EventType, useListType } from '../model';
 
 import styles from './CoinSwitch.module.css';
 

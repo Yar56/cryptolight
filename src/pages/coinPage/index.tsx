@@ -9,7 +9,7 @@ import CommonPageHeader from '~/shared/ui/components/commonPageHeader/CommonPage
 import { coinModel, coinUi } from '~/entities/coin';
 
 import { FavoriteCoin } from '~/features/favoriteCoin';
-import PriceChart from '~/features/priceChart/ui/priceChart';
+import { PriceChart } from '~/features/priceChart';
 
 import { Header } from '~/widgets/header';
 

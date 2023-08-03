@@ -17,7 +17,7 @@ const getStockValue = (d: DataProps) => d?.price;
 const getFormatValue = (d: DataProps) => numeral(d.price).format('$0,0.00');
 const bisectDate = bisector<DataProps, Date>((d) => new Date(d.date)).left;
 
-const PriceChart: FunctionComponent<PriceChartProps> = ({
+export const PriceChart: FunctionComponent<PriceChartProps> = ({
     width = 10,
     height,
     data,
@@ -163,5 +163,3 @@ const PriceChart: FunctionComponent<PriceChartProps> = ({
         </div>
     );
 };
-
-export default PriceChart;

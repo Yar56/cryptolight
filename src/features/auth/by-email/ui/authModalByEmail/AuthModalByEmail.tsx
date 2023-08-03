@@ -4,12 +4,11 @@ import React, { FunctionComponent, useReducer, useState } from 'react';
 import * as yup from 'yup';
 
 import { AuthErrorMessages, FirebaseError } from '~/shared/api/cryptoLight/models';
+import { ModalByEmailParams } from '~/shared/types/modal/commonModalTypes';
 import { Mail } from '~/shared/ui/icons/Mail';
 import { Password } from '~/shared/ui/icons/Password';
 
 import { signInUserFx } from '~/entities/user/model';
-
-import { ModalByEmailParams } from '~/features/commonModalTypes';
 
 import styles from './AuthModalByEmail.module.css';
 

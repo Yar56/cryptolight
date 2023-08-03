@@ -4,7 +4,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { Coin } from '~/shared/api/coingecko/models';
 import { numberWithSpaces } from '~/shared/lib/format/numberWithSpaces';
 
-import styles from './styles.module.scss';
+import styles from './CoinPageCard.module.scss';
 
 interface CoinCardProps {
     coin: Coin;

@@ -1,3 +1,3 @@
-export * from './coinPageCard';
-export * from './coinListCard';
-export * from './coinListByGlobalTrendsCard';
+export * from './coinPageCard/CoinPageCard';
+export * from './coinListCard/CoinListCard';
+export * from './coinListByGlobalTrendsCard/CoinListByGlobalTrendsCard';

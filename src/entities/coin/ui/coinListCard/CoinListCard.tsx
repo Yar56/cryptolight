@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { TrendingCoin } from '~/shared/api/coingecko/models';
 import { getCoinPageUrl } from '~/shared/lib/navigate/getCoinPageUrl';
 
-import styles from './styles.module.css';
+import styles from './CoinListCard.module.css';
 
 interface CoinCardProps {
     coin: TrendingCoin;

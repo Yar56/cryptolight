@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Coin } from '~/shared/api/coingecko/models';
 import { getCoinPageUrl } from '~/shared/lib/navigate/getCoinPageUrl';
 
-import styles from './styles.module.scss';
+import styles from './CoinListByGlobalTrendsCard.module.scss';
 
 interface CoinsByGlobalTrendsCardProps {
     coin: Coin;

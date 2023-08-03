@@ -1,1 +1,1 @@
-export * from './favoriteCoin/FavoriteCoin';
+export * from './FavoriteCoin';

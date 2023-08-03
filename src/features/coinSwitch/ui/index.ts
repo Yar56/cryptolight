@@ -1,1 +1,1 @@
-export * from './coinSwitch';
+export * from './coinSwitch/CoinSwitch';

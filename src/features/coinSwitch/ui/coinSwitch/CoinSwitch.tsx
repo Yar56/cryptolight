@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 
 import { events, EventType, useListType } from '../../model';
 
-import styles from './styles.module.css';
+import styles from './CoinSwitch.module.css';
 
 export const CoinSwitch: FunctionComponent = () => {
     const listType = useListType();

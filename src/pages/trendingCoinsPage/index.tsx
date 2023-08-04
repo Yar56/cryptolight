@@ -23,12 +23,7 @@ const TrendingCoinsPage = () => {
     const coinsByGlobal = useStore(coinListByGlobalTrendsSubModel.$coinListByGlobal);
     const listType = useListType();
 
-    /**
-     * Запрашиваем данные при загрузке страницы
-     * @remark Является плохой практикой в мире effector и представлено здесь - лишь для наглядной демонстрации
-     * Лучше фетчить через event.pageMounted или reflect
-     */
-
+    // todo reflect
     useEffect(() => {
         coinModel.coinListSubModel.getTrendingCoinsListFx();
     }, []);

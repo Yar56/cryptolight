@@ -7,7 +7,7 @@ import { clearState } from '~/shared/lib/storage/localStorage';
 
 import { userModel } from '~/entities/user';
 
-import { AuthModalByEmail } from '~/features/auth/by-email';
+import { AuthModalByEmail } from 'features/auth/byEmail';
 import { favoriteCoinModel } from '~/features/favoriteCoin';
 
 import { RouteName } from '~/pages/models';

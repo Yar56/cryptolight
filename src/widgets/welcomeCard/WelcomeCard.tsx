@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { userModel } from '~/entities/user';
 
-import { AuthModalByEmail } from 'features/auth/byEmail';
-import { RegistrationModalByEmail } from 'features/registration/byEmail';
+import { AuthModalByEmail } from '~/features/auth/byEmail';
+import { RegistrationModalByEmail } from '~/features/registration/byEmail';
 
 import { RouteName } from '~/pages/models';
 

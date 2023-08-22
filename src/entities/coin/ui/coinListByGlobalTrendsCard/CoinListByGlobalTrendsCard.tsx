@@ -3,13 +3,13 @@ import { get } from 'lodash';
 import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Coin } from '~/shared/api/coingecko/models';
+import { coinGeckoApi } from '~/shared/api/';
 import { getCoinPageUrl } from '~/shared/lib/navigate/getCoinPageUrl';
 
 import styles from './CoinListByGlobalTrendsCard.module.scss';
 
 interface CoinsByGlobalTrendsCardProps {
-    coin: Coin;
+    coin: coinGeckoApi.models.Coin;
     badge?: ReactNode;
 }
 

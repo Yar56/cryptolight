@@ -1,13 +1,13 @@
 import { Avatar, Card, Col, Row, Text } from '@nextui-org/react';
 import React, { FunctionComponent, ReactElement } from 'react';
 
-import { Coin } from '~/shared/api/coingecko/models';
+import { coinGeckoApi } from '~/shared/api';
 import { numberWithSpaces } from '~/shared/lib/format/numberWithSpaces';
 
 import styles from './CoinPageCard.module.scss';
 
 interface CoinCardProps {
-    coin: Coin;
+    coin: coinGeckoApi.models.Coin;
     favoriteCoinComponent?: ReactElement;
 }
 

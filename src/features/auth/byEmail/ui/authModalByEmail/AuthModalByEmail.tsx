@@ -3,8 +3,8 @@ import { useFormik } from 'formik';
 import React, { FunctionComponent, useReducer, useState } from 'react';
 import * as yup from 'yup';
 
-import { AuthErrorMessages, FirebaseError } from '~/shared/api/cryptoLight/models';
-import { ModalByEmailParams } from '~/shared/types/modal/commonModalTypes';
+import { cryptoLightApi } from '~/shared/api';
+import { commonModalTypes } from '~/shared/types';
 import { Mail } from '~/shared/ui/icons/Mail';
 import { Password } from '~/shared/ui/icons/Password';
 
@@ -12,7 +12,9 @@ import { signInUserFx } from '~/entities/user/model';
 
 import styles from './AuthModalByEmail.module.css';
 
-export type AuthModalByEmailParams = ModalByEmailParams;
+export type AuthModalByEmailParams = commonModalTypes.ModalByEmailParams;
+
+const errorMessages = cryptoLightApi.models.AuthErrorMessages;
 
 const initialState = { isOpenAuth: false };
 
@@ -68,12 +70,12 @@ export const AuthModalByEmail: FunctionComponent<AuthModalByEmailParams> = ({ ch
                 await signInUserFx({ email, password });
                 handleClose();
             } catch (error) {
-                const typedError = error as FirebaseError;
-                if (typedError.message === AuthErrorMessages.EMAIL_NOT_FOUND) {
+                const typedError = error as cryptoLightApi.models.FirebaseError;
+                if (typedError.message === errorMessages.EMAIL_NOT_FOUND) {
                     setApiError('Такого email не существует');
-                } else if (typedError.message === AuthErrorMessages.INVALID_PASSWORD) {
+                } else if (typedError.message === errorMessages.INVALID_PASSWORD) {
                     setApiError('Неверный пароль');
-                } else if (typedError.message === AuthErrorMessages.USER_DISABLED) {
+                } else if (typedError.message === errorMessages.USER_DISABLED) {
                     setApiError('Юзер был отключен');
                 } else {
                     setApiError('Непредвиденная ошибка!');

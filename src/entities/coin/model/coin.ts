@@ -1,21 +1,21 @@
 import { createStore, createEffect } from 'effector';
 
 import { coinGeckoApi } from '~/shared/api';
-import { GetCoinByIdParams, GetCoinChartByIdParams } from '~/shared/api/coingecko/coins';
-import { Coin, CoinMarketChart, DataProps } from '~/shared/api/coingecko/models';
 
-export const getCoinByIdFx = createEffect(({ coinId }: GetCoinByIdParams) => {
+type Coin = coinGeckoApi.models.Coin;
+
+export const getCoinByIdFx = createEffect(({ coinId }: coinGeckoApi.coins.GetCoinByIdParams) => {
     return coinGeckoApi.coins.getCoinById({ coinId });
 });
 
-export const getCoinMarketChartByIdFx = createEffect(({ coinId }: GetCoinChartByIdParams) => {
+export const getCoinMarketChartByIdFx = createEffect(({ coinId }: coinGeckoApi.coins.GetCoinChartByIdParams) => {
     return coinGeckoApi.coins.getCoinMarketChartById({ coinId });
 });
 
 interface CoinState {
     coin?: Coin;
-    coinMarketChart?: CoinMarketChart;
-    preparedPrices?: DataProps[];
+    coinMarketChart?: coinGeckoApi.models.CoinMarketChart;
+    preparedPrices?: coinGeckoApi.models.DataProps[];
 }
 
 export const coinInitialState: CoinState = {};

@@ -3,7 +3,7 @@ import { SimpleColors } from '@nextui-org/react/types/utils/prop-types';
 import React, { FunctionComponent } from 'react';
 
 import classNames from '~/shared/aliases/classNames';
-import { FavoritedCoinsMap } from '~/shared/api/cryptoLight/models';
+import { cryptoLightApi } from '~/shared/api';
 
 import { userModel } from '~/entities/user';
 
@@ -41,7 +41,7 @@ export const FavoriteCoin: FunctionComponent<FavoriteCoinProps> = ({ coinId, cla
             return;
         }
 
-        const data: FavoritedCoinsMap = {
+        const data: cryptoLightApi.models.FavoritedCoinsMap = {
             [`${user?.localId}`]: { ...likedCoinsMap, [coinId]: !isFavorite }
         };
 

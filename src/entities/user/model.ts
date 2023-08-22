@@ -2,8 +2,9 @@ import { createEffect, createEvent, createStore } from 'effector';
 import { useStore, useStoreMap } from 'effector-react';
 
 import { cryptoLightApi } from '~/shared/api';
-import { User } from '~/shared/api/cryptoLight/models';
 import { saveState } from '~/shared/lib/storage/localStorage';
+
+type User = cryptoLightApi.models.User;
 
 interface AuthUserFxParams {
     email: string;

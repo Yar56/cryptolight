@@ -1,9 +1,9 @@
 import { createEffect, createStore } from 'effector';
 
 import { coinGeckoApi } from '~/shared/api';
-import { Coin } from '~/shared/api/coingecko/models';
 
-type CoinsTrendingByGlobalState = Coin[];
+type CoinsTrendingByGlobalState = coinGeckoApi.models.Coin[];
+
 export const getCoinListByGlobalTrendsFx = createEffect(() => {
     return coinGeckoApi.coins.getCoinListByGlobalTrends();
 });

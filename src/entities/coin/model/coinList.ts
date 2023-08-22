@@ -2,13 +2,12 @@ import { createStore, createEffect } from 'effector';
 import { useStore } from 'effector-react';
 
 import { coinGeckoApi } from '~/shared/api';
-import { TrendingCoin } from '~/shared/api/coingecko/models';
 
 export const getTrendingCoinsListFx = createEffect(() => {
     return coinGeckoApi.coins.getTrendingCoinList();
 });
 
-type CoinsTrendingState = TrendingCoin[];
+type CoinsTrendingState = coinGeckoApi.models.TrendingCoin[];
 
 export const coinsInitialState: CoinsTrendingState = [];
 

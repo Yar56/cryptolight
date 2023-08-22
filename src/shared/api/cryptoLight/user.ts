@@ -1,19 +1,18 @@
 import { AxiosPromise } from 'axios';
 
-import { cryptoLightRequester } from '~/shared/api/cryptoLight/base';
-import { User } from '~/shared/api/cryptoLight/models';
+import { cryptoLightApi } from '~/shared/api';
 
 export interface SignUpUserParams {
     email: string;
     password: string;
 }
 
-export const signUpUser = ({ email, password }: SignUpUserParams): AxiosPromise<User> => {
-    return cryptoLightRequester.post('/signUp', { email, password });
+export const signUpUser = ({ email, password }: SignUpUserParams): AxiosPromise<cryptoLightApi.models.User> => {
+    return cryptoLightApi.base.cryptoLightRequester.post('/signUp', { email, password });
 };
 
-export const signInUser = ({ email, password }: SignUpUserParams): AxiosPromise<User> => {
-    return cryptoLightRequester.post('/signInWithPassword', { email, password });
+export const signInUser = ({ email, password }: SignUpUserParams): AxiosPromise<cryptoLightApi.models.User> => {
+    return cryptoLightApi.base.cryptoLightRequester.post('/signInWithPassword', { email, password });
 };
 
 interface SignOutUserParams {
@@ -24,7 +23,7 @@ export const signOutUser = ({ uid }: SignOutUserParams) => {
         console.log('user.uid is undefined, skip signOutUser');
         return Promise.resolve();
     }
-    return cryptoLightRequester.post('/signOut', { uid });
+    return cryptoLightApi.base.cryptoLightRequester.post('/signOut', { uid });
 };
 
 export interface CheckAuthUserParams {
@@ -36,5 +35,5 @@ export const checkAuthUser = ({ idToken }: CheckAuthUserParams) => {
         console.log(`idToken=${idToken}, skip checkAuthUser`);
         return Promise.resolve();
     }
-    return cryptoLightRequester.post('/authStateChanged', { idToken });
+    return cryptoLightApi.base.cryptoLightRequester.post('/authStateChanged', { idToken });
 };

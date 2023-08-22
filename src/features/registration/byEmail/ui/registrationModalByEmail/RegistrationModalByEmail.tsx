@@ -3,8 +3,8 @@ import { useFormik } from 'formik';
 import React, { FunctionComponent, useReducer, useState } from 'react';
 import * as yup from 'yup';
 
-import { AuthErrorMessages, FirebaseError } from '~/shared/api/cryptoLight/models';
-import { ModalByEmailParams } from '~/shared/types/modal/commonModalTypes';
+import { cryptoLightApi } from '~/shared/api';
+import { commonModalTypes } from '~/shared/types';
 import { Mail } from '~/shared/ui/icons/Mail';
 import { Password } from '~/shared/ui/icons/Password';
 
@@ -12,7 +12,8 @@ import { signUpUserFx } from '~/entities/user/model';
 
 import styles from './RegistrationModalByEmail.module.css';
 
-export type RegistrationModalByEmailParams = ModalByEmailParams;
+export type RegistrationModalByEmailParams = commonModalTypes.ModalByEmailParams;
+const errorMessages = cryptoLightApi.models.AuthErrorMessages;
 
 const initialState = { isOpenRegistration: false };
 
@@ -75,13 +76,13 @@ export const RegistrationModalByEmail: FunctionComponent<RegistrationModalByEmai
                 await signUpUserFx({ email, password });
                 handleClose();
             } catch (error) {
-                const typedError = error as FirebaseError;
+                const typedError = error as cryptoLightApi.models.FirebaseError;
 
-                if (typedError.message === AuthErrorMessages.EMAIL_EXISTS) {
+                if (typedError.message === errorMessages.EMAIL_EXISTS) {
                     setApiError('Такой email уже существует!');
-                } else if (typedError.message === AuthErrorMessages.OPERATION_NOT_ALLOWED) {
+                } else if (typedError.message === errorMessages.OPERATION_NOT_ALLOWED) {
                     setApiError('Вход с паролем отключен для этого проекта. Обратитесь в поддержку');
-                } else if (typedError.message === AuthErrorMessages.TOO_MANY_ATTEMPTS_TRY_LATER) {
+                } else if (typedError.message === errorMessages.TOO_MANY_ATTEMPTS_TRY_LATER) {
                     setApiError('Слишком много попыток, попробуйте позже');
                 } else {
                     setApiError('Непредвиденная ошибка!');

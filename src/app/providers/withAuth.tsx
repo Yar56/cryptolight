@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { cryptoLightApi } from '~/shared/api';
-import { User } from '~/shared/api/cryptoLight/models';
 import { loadState } from '~/shared/lib/storage/localStorage';
 import PageLoader from '~/shared/ui/components/pageLoader/PageLoader';
 
@@ -11,7 +10,7 @@ import { userModel } from '~/entities/user';
 export const withAuth = (component: () => React.ReactNode) => () => {
     const { user } = userModel.selectors.useUser();
 
-    const [userFormLs, setUserFormLs] = useState<User | undefined>();
+    const [userFormLs, setUserFormLs] = useState<cryptoLightApi.models.User | undefined>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {

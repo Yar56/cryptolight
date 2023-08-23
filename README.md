@@ -16,8 +16,8 @@ This pet project was written to try FSD in action. The project has conventions a
       - `docker build -t cryptolight .`
 - Run
   - add .env file with the following contents
-    `VITE_REACT_APP_COIN_API_HOST=https://api.coingecko.com/api/v3/`
-    `VITE_REACT_APP_CRYPTO_LIGHT_API_HOST=http://crypto-light.space`
+    `VITE_COIN_API_HOST=https://api.coingecko.com/api/v3/`
+    `VITE_CRYPTO_LIGHT_API_HOST=http://crypto-light.space`
   - npm run dev
   - or use docker
     - `docker run -it -v ${PWD}:/app -v /app/node_modules -e CHOKIDAR_USEPOLLING=true --env-file .env -p 3000:3000 cryptolight`

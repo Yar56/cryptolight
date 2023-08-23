@@ -6,8 +6,8 @@ const getEnvVar = (key: string) => {
 };
 
 // region hosts
-export const COIN_API_HOST = getEnvVar('VITE_REACT_APP_COIN_API_HOST');
-export const CRYPTO_LIGHT_HOST = getEnvVar('VITE_REACT_APP_CRYPTO_LIGHT_API_HOST');
+export const COIN_API_HOST = getEnvVar('VITE_COIN_API_HOST');
+export const CRYPTO_LIGHT_HOST = getEnvVar('VITE_CRYPTO_LIGHT_API_HOST');
 // endregion
 
 // export const NODE_ENV = getEnvVar('NODE_ENV');

@@ -3,7 +3,8 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { coinGeckoApi } from '~/shared/api';
-import { getCoinPageUrl } from '~/shared/lib/navigate/getCoinPageUrl';
+
+import { coinLib } from '~/entities/coin/';
 
 import styles from './CoinListCard.module.css';
 
@@ -17,7 +18,7 @@ export const CoinListCard: FunctionComponent<CoinCardProps> = ({ coin, likeCompo
         item: { large, id: coinId, name, symbol, priceBtc }
     } = coin;
     const navigate = useNavigate();
-    const handleCardClick = () => navigate({ pathname: getCoinPageUrl({ coinId }) });
+    const handleCardClick = () => navigate({ pathname: coinLib.getCoinPageUrl({ coinId }) });
 
     return (
         <Grid xs={12} onClick={handleCardClick}>

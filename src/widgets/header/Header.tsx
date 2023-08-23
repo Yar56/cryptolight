@@ -3,9 +3,8 @@ import React, { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { cryptoLightApi } from '~/shared/api';
-import { clearState } from '~/shared/lib/storage/localStorage';
 
-import { userModel } from '~/entities/user';
+import { userModel, userLib } from '~/entities/user';
 
 import { AuthModalByEmail } from '~/features/auth/byEmail';
 import { favoriteCoinModel } from '~/features/favoriteCoin';
@@ -35,7 +34,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
             await cryptoLightApi.user.signOutUser({ uid: user?.localId }).then(() => {
                 userModel.events.updateUserData(undefined);
                 favoriteCoinModel.events.clearFavoriteCoins();
-                clearState();
+                userLib.clearState();
             });
         } catch (error) {
             console.error(error, 'Error while user.signOutUser()');

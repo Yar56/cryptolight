@@ -2,7 +2,8 @@ import { createEffect, createEvent, createStore } from 'effector';
 import { useStore, useStoreMap } from 'effector-react';
 
 import { cryptoLightApi } from '~/shared/api';
-import { saveState } from '~/shared/lib/storage/localStorage';
+
+import { userLib } from '~/entities/user';
 
 type User = cryptoLightApi.models.User;
 
@@ -44,6 +45,6 @@ export const selectors = { useIsUserAuth, useUser };
 $user.watch((state) => console.debug(state));
 $user.watch((state) => {
     if (state.user) {
-        saveState(state.user);
+        userLib.saveState(state.user);
     }
 });

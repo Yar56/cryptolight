@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { cryptoLightApi } from '~/shared/api';
-import { loadState } from '~/shared/lib/storage/localStorage';
 import PageLoader from '~/shared/ui/components/pageLoader/PageLoader';
 
-import { userModel } from '~/entities/user';
+import { userModel, userLib } from '~/entities/user';
 
 // eslint-disable-next-line react/display-name
 export const withAuth = (component: () => React.ReactNode) => () => {
@@ -19,7 +18,7 @@ export const withAuth = (component: () => React.ReactNode) => () => {
         if (!user) {
             // eslint-disable-next-line prefer-const
             timeoutId = setTimeout(() => {
-                const user = loadState();
+                const user = userLib.loadState();
                 if (user) {
                     console.log('user from storage is exists');
                     setUserFormLs(user);

@@ -4,7 +4,8 @@ import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { coinGeckoApi } from '~/shared/api/';
-import { getCoinPageUrl } from '~/shared/lib/navigate/getCoinPageUrl';
+
+import { coinLib } from '~/entities/coin';
 
 import styles from './CoinListByGlobalTrendsCard.module.scss';
 
@@ -39,7 +40,7 @@ export const CoinListByGlobalTrendsCard: FunctionComponent<CoinsByGlobalTrendsCa
             return;
         }
 
-        navigate({ pathname: getCoinPageUrl({ coinId }) });
+        navigate({ pathname: coinLib.getCoinPageUrl({ coinId }) });
     };
     return (
         <Grid xs={12} onClick={handleCardClick}>

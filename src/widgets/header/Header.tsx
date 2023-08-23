@@ -3,13 +3,12 @@ import React, { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { cryptoLightApi } from '~/shared/api';
+import { routesConfig } from '~/shared/config';
 
 import { userModel, userLib } from '~/entities/user';
 
 import { AuthModalByEmail } from '~/features/auth/byEmail';
 import { favoriteCoinModel } from '~/features/favoriteCoin';
-
-import { RouteName } from '~/pages/models';
 
 interface HeaderProps {
     sticky?: boolean;
@@ -26,8 +25,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
     const { user } = userModel.selectors.useUser();
     const navigate = useNavigate();
 
-    const handleProfileClick = () => navigate(RouteName.PROFILE_PAGE);
-    const handleCoinsClick = () => navigate(RouteName.PROFILE_PAGE);
+    const handleProfileClick = () => navigate(routesConfig.RouteName.PROFILE_PAGE);
+    const handleCoinsClick = () => navigate(routesConfig.RouteName.PROFILE_PAGE);
 
     const handleSignOutClick = async () => {
         try {

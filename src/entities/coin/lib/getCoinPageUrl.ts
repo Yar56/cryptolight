@@ -1,7 +1,7 @@
-import { RouteName } from '~/pages/models';
+import { routesConfig } from '~/shared/config';
 
 interface GetCoinPageUrlParams {
     coinId: string;
 }
 export const getCoinPageUrl = ({ coinId }: GetCoinPageUrlParams): string =>
-    RouteName.COIN_PAGE.replace(':coinId', coinId);
+    routesConfig.RouteName.COIN_PAGE.replace(':coinId', coinId);

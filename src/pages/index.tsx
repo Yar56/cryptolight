@@ -1,9 +1,9 @@
 import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { SuspenseLayout } from '~/widgets/layouts/SuspenseLayout';
+import { routesConfig } from '~/shared/config';
 
-import { RouteDescription, RouteName } from '~/pages/models';
+import { SuspenseLayout } from '~/widgets/layouts/SuspenseLayout';
 
 import MainPage from './trendingCoinsPage';
 
@@ -11,17 +11,19 @@ const CoinPage = lazy(() => import('./coinPage'));
 const ProfilePage = lazy(() => import('./profilePage'));
 const NotFoundPage = lazy(() => import('./notFoundPage'));
 
-const routes: RouteDescription[] = [
+const { TRENDING_COIN_PAGE, PROFILE_PAGE, COIN_PAGE } = routesConfig.RouteName;
+
+const routes: routesConfig.RouteDescription[] = [
     {
-        path: RouteName.TRENDING_COIN_PAGE,
+        path: TRENDING_COIN_PAGE,
         component: MainPage
     },
     {
-        path: RouteName.COIN_PAGE,
+        path: COIN_PAGE,
         component: CoinPage
     },
     {
-        path: RouteName.PROFILE_PAGE,
+        path: PROFILE_PAGE,
         component: ProfilePage
     }
 ];

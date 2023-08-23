@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { CRYPTO_LIGHT_HOST } from '~/shared/config';
+import { envs } from '~/shared/config';
 
 export const cryptoLightRequester = axios.create({
-    baseURL: CRYPTO_LIGHT_HOST
+    baseURL: envs.CRYPTO_LIGHT_HOST
 });

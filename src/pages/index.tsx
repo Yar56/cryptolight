@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { routesConfig } from '~/shared/config';
-
-import { SuspenseLayout } from '~/widgets/layouts/SuspenseLayout';
+import { SuspenseLayout } from '~/shared/ui/layouts';
 
 import MainPage from './trendingCoinsPage';
 

@@ -3,42 +3,28 @@ import { useStore } from 'effector-react';
 import { uniqueId } from 'lodash';
 import React, { useEffect } from 'react';
 
-import { coinUi, coinModel } from '~/entities/coin';
-import { userModel } from '~/entities/user';
-const { CoinListCard, CoinListByGlobalTrendsCard } = coinUi;
-const { coinListSubModel, coinListByGlobalTrendsSubModel } = coinModel;
+import { coinModel, coinUi } from '~/entities/coin';
 
 import { EventType, useListType } from '~/features/coinSwitch/model';
 import { CoinSwitch } from '~/features/coinSwitch/ui';
-import { FavoriteCoin, favoriteCoinModel } from '~/features/favoriteCoin';
+import { FavoriteCoin } from '~/features/favoriteCoin';
 
 import { Header } from '~/widgets/header';
 import { WelcomeCard } from '~/widgets/welcomeCard';
 
+const { CoinListCard, CoinListByGlobalTrendsCard } = coinUi;
+const { coinListSubModel, coinListByGlobalTrendsSubModel } = coinModel;
+
 const TrendingCoinsPage = () => {
-    const { user } = userModel.selectors.useUser();
     const coinList = useStore(coinListSubModel.$coinList);
     const isLoading = useStore(coinListSubModel.$coinListIsLoading);
     const isEmpty = useStore(coinListSubModel.$coinListIsEmpty);
     const coinsByGlobal = useStore(coinListByGlobalTrendsSubModel.$coinListByGlobal);
     const listType = useListType();
 
-    // todo reflect
     useEffect(() => {
-        coinModel.coinListSubModel.getTrendingCoinsListFx();
+        coinListSubModel.events.pageMounted();
     }, []);
-
-    useEffect(() => {
-        coinModel.coinListByGlobalTrendsSubModel.getCoinListByGlobalTrendsFx();
-    }, []);
-
-    useEffect(() => {
-        if (!user) {
-            console.log('user is undefined, skip getFavoriteUserCoinsFx');
-            return;
-        }
-        favoriteCoinModel.getFavoriteUserCoinsFx({ userId: user.localId });
-    }, [user]);
 
     const isCoinGeckoType = listType === EventType.COIN_GECKO;
 

@@ -4,8 +4,12 @@ import produce from 'immer';
 
 import { cryptoLightApi } from '~/shared/api';
 
-export const setFavoriteCoin = createEvent<string>();
-export const clearFavoriteCoins = createEvent();
+import { coinModel } from '~/entities/coin';
+import { userModel } from '~/entities/user';
+
+const setFavoriteCoin = createEvent<string>();
+const clearFavoriteCoins = createEvent();
+
 type FavoriteCoinsState = Record<string, boolean>;
 
 export const getFavoriteUserCoinsFx = createEffect(
@@ -46,3 +50,13 @@ export const useFavoriteCoin = ({ coinId }: { coinId: string }): boolean | undef
 
 export const selectors = { useFavoritedCoins, useFavoriteCoin, useFavoritedCoinsIds };
 $favoritedCoins.watch((state) => console.debug(state));
+
+coinModel.coinListSubModel.events.pageMounted.watch(() => {
+    userModel.$user.watch((state) => {
+        if (!state.user) {
+            console.log('user is undefined, skip getFavoriteUserCoinsFx');
+            return;
+        }
+        getFavoriteUserCoinsFx({ userId: state.user.localId });
+    });
+});

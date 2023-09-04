@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "typescript:validate": "tsc --noEmit -p tsconfig.validation.json",
-    "host": "vite --host"
+    "host": "vite --host",
+    "lint": "eslint . --max-warnings=0"
   },
   "repository": {
     "type": "git",
@@ -30,14 +31,14 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-router": "^5.1.19",
     "@types/react-router-dom": "^5.3.3",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.10",
     "cross-env": "^7.0.3",
     "css-tree": "^2.2.1",
     "eslint": "8.22.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-boundaries": "^3.3.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-boundaries": "^3.4.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-react": "^7.31.8",
     "postcss": "^8.4.16",

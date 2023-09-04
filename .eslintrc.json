@@ -4,10 +4,10 @@
         "es2021": true
     },
     "extends": [
+        "@feature-sliced",
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "@feature-sliced",
         "@feature-sliced/eslint-config/rules/import-order/experimental"
     ],
     "overrides": [

@@ -1,6 +1,6 @@
 import { cloneDeep, isArray, isPlainObject, isString, map, mapKeys, mapValues, snakeCase } from 'lodash';
 
-export default function keysToSnakeCase(object: object | object[]): object {
+export function keysToSnakeCase(object: object | object[]): object {
     let snakeCaseObject = cloneDeep(object);
 
     if (isArray(snakeCaseObject)) {

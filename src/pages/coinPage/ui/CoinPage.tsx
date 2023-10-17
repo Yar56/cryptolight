@@ -4,7 +4,9 @@ import { useStore } from 'effector-react';
 import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import CommonPageHeader from '~/shared/ui/components/commonPageHeader/CommonPageHeader';
+import { sharedUiComponents } from '~/shared/ui';
+
+const { CommonPageHeader } = sharedUiComponents;
 
 import { coinModel, coinUi } from '~/entities/coin';
 

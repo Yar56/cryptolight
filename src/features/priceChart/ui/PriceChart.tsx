@@ -7,8 +7,9 @@ import { format } from 'date-fns';
 import numeral from 'numeral';
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 
-import { theme } from '~/shared/ui/styles';
+import { sharedUiStyles } from '~/shared/ui';
 
+const { theme } = sharedUiStyles;
 import { DataProps, PriceChartProps } from '~/features/priceChart/model/types';
 import LineChart from '~/features/priceChart/ui/LineChart';
 

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { cryptoLightApi } from '~/shared/api';
-import PageLoader from '~/shared/ui/components/pageLoader/PageLoader';
+import { sharedUiComponents } from '~/shared/ui';
 
+const { PageLoader } = sharedUiComponents;
 import { userModel, userLib } from '~/entities/user';
 
 // eslint-disable-next-line react/display-name

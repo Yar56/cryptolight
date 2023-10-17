@@ -1,22 +1,24 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { routesConfig } from '~/shared/config';
-import { SuspenseLayout } from '~/shared/ui/layouts';
+import { sharedConfigRoutes } from '~/shared/config';
+import { sharedUiLayouts } from '~/shared/ui';
 
 import { coinPageUi } from '~/pages/coinPage';
 import { notFoundPageUi } from '~/pages/notFoundPage';
 import { profilePageUi } from '~/pages/profilePage';
 import { trendingCoinsPageUi } from '~/pages/trendingCoinsPage';
 
+const { RouteName } = sharedConfigRoutes;
+const { SuspenseLayout } = sharedUiLayouts;
 const { TrendingCoinsPage } = trendingCoinsPageUi;
 const { CoinPage } = coinPageUi;
 const { ProfilePage } = profilePageUi;
 const { NotFoundPage } = notFoundPageUi;
 
-const { TRENDING_COIN_PAGE, PROFILE_PAGE, COIN_PAGE } = routesConfig.RouteName;
+const { TRENDING_COIN_PAGE, PROFILE_PAGE, COIN_PAGE } = RouteName;
 
-const routes: routesConfig.RouteDescription[] = [
+const routes: sharedConfigRoutes.RouteDescription[] = [
     {
         path: TRENDING_COIN_PAGE,
         component: TrendingCoinsPage

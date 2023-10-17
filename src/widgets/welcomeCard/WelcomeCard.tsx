@@ -2,8 +2,9 @@ import { Button, Card, Row, Text } from '@nextui-org/react';
 import React, { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { routesConfig } from '~/shared/config';
+import { sharedConfigRoutes } from '~/shared/config';
 
+const { RouteName } = sharedConfigRoutes;
 import { userModel } from '~/entities/user';
 
 import { AuthModalByEmail } from '~/features/auth/byEmail';
@@ -15,7 +16,7 @@ export const WelcomeCard: FunctionComponent = () => {
     const navigate = useNavigate();
     const isUserAuth = userModel.selectors.useIsUserAuth();
     const { user } = userModel.selectors.useUser();
-    const handleCoinsClick = () => navigate(routesConfig.RouteName.PROFILE_PAGE);
+    const handleCoinsClick = () => navigate(RouteName.PROFILE_PAGE);
 
     return (
         <Card css={{ $$cardColor: '$colors$primary', color: '#fff', maxW: '590px' }}>

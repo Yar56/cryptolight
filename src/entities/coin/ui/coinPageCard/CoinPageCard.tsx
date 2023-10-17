@@ -2,7 +2,9 @@ import { Avatar, Card, Col, Row, Text } from '@nextui-org/react';
 import React, { FunctionComponent, ReactElement } from 'react';
 
 import { coinGeckoApi } from '~/shared/api';
-import { numberWithSpaces } from '~/shared/lib/format/numberWithSpaces';
+import { formatLib } from '~/shared/lib';
+
+const { numberWithSpaces } = formatLib;
 
 import styles from './CoinPageCard.module.scss';
 

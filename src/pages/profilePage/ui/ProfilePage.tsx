@@ -2,8 +2,9 @@ import { Container, Grid, Text } from '@nextui-org/react';
 import { uniqueId } from 'lodash';
 import React, { useMemo } from 'react';
 
-import CommonPageHeader from '~/shared/ui/components/commonPageHeader/CommonPageHeader';
+import { sharedUiComponents } from '~/shared/ui';
 
+const { CommonPageHeader } = sharedUiComponents;
 import { coinModel, coinUi } from '~/entities/coin';
 
 import { FavoriteCoin } from '~/features/favoriteCoin';

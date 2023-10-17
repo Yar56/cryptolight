@@ -1,2 +1,2 @@
-export * as envs from './env';
-export * as routesConfig from './routes';
+export * as sharedConfigEnvs from './envs';
+export * as sharedConfigRoutes from './routes';

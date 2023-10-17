@@ -1,12 +1,13 @@
 import { Spacer, Text } from '@nextui-org/react';
 import React from 'react';
 
-import BackButton from '~/shared/ui/components/backButton/BackButton';
+import { sharedUiComponents } from '~/shared/ui';
+const { BackButton } = sharedUiComponents;
 
 interface CommonPageHeaderProps {
     headerText: string;
 }
-const CommonPageHeader: FunctionComponent<CommonPageHeaderProps> = ({ headerText }) => {
+export const CommonPageHeader: FunctionComponent<CommonPageHeaderProps> = ({ headerText }) => {
     return (
         <>
             <Spacer y={1} />
@@ -19,5 +20,3 @@ const CommonPageHeader: FunctionComponent<CommonPageHeaderProps> = ({ headerText
         </>
     );
 };
-
-export default CommonPageHeader;

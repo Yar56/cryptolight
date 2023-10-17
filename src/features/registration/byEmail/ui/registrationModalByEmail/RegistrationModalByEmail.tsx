@@ -5,8 +5,8 @@ import * as yup from 'yup';
 
 import { cryptoLightApi } from '~/shared/api';
 import { commonModalTypes } from '~/shared/types';
-import { Mail } from '~/shared/ui/icons/Mail';
-import { Password } from '~/shared/ui/icons/Password';
+import { sharedUiIcons } from '~/shared/ui';
+const { Password, Mail } = sharedUiIcons;
 
 import { signUpUserFx } from '~/entities/user/model';
 

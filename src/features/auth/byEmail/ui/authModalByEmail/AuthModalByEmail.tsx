@@ -5,12 +5,13 @@ import * as yup from 'yup';
 
 import { cryptoLightApi } from '~/shared/api';
 import { commonModalTypes } from '~/shared/types';
-import { Mail } from '~/shared/ui/icons/Mail';
-import { Password } from '~/shared/ui/icons/Password';
+import { sharedUiIcons } from '~/shared/ui';
 
 import { signInUserFx } from '~/entities/user/model';
 
 import styles from './AuthModalByEmail.module.css';
+
+const { Mail, Password } = sharedUiIcons;
 
 export type AuthModalByEmailParams = commonModalTypes.ModalByEmailParams;
 

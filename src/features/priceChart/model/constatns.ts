@@ -1,4 +1,5 @@
-import { theme } from '~/shared/ui/styles';
+import { sharedUiStyles } from '~/shared/ui';
+const { theme } = sharedUiStyles;
 
 export const AXIS_COLOR = theme.colors.primary;
 export const AXIS_BOTTOM_TICK_LABEL_PROPS = {

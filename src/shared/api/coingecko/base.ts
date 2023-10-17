@@ -1,10 +1,13 @@
 import axios from 'axios';
 
-import { envs } from '~/shared/config';
-import { keysToCamelCase } from '~/shared/lib/cases/keysToCamelCase';
+import { sharedConfigEnvs } from '~/shared/config';
+const { COIN_API_HOST } = sharedConfigEnvs;
+import { casesLib } from '~/shared/lib';
+
+const { keysToCamelCase } = casesLib;
 
 export const coinGeckoRequester = axios.create({
-    baseURL: envs.COIN_API_HOST
+    baseURL: COIN_API_HOST
 });
 
 const EXCLUDED_URLS = ['/coins/bitcoin/market_chart?vs_currency'];

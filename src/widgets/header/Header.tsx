@@ -3,8 +3,9 @@ import React, { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { cryptoLightApi } from '~/shared/api';
-import { routesConfig } from '~/shared/config';
+import { sharedConfigRoutes } from '~/shared/config';
 
+const { RouteName } = sharedConfigRoutes;
 import { userModel, userLib } from '~/entities/user';
 
 import { AuthModalByEmail } from '~/features/auth/byEmail';
@@ -25,8 +26,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ sticky: isSticky }) => 
     const { user } = userModel.selectors.useUser();
     const navigate = useNavigate();
 
-    const handleProfileClick = () => navigate(routesConfig.RouteName.PROFILE_PAGE);
-    const handleCoinsClick = () => navigate(routesConfig.RouteName.PROFILE_PAGE);
+    const handleProfileClick = () => navigate(RouteName.PROFILE_PAGE);
+    const handleCoinsClick = () => navigate(RouteName.PROFILE_PAGE);
 
     const handleSignOutClick = async () => {
         try {

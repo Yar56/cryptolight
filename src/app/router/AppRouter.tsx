@@ -1,21 +1,25 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { routesConfig } from '~/shared/config';
 import { SuspenseLayout } from '~/shared/ui/layouts';
 
-import MainPage from './trendingCoinsPage';
+import { coinPageUi } from '~/pages/coinPage';
+import { notFoundPageUi } from '~/pages/notFoundPage';
+import { profilePageUi } from '~/pages/profilePage';
+import { trendingCoinsPageUi } from '~/pages/trendingCoinsPage';
 
-const CoinPage = lazy(() => import('./coinPage'));
-const ProfilePage = lazy(() => import('./profilePage'));
-const NotFoundPage = lazy(() => import('./notFoundPage'));
+const { TrendingCoinsPage } = trendingCoinsPageUi;
+const { CoinPage } = coinPageUi;
+const { ProfilePage } = profilePageUi;
+const { NotFoundPage } = notFoundPageUi;
 
 const { TRENDING_COIN_PAGE, PROFILE_PAGE, COIN_PAGE } = routesConfig.RouteName;
 
 const routes: routesConfig.RouteDescription[] = [
     {
         path: TRENDING_COIN_PAGE,
-        component: MainPage
+        component: TrendingCoinsPage
     },
     {
         path: COIN_PAGE,
@@ -31,7 +35,7 @@ const routesContent = routes.map(({ path, component: Component }) => (
     <Route key={path} path={path} element={<Component />} />
 ));
 
-export const Routing = () => {
+export const AppRouter = () => {
     return (
         <SuspenseLayout>
             <Routes>

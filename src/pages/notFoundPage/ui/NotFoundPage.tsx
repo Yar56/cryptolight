@@ -1,7 +1,7 @@
 import { Card, Container, Row, Text } from '@nextui-org/react';
 import React from 'react';
 
-const NotFoundPage = () => {
+export const NotFoundPage: FunctionComponent = () => {
     return (
         <Container>
             <Card css={{ $$cardColor: '$colors$primary', mt: 50 }}>
@@ -16,5 +16,3 @@ const NotFoundPage = () => {
         </Container>
     );
 };
-
-export default NotFoundPage;

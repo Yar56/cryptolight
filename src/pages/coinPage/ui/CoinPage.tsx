@@ -13,11 +13,11 @@ import { PriceChart } from '~/features/priceChart';
 
 import { Header } from '~/widgets/header';
 
-import styles from './styles.module.scss';
+import styles from './CoinPage.module.scss';
 
 const { CoinPageCard } = coinUi;
 
-const CoinPage: FunctionComponent = () => {
+export const CoinPage: FunctionComponent = () => {
     const { coinId } = useParams<{ coinId: string }>();
     const coin = useStore(coinModel.coinSubModel.$coin);
     const preparedPrices = useStore(coinModel.coinSubModel.$preparedPrices);
@@ -134,4 +134,3 @@ const CoinPage: FunctionComponent = () => {
         </>
     );
 };
-export default CoinPage;

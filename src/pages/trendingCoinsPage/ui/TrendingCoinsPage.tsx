@@ -15,7 +15,7 @@ import { WelcomeCard } from '~/widgets/welcomeCard';
 const { CoinListCard, CoinListByGlobalTrendsCard } = coinUi;
 const { coinListSubModel, coinListByGlobalTrendsSubModel } = coinModel;
 
-const TrendingCoinsPage = () => {
+export const TrendingCoinsPage = () => {
     const coinList = useStore(coinListSubModel.$coinList);
     const isLoading = useStore(coinListSubModel.$coinListIsLoading);
     const isEmpty = useStore(coinListSubModel.$coinListIsEmpty);
@@ -74,5 +74,3 @@ const TrendingCoinsPage = () => {
         </>
     );
 };
-
-export default TrendingCoinsPage;

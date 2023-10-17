@@ -13,7 +13,7 @@ import { Header } from '~/widgets/header';
 
 const { CoinListCard } = coinUi;
 
-const ProfilePage = () => {
+export const ProfilePage: FunctionComponent = () => {
     const likedCoinsIds = favoriteCoinModel.selectors.useFavoritedCoinsIds();
     const coinList = coinModel.coinListSubModel.selectors.useCoinList();
 
@@ -50,5 +50,3 @@ const ProfilePage = () => {
         </div>
     );
 };
-
-export default ProfilePage;

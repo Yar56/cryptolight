@@ -10,9 +10,10 @@ import { coinModel, coinUi } from '~/entities/coin';
 import { FavoriteCoin } from '~/features/favoriteCoin';
 import { favoriteCoinModel } from '~/features/favoriteCoin';
 
-import { Header } from '~/widgets/header';
+import { widgetHeaderUi } from '~/widgets/header';
 
 const { CoinListCard } = coinUi;
+const { Header } = widgetHeaderUi;
 
 export const ProfilePage: FunctionComponent = () => {
     const likedCoinsIds = favoriteCoinModel.selectors.useFavoritedCoinsIds();

@@ -13,11 +13,12 @@ import { coinModel, coinUi } from '~/entities/coin';
 import { FavoriteCoin } from '~/features/favoriteCoin';
 import { PriceChart } from '~/features/priceChart';
 
-import { Header } from '~/widgets/header';
+import { widgetHeaderUi } from '~/widgets/header';
 
 import styles from './CoinPage.module.scss';
 
 const { CoinPageCard } = coinUi;
+const { Header } = widgetHeaderUi;
 
 export const CoinPage: FunctionComponent = () => {
     const { coinId } = useParams<{ coinId: string }>();

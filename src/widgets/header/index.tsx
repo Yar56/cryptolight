@@ -1,1 +1,1 @@
-export * from './Header';
+export * as widgetHeaderUi from './ui';

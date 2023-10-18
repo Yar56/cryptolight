@@ -9,11 +9,13 @@ import { EventType, useListType } from '~/features/coinSwitch/model';
 import { CoinSwitch } from '~/features/coinSwitch/ui';
 import { FavoriteCoin } from '~/features/favoriteCoin';
 
-import { Header } from '~/widgets/header';
-import { WelcomeCard } from '~/widgets/welcomeCard';
+import { widgetHeaderUi } from '~/widgets/header';
+import { widgetWelcomeCardUi } from '~/widgets/welcomeCard';
 
 const { CoinListCard, CoinListByGlobalTrendsCard } = coinUi;
 const { coinListSubModel, coinListByGlobalTrendsSubModel } = coinModel;
+const { Header } = widgetHeaderUi;
+const { WelcomeCard } = widgetWelcomeCardUi;
 
 export const TrendingCoinsPage = () => {
     const coinList = useStore(coinListSubModel.$coinList);

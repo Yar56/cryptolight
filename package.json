@@ -10,6 +10,7 @@
     "typescript:validate": "tsc --noEmit -p tsconfig.validation.json",
     "host": "vite --host",
     "lint": "eslint src --max-warnings=0",
+    "lint:ci": "eslint src",
     "eslint:fix": "eslint --fix src"
   },
   "repository": {

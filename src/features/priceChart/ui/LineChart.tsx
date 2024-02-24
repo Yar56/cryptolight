@@ -8,7 +8,7 @@ import {
     AXIS_BOTTOM_TICK_LABEL_PROPS,
     AXIS_COLOR,
     AXIS_LEFT_TICK_LABEL_PROPS
-} from '~/features/priceChart/model/constatns';
+} from '~/features/priceChart/model/constants';
 import { DataProps } from '~/features/priceChart/model/types';
 
 export interface LineChartProps {

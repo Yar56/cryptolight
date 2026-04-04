@@ -1,99 +1,129 @@
 # CLAUDE.md
 
-## Всегда работай на русском!
+Этот файл содержит инструкции для Claude Code (claude.ai/code) при работе с кодом в репозитории.
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Обязательный workflow
 
-## Commands
+### 1. Исследование и планирование
+- **Всегда начинайте с изучения** существующего кода
+- **Создавайте структурированные TODO-планы** для задач из 3+ шагов
+- **Запрашивайте согласование каждого пункта** с описанием плана работ по нему
+- **Ждите явного одобрения как ответ от пользователя в переписке** ("Вперёд", "Продолжаем") перед выполнением
+
+### 2. Архитектурное мышление
+- **Объясняйте "почему"**, а не только "что" делаете
+- **Обсуждайте trade-off'ы** различных решений
+- **Предлагайте альтернативы** когда уместно
+- **Рассматривайте перспективы развития** ("навырост" vs YAGNI)
+
+### 3. Качественное выполнение
+- **Обновляйте TODO-статусы** в реальном времени
+- **Исправляйте ошибки компиляции** сразу `npm run typescript:lint:core`
+- **Самостоятельно проверяйте линты**: запускайте `npm run lint` после изменений
+- **Запускай тесты на добавление новой функциональности `npm run test`**
+- **Устраняйте дублирование** при рефакторинге
+
+### 4. Адаптивная коммуникация
+- **Переспрашивайте** при неясности требований
+- **Не выдумывай, если не знаешь ответа**, лучше сходить в интернет и узнать какие есть подводные камни
+- **Задавайте уточняющие вопросы** о неочевидных моментах
+- **Подводите итоги**
+
+## Команды
 
 ```bash
-npm run dev          # Start dev server on port 3000
-npm run build        # Type-check + Vite build (outputs to build/)
-npm run lint         # ESLint with zero warnings tolerance
-npm run lint:ci      # ESLint (allows warnings, used in CI)
-npm run eslint:fix   # Auto-fix ESLint issues
-npm run typescript:validate  # Type-check without emitting
+npm run dev          # Запуск dev-сервера на порту 3000
+npm run build        # Проверка типов + сборка через Vite (результат в build/)
+npm run lint         # ESLint с нулевой толерантностью к предупреждениям
+npm run lint:ci      # ESLint (допускает предупреждения, используется в CI)
+npm run eslint:fix   # Автоматическое исправление ошибок ESLint
+npm run typescript:validate  # Проверка типов без генерации файлов
 ```
 
-No test framework is configured — there are no test files or test scripts.
+Тестовый фреймворк не настроен — тестовых файлов и скриптов нет.
 
-## Environment Variables
+## Переменные окружения
 
-Required in `.env`:
+Обязательны в `.env`:
+
 ```
 VITE_COIN_API_HOST=https://api.coingecko.com/api/v3/
 VITE_CRYPTO_LIGHT_API_HOST=http://crypto-light.space
 ```
 
-## Architecture: Feature-Sliced Design (FSD)
+## Архитектура: Feature-Sliced Design (FSD)
 
-The project strictly follows [FSD](https://feature-sliced.design/). Layers (bottom to top — lower layers cannot import from higher):
+Проект строго следует [FSD](https://feature-sliced.design/). Слои (снизу вверх — нижние слои не могут импортировать из верхних):
 
 ```
 shared → entities → features → widgets → pages → app
 ```
 
-- **`shared/`** — API clients, config, reusable UI, utilities
-- **`entities/`** — Business entities (`coin/`, `user/`) with model + ui + lib
-- **`features/`** — User interactions (auth, registration, favoriteCoin, priceChart)
-- **`widgets/`** — Composite UI combining entities + features
-- **`pages/`** — Route-level components
-- **`app/`** — Root component, providers, router
+- **`shared/`** — API-клиенты, конфиг, переиспользуемый UI, утилиты
+- **`entities/`** — Бизнес-сущности (`coin/`, `user/`) с model + ui + lib
+- **`features/`** — Пользовательские взаимодействия (auth, registration, favoriteCoin, priceChart)
+- **`widgets/`** — Составной UI, объединяющий entities + features
+- **`pages/`** — Компоненты уровня маршрута
+- **`app/`** — Корневой компонент, провайдеры, роутер
 
-ESLint enforces import boundaries via `@feature-sliced/eslint-config` and `eslint-plugin-boundaries`. Violations will fail `npm run lint`.
+ESLint контролирует границы импортов через `@feature-sliced/eslint-config` и `eslint-plugin-boundaries`. Нарушения провалят `npm run lint`.
 
-## Path Aliases
+## Псевдонимы путей
 
-`~/` resolves to `src/` in both TypeScript and Vite:
+`~/` разрешается в `src/` как в TypeScript, так и в Vite:
+
 ```ts
 import { coingeckoApi } from '~/shared/api';
 ```
 
-## State Management: Effector
+## Управление состоянием: Effector
 
-All state lives in `model/` directories within each slice. Pattern:
+Всё состояние хранится в директориях `model/` внутри каждого слайса. Паттерн:
 
 ```ts
-// Effects (async)
+// Эффекты (асинхронные)
 export const fetchCoinFx = createEffect(async (id: string) => api.coins.getCoin(id));
 
-// Store
+// Стор
 export const $coin = createStore<CoinState>(initial)
   .on(fetchCoinFx.doneData, (_, { data }) => data);
 
-// Derived stores
+// Производные сторы
 export const $coinIsLoading = fetchCoinFx.pending;
 
-// React hooks (selectors)
+// React-хуки (селекторы)
 export const useCoin = () => useStore($coin);
 
 export const selectors = { useCoin };
 ```
 
-- Use `immer`'s `produce` for complex state mutations
-- Side effects (localStorage sync, logging) go in `.watch()` callbacks
-- Page-level events (e.g., `pageMounted`) trigger effects via `.watch()`
+- Используй `produce` из `immer` для сложных мутаций состояния
+- Побочные эффекты (синхронизация с localStorage, логирование) выносятся в `.watch()`
+- События уровня страницы (например, `pageMounted`) запускают эффекты через `.watch()`
 
-## Provider Composition
+## Композиция провайдеров
 
-Providers use `compose-function` in `app/providers/`:
+Провайдеры используют `compose-function` в `app/providers/`:
+
 ```ts
 export const withProviders = compose(withRouter, withUi, withAuth);
 ```
 
-`withAuth` verifies the user token on startup and persists user to localStorage.
+`withAuth` проверяет токен пользователя при старте и сохраняет пользователя в localStorage.
 
-## API Layer
+## API-слой
 
-Two API clients in `shared/api/`:
-- **`coingecko/`** — Public CoinGecko API (trending, coin detail, market chart)
-- **`cryptoLight/`** — Custom backend (auth, user data, favorites)
+Два API-клиента в `shared/api/`:
 
-Both use Axios with interceptors that convert snake_case responses to camelCase automatically.
+- **`coingecko/`** — Публичный CoinGecko API (трендовые монеты, детали монеты, график рынка)
+- **`cryptoLight/`** — Собственный бэкенд (авторизация, данные пользователя, избранное)
 
-## Routes
+Оба используют Axios с интерсепторами, которые автоматически конвертируют snake_case-ответы в camelCase.
 
-Defined as an enum in `shared/config/routes/routes.ts`:
+## Маршруты
+
+Определены как enum в `shared/config/routes/routes.ts`:
+
 ```ts
 export enum RouteName {
   TRENDING_COIN_PAGE = '/',
@@ -101,5 +131,3 @@ export enum RouteName {
   PROFILE_PAGE = '/profile'
 }
 ```
-
-
